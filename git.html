@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Git Usage</title>
+</head>
+<body>
+<p>This is what I did to create a gh-pages branch in a
+   local working repository.</p>
+<ul>
+<li>Forked the project dcm4che/dcm4che to make a project
+    bradleyross/dcm4che.  I then added the branch gh-pages.  At
+    this point, the contents of the gh-pages and master branches are
+    the same.</li>
+<li>Created a directory on my workstation for the gh-pages branch
+    and then used the cd 
+    command to set that as the current directory.</li>
+<li>Issued the command <nobr><code>
+    git clone https://www.github.com/bradleyross/dcm4che .</code></nobr>
+    This created a clone of the master branch in the directory.</li>
+<li>Used the command <nobr><code>git checkout gh-pages</code></nobr>.
+    This changed the contents of the directory to the gh-pages branch.</li>
+<li>Created a subdirectory in the directory named <code>ToBeDeleted</code>
+    and moved everything but .gitignore to this directory.  I also
+    added <code>.DS_Store</code> as a line in the <code>.gitignore</code>
+    file.  (This is for Apple MacOS workstations but won't interfere
+    with other systems.)<li>
+<li>I then carried out the following commands.</li>
+    <ul>
+    <li><code>rm -r ToBeDeleted</code></li>
+    <li><code>git add .gitignore</code></li>
+    <li><code>git commit . -m "Removing all non-documentation files</code></li>
+    <li><code>git push origin gh-pages</code></li>
+    </ul>   
+</body>
+</html>
