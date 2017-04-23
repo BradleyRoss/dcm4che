@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+</head>
+</head>
+<body>
+<ul>
+<li>
+<p>In dcm4che-audit, the Javadoc sections in 
+    dcm4che-audit/target/generated-sources/jaxb 
+    are malformed.  In the comments the > signs 
+    should have been 
+    converted to &amp;gt but weren't.  This 
+    appears to be due to the Java class
+    org.dcm4che3.audit/AuditMessages.  The problem could be in the 
+    artifact javax.xml.bind/jaxb-api/2.1 
+    whose homepage is http://jaxb.java.net.</p>
+<p>There is a fix <i>549 - Unescaped javadoc in @XmlElements<i> that 
+       was changed between 2.2.3u2 and 2.2.4 that may be relevant.  See
+       <a href="https://jaxb.java.net/2.2.5/docs/release-documentation.html"
+       target="_blank">
+       https://jaxb.java.net/2.2.5/docs/release-documentation.html</a>
+       for a reference.<p>
+</li>
+</ul>
+</body>
+</html>
