@@ -768,10 +768,10 @@ public class AuditLogger extends DeviceExtension {
      * Send Audit Message by Syslog Protocol to Audit Record Repository, if the
      * message does not match any configured {@code AuditSuppressCriteria}. If
      * an I/O error occurs sending the message to the {@code AuditRecordRepository}
-     * and if a {@code RetryInterval) is configured, the message will be spooled
+     * and if a {@code RetryInterval} is configured, the message will be spooled
      * into the configured {@code SpoolDirectory} for later re-send and the
      * method returns {@code false}. If no {@code RetryInterval} is configured,
-     * the method throws an {@code IOException) if an I/O error occurs sending
+     * the method throws an {@code IOException} if an I/O error occurs sending
      * the message.
      * <p/>
      * Attention: sending via UDP without getting an I/O error does not ensure
@@ -784,9 +784,9 @@ public class AuditLogger extends DeviceExtension {
      * {@code SendStatus.QUEUED} if the message was spooled for later re-send
      * @throws IllegalStateException           if there is no {@code AuditRecordRepository} associated with
      *                                         this {@code AuditLogger}
-     * @throws IncompatibleConnectionException if no {@code Connection) of this {@code AuditLogger} is compatible
-     *                                         with any {@code Connection) of the associated {@code AuditRecordRepository}
-     * @throws GeneralSecurityException        if the {@link  SSLContext} could not get intialized from configured
+     * @throws IncompatibleConnectionException if no {@code Connection} of this {@code AuditLogger} is compatible
+     *                                         with any {@code Connection} of the associated {@code AuditRecordRepository}
+     * @throws GeneralSecurityException        if the {@link  SSLContext} could not get initialized from configured
      *                                         private key and public certificates
      * @throws IOException                     if an I/O error occurs sending the message to the {@code AuditRecordRepository}
      *                                         or on spooling the message to the file system

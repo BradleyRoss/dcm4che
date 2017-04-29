@@ -1,7 +1,4 @@
-<html>
-<head>
-</head>
-<body>
+/**
 <p>These are java classes that are created by using XSLT translation
    on an XML schema that is part of the Dicom standard.</p>
 <p>Using versions of the Maven artifact (groupId:javax.xml.bind,
@@ -10,5 +7,6 @@
    incorrectly, with many of the &gt; (greater than) symbols not
    being converted to the HTML literal &amp;gt.  The current
    version is 2.2.5.</p>
-</body>
-</html>
+<p>This class is included in the Maven module dcm4che-audit.</p>
+*/
+package org.dcm4che3.audit;

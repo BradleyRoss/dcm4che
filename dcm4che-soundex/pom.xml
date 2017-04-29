@@ -58,10 +58,10 @@
     </plugins>
   </build>
   <dependencies>
+    <!--  Should this be of scope test? -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.8.2</version>
       <type>jar</type>
       <scope>compile</scope>
     </dependency>

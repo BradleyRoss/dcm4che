@@ -100,8 +100,12 @@
   <build>
     <plugins>
       <plugin>
+        <!--  
+              The version number was removed because it conflicted
+              with another location that specified a later version
+         -->
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
-        <version>2.4</version>
         <configuration>
           <archive>
             <manifest>

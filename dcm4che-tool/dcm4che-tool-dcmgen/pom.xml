@@ -52,6 +52,7 @@
       <artifactId>slf4j-log4j12</artifactId>
     </dependency>
     <dependency>
+      <!--  Should this be of scope test -->
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <scope>compile</scope>
