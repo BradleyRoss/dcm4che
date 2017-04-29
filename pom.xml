@@ -149,6 +149,7 @@
                 <location>${session.executionRootDirectory}/src/main/javadoc/slf4j</location>
               </offlineLink>            
             </offlineLinks>
+            <failOnError>false</failOnError>
           </configuration>
         </plugin>
         <plugin>
