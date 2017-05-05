@@ -58,6 +58,7 @@ import org.slf4j.LoggerFactory;
 import java.util.*;
 
 /**
+ * <p>This class is part of the Maven module dcm4che-conf-dicom.</p>
  * @author Gunter Zeilinger <gunterze@gmail.com>
  */
 public class DicomConfigurationBuilder {

@@ -121,10 +121,10 @@ public @interface ConfigurableProperty {
 
         /**
          * Enables the extension-by-composition mechanism of the framework for containing class and marks the property as an extension map.
-         * Only may be applied on fields with type Map&lt;Class<? extends T>, T&gt;.
+         * Only may be applied on fields with type Map&lt;Class&lt;? extends T&gt;, T&gt;.
          * T will be treated as base extension class
          *
-         * @return
+         * 
          */
         ExtensionsProperty,
 

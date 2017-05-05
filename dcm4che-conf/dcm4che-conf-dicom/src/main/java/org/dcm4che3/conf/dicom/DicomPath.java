@@ -46,7 +46,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Single source for all the DicomConfiguration-related xpaths
+ * Single source for all the DicomConfiguration-related xpaths.
+ * 
+ * <p>This class is part of the Maven module dcm4che-conf-dicom.</p>
  *
  * @author Roman K
  */

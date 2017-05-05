@@ -313,7 +313,7 @@ public class StringUtils {
 
 
     /**
-     * @deprecated use {@link ResourceLocator.resourceURL(String)} instead. 
+     * @deprecated use {@link ResourceLocator#resourceURL(String)} instead. 
      */
     @Deprecated
     public static String resourceURL(String name) {

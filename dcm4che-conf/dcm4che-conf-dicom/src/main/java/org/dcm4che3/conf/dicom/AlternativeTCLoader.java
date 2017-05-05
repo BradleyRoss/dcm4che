@@ -58,7 +58,10 @@ import org.slf4j.LoggerFactory;
 import java.util.*;
 
 /**
- * Relies on org.dcm4che3.net.TCGroupConfigAEExtension and TransferCapabilityConfigExtension to load Transfer Capabilities
+ * Relies on org.dcm4che3.net.TCGroupConfigAEExtension and 
+ * TransferCapabilityConfigExtension to load Transfer Capabilities.
+ * 
+ * <p>This class is part of the Maven module dcm4che-conf-dicom.</p>
  *
  * @author Roman K
  */

@@ -64,14 +64,12 @@ public class StoreSCPResult implements TestResult {
     private List<String> sopUIDs;
     /**
      * @param testDescription
-     * @param fileName
-     * @param size
      * @param time
      * @param filesReceived
+     * @param cmdRQ
      * @param sopIUIDs 
-     * @param warnings
-     * @param failures
-     * @param cmdRSP 
+     * @param instanceLocations
+     * 
      */
     public StoreSCPResult(String testDescription, long time, int filesReceived
             , List<Attributes> cmdRQ, List<String> sopIUIDs

@@ -19,7 +19,9 @@ import java.util.*;
 
 /**
  *  Relies on org.dcm4che3.net.TCGroupConfigAEExtension and TransferCapabilityConfigExtension to populate Transfer Capabilities on load
- *  Removes AE's TCs on save
+ *  Removes AE's TCs on save.
+ *  
+ *  <p>This class is part of the Maven module dcm4che-conf-dicom.</p>
  */
 public class AppEntityTCGroupHandlingTypeAdapter extends DefaultDelegatingConfigTypeAdapter<ApplicationEntity, Map> {
 

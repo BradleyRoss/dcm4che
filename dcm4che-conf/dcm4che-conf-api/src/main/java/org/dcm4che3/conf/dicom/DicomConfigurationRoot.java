@@ -8,7 +8,11 @@ import org.dcm4che3.conf.core.api.LDAP;
 import org.dcm4che3.net.Device;
 
 import java.util.Map;
-
+/**
+ * 
+ * <p>This class belongs to the Maven module dcm4che-conf-api.</p>
+ *
+ */
 @ConfigurableClass
 public class DicomConfigurationRoot {
 

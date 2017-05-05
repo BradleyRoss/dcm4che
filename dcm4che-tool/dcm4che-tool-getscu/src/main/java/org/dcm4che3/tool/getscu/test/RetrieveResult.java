@@ -60,11 +60,11 @@ public class RetrieveResult implements TestResult{
     /**
      * @param testDescription
      * @param expectedResult
-     * @param numMatches
+     * @param numResponses
      * @param numSuccess
      * @param numFail
      * @param time
-     * @param timeFirst
+     * @param response
      */
     public RetrieveResult(String testDescription, int expectedResult,
             int numResponses, int numSuccess, int numFail, long time,
