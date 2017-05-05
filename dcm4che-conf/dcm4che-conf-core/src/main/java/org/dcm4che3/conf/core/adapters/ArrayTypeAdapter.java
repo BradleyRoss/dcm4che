@@ -76,7 +76,7 @@ public class ArrayTypeAdapter implements ConfigTypeAdapter<Object, Object> {
         PRIMITIVE_TO_WRAPPER.put(void.class, Void.class);
     }
 
-    @Override
+    
     public Object fromConfigNode(Object configNode, ConfigProperty property, LoadingContext ctx, Object parent) throws ConfigurationException {
 
         Class<?> componentType = ((Class) property.getType()).getComponentType();
@@ -116,7 +116,7 @@ public class ArrayTypeAdapter implements ConfigTypeAdapter<Object, Object> {
             throw new ConfigurationException("Object of unexpected type (" + configNode.getClass().getName() + ") supplied for conversion into an array. Must be a collection.");
     }
 
-    @Override
+    
     public Object toConfigNode(Object object, ConfigProperty property, SavingContext ctx) throws ConfigurationException {
 
         if (object == null) return null;
@@ -140,7 +140,7 @@ public class ArrayTypeAdapter implements ConfigTypeAdapter<Object, Object> {
         return list;
     }
 
-    @Override
+    
     public Map<String, Object> getSchema(ConfigProperty property, ProcessingContext ctx) throws ConfigurationException {
 
         Map<String, Object> metadata = new HashMap<String, Object>();
@@ -161,7 +161,7 @@ public class ArrayTypeAdapter implements ConfigTypeAdapter<Object, Object> {
         return metadata;
     }
 
-    @Override
+    
     public Object normalize(Object configNode, ConfigProperty property, ProcessingContext ctx) throws ConfigurationException {
 
         // byte[] is a special case
