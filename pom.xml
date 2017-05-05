@@ -101,15 +101,10 @@
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
         </dependency>
-        <dependency>
-          <groupId>bradleyross</groupId>
-          <artifactId>dcm4che-log</artifactId>
-        </dependency>
         
         <dependency>
-          <groupId>bradleyross</groupId>
+          <groupId>org.dcm4che</groupId>
           <artifactId>dcm4che-log</artifactId>
-          <version>0.0.1-SNAPSHOT</version>
           <scope>provided</scope>
         </dependency>
     </dependencies>
@@ -283,9 +278,9 @@
     -->
     <dependencies>
       <dependency>
-        <groupId>bradleyross</groupId>
+        <groupId>org.dcm4che</groupId>
         <artifactId>dcm4che-log</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>3.3.9-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>org.jboss.resteasy</groupId>

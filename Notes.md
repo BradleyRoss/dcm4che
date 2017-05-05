@@ -4,6 +4,17 @@
 This document represents some notes on the bradleyross/dcm4che fork 
 \([Project](https://www.github.com/bradleyross/dcm4che)  
 [Documentation](https://bradleyross.github.io/dcm4che) \) of dcm4che/dcm4che.
+
+##Installing jar file
+
+mvn org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file \
+-Dfile=dcm4che-log-3.3.9-SNAPSHOT.jar \
+-DgroupId=org.dcm4che \
+-DartifactId=dcm4che-log \
+-Dversion=3.3.9-SNAPSHOT \
+-Dpackaging=jar \
+-DlocalRepositoryPath=/Users/bradleyross/.m2/repository
+
 ##Running Maven
 
 mvn >log.txt clean compile javadoc:aggregate dependency:tree  site

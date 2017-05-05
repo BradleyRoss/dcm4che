@@ -28,7 +28,7 @@
   -->
 <log4j:configuration >
   <appender name="out" class="org.apache.log4j.DailyRollingFileAppender">
-    <param name="File" value="${user.home}/weblogs/dcm4che-log4j1.log" />
+    <param name="File" value="${user.home}/weblogs/log4j1.log" />
     <param name="DatePattern" value="'-'yyyy-MM-dd-HH" />
     <layout class="org.apache.log4j.PatternLayout">
       <param name="ConversionPattern" value="%d %p %C{1} [%t] %m%n" />
