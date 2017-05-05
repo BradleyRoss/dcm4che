@@ -35,7 +35,6 @@ public class ExtensionMergingConfiguration extends DelegatingConfiguration {
             Object currentConfigurationNode = super.getConfigurationNode(path, configurableClass);
 
             ConfigNodeTraverser.dualTraverseNodeTypesafe(configNode, currentConfigurationNode, ConfigReflection.getDummyPropertyForClass(configurableClass), allExtensionClasses, new ConfigNodeTraverser.ConfigNodesTypesafeFilter() {
-                @Override
                 public void beforeNodes(Map<String, Object> containerNode1, Map<String, Object> containerNode2, Class containerNodeClass, ConfigProperty property) throws ConfigurationException {
 
                 if (property.isExtensionsProperty()) {

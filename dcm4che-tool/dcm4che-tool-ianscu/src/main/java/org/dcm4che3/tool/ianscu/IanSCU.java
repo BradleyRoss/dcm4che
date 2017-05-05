@@ -167,7 +167,6 @@ public class IanSCU {
                 System.out.println(rb.getString("scanning"));
                 DicomFiles.scan(argList, new DicomFiles.Callback() {
                     
-                    @Override
                     public boolean dicomFile(File f, Attributes fmi, long dsPos,
                             Attributes ds) {
                         if (UID.InstanceAvailabilityNotificationSOPClass.equals(

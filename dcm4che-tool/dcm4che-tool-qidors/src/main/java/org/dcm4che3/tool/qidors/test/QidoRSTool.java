@@ -163,12 +163,10 @@ public class QidoRSTool implements TestTool {
         this.expectedMatches = matches;
     }
 
-    @Override
     public void init(TestResult resultIn) {
         this.result = resultIn;
     }
 
-    @Override
     public TestResult getResult() {
         return this.result;
     }

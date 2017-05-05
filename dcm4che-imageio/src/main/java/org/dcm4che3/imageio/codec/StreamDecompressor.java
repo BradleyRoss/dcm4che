@@ -108,7 +108,7 @@ public class StreamDecompressor implements CoerceAttributes {
         this.coerceAttributes = coerceAttributes;
     }
 
-    @Override
+    
     public Attributes coerce(Attributes attrs) {
         return attrs;
     }
@@ -192,7 +192,7 @@ public class StreamDecompressor implements CoerceAttributes {
     }
 
     private final DicomInputHandler handler = new DicomInputHandler() {
-        @Override
+        
         public void readValue(DicomInputStream dis, Attributes attrs) throws IOException {
             if (dis.tag() == Tag.PixelData && dis.level() == 0)
                 onPixelData(dis, attrs);
@@ -200,20 +200,20 @@ public class StreamDecompressor implements CoerceAttributes {
                 dis.readValue(dis, attrs);
         }
 
-        @Override
+        
         public void readValue(DicomInputStream dis, Sequence seq) throws IOException {
             dis.readValue(dis, seq);
         }
 
-        @Override
+        
         public void readValue(DicomInputStream dis, Fragments frags) throws IOException {
             throw new UnsupportedOperationException();
         }
 
-        @Override
+        
         public void startDataset(DicomInputStream dis) throws IOException {}
 
-        @Override
+       
         public void endDataset(DicomInputStream dis) throws IOException {}
     };
 }

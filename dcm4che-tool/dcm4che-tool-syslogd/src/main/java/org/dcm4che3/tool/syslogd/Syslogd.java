@@ -76,7 +76,6 @@ public class Syslogd {
     private File storageDir;
     private final AuditRecordHandler handler = new AuditRecordHandler() {
 
-        @Override
         public void onMessage(byte[] data, int xmlOffset, int xmlLength,
                 Connection conn, InetAddress from) {
             Syslogd.this.onMessage(data, xmlOffset, xmlLength, conn, from);

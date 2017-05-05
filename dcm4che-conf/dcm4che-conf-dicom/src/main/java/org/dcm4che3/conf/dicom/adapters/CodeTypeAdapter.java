@@ -54,12 +54,12 @@ public class CodeTypeAdapter extends DefaultConfigTypeAdapters.CommonAbstractStr
         metadata.put("class", "Code");
     }
 
-    @Override
+    
     public Code fromConfigNode(String configNode, ConfigProperty property, LoadingContext ctx, Object parent) throws ConfigurationException {
         return new Code(configNode);
     }
 
-    @Override
+    
     public String toConfigNode(Code object, ConfigProperty property, SavingContext ctx) throws ConfigurationUnserializableException {
         return object.toString();
     }

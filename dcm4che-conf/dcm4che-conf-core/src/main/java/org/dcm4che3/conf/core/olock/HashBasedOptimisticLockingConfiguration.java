@@ -113,7 +113,6 @@ public class HashBasedOptimisticLockingConfiguration extends DelegatingConfigura
      */
     public static class HashMarkingTypesafeNodeFilter implements ConfigNodeTypesafeFilter {
 
-        @Override
         public boolean beforeNode(Map<String, Object> containerNode, Class containerNodeClass, ConfigProperty property) throws ConfigurationException {
 
             if (property.isOlockHash()) {

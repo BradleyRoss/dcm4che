@@ -136,7 +136,7 @@ public class StoreTool implements TestTool {
 
         main.setRspHandlerFactory(new StoreSCU.RSPHandlerFactory() {
 
-            @Override
+            
             public DimseRSPHandler createDimseRSPHandler(final File f) {
 
                 return new DimseRSPHandler(0) {
@@ -219,12 +219,12 @@ public class StoreTool implements TestTool {
 
     }
 
-    @Override
+    
     public void init(TestResult result) {
         this.result = (StoreResult) result;
     }
 
-    @Override
+    
     public StoreResult getResult() {
         return this.result;
     }

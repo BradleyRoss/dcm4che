@@ -61,7 +61,6 @@ public class ExtensionTypeAdapter implements ConfigTypeAdapter<Map<Class<?>, Obj
 
     public static final Logger log = LoggerFactory.getLogger(ExtensionTypeAdapter.class);
 
-    @Override
     public Map<Class<?>, Object> fromConfigNode(Map<String, Object> configNode, ConfigProperty property, LoadingContext ctx, Object parent) throws ConfigurationException {
 
         // figure out base extension class
@@ -98,7 +97,6 @@ public class ExtensionTypeAdapter implements ConfigTypeAdapter<Map<Class<?>, Obj
         return extensionsMap;
     }
 
-    @Override
     public Map<String, Object> toConfigNode(Map<Class<?>, Object> object, ConfigProperty property, SavingContext ctx) throws ConfigurationException {
         Map<String, Object> extensionsMapNode = Configuration.NodeFactory.emptyNode();
 
@@ -110,14 +108,12 @@ public class ExtensionTypeAdapter implements ConfigTypeAdapter<Map<Class<?>, Obj
         return extensionsMapNode;
     }
 
-    @Override
     public Map<String, Object> getSchema(ConfigProperty property, ProcessingContext ctx) throws ConfigurationException {
         Map<String, Object> metadata = new HashMap<String, Object>();
         metadata.put("type", "extensionMap");
         return metadata;
     }
 
-    @Override
     public Map<String, Object> normalize(Object configNode, ConfigProperty property, ProcessingContext ctx) throws ConfigurationException {
         if (configNode == null)
             return new HashMap<String, Object>();

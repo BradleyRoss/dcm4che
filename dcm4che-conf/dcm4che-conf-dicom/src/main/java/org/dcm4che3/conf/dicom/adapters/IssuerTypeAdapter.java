@@ -54,12 +54,12 @@ public class IssuerTypeAdapter extends DefaultConfigTypeAdapters.CommonAbstractS
         metadata.put("class", "Issuer");
     }
 
-    @Override
+    
     public Issuer fromConfigNode(String configNode, ConfigProperty property, LoadingContext ctx, Object parent) throws ConfigurationException {
         return configNode == null || configNode.length() == 0 ? null : new Issuer(configNode);
     }
 
-    @Override
+    
     public String toConfigNode(Issuer object, ConfigProperty property, SavingContext ctx) throws ConfigurationUnserializableException {
         return object == null ? "" : object.toString();
     }

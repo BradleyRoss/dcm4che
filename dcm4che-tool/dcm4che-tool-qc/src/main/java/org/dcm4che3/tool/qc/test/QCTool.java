@@ -81,12 +81,12 @@ public class QCTool implements TestTool {
         return code;
     }
 
-    @Override
+    
     public void init(TestResult result) {
     	this.result = result;
     }
 
-    @Override
+    
     public TestResult getResult() {
     	return this.result;
     }

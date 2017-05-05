@@ -58,17 +58,17 @@ public abstract class AbstractDicomService implements DicomService {
         this.sopClasses = sopClasses.clone();
     }
 
-    @Override
+    
     public final String[] getSOPClasses() {
         return sopClasses;
     }
 
-    @Override
+    
     public void onClose(Association as) {
         // NOOP
     }
 
-    @Override
+    
     public void onDimseRQ(Association as, PresentationContext pc,
             Dimse dimse, Attributes cmd, PDVInputStream data) throws IOException {
         onDimseRQ(as, pc, dimse, cmd, readDataset(pc, data));

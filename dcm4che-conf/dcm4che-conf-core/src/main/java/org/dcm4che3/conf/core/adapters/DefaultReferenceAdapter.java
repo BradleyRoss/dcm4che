@@ -69,7 +69,7 @@ public class DefaultReferenceAdapter implements ConfigTypeAdapter {
         metadata.put("class", "Reference");
     }
 
-    @Override
+    
     public Object fromConfigNode(Object configNode, ConfigProperty property, LoadingContext ctx, Object parent) throws ConfigurationException {
 
         // old deprecated style ref, for backwards-compatibility
@@ -135,7 +135,7 @@ public class DefaultReferenceAdapter implements ConfigTypeAdapter {
         return byUUID;
     }
 
-    @Override
+    
     public Object toConfigNode(Object object, ConfigProperty property, SavingContext ctx) throws ConfigurationException {
         Map<String, Object> node = Configuration.NodeFactory.emptyNode();
 
@@ -153,7 +153,7 @@ public class DefaultReferenceAdapter implements ConfigTypeAdapter {
         return node;
     }
 
-    @Override
+    
     public Map<String, Object> getSchema(ConfigProperty property, ProcessingContext ctx) throws ConfigurationException {
         Map<String, Object> schema = new HashMap<String, Object>();
         schema.putAll(metadata);
@@ -161,7 +161,7 @@ public class DefaultReferenceAdapter implements ConfigTypeAdapter {
         return schema;
     }
 
-    @Override
+    
     public Object normalize(Object configNode, ConfigProperty property, ProcessingContext ctx) throws ConfigurationException {
         return configNode;
     }

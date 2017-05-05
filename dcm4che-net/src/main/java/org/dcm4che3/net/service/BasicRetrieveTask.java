@@ -123,12 +123,12 @@ public class BasicRetrieveTask<T extends InstanceLocator> implements
         return storeas;
     }
 
-    @Override
+   
     public void onCancelRQ(Association as) {
         storescu.cancel();
     }
 
-    @Override
+    
     public void run() {
         rqas.addCancelRQHandler(msgId, this);
         ((Observable)storescu).addObserver(this);
@@ -163,7 +163,7 @@ public class BasicRetrieveTask<T extends InstanceLocator> implements
     private void startWritingAsyncRSP() {
         writePendingRSP = rqas.getApplicationEntity().getDevice()
                 .scheduleAtFixedRate(new Runnable() {
-                    @Override
+                    
                     public void run() {
                         BasicRetrieveTask.this.writeRSP(); // async response
                     }

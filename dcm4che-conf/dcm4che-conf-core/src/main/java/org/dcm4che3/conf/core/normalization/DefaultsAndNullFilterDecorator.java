@@ -80,7 +80,7 @@ public class DefaultsAndNullFilterDecorator extends DelegatingConfiguration {
     public void persistNode(Path path, final Map<String, Object> configNode, final Class configurableClass) throws ConfigurationException {
 
         ConfigNodeTypesafeFilter filterDefaults = new ConfigNodeTypesafeFilter() {
-            @Override
+            
             public boolean beforeNode(Map<String, Object> containerNode, Class containerNodeClass, ConfigProperty property) throws ConfigurationException {
 
                 boolean doDelete = false;
@@ -135,7 +135,7 @@ public class DefaultsAndNullFilterDecorator extends DelegatingConfiguration {
 
             // generate missing UUIDs
             ConfigNodeTraverser.traverseNodeTypesafe(configNode, ConfigReflection.getDummyPropertyForClass(configurableClass), allExtensionClasses, new ConfigNodeTypesafeFilter() {
-                @Override
+                
                 public boolean beforeNode(Map<String, Object> containerNode, Class containerNodeClass, ConfigProperty property) throws ConfigurationException {
                     if (property.isUuid() && (containerNode.get(Configuration.UUID_KEY) == null || "".equals(containerNode.get(Configuration.UUID_KEY)))) {
                         String newUUID = UUID.randomUUID().toString();
@@ -157,7 +157,7 @@ public class DefaultsAndNullFilterDecorator extends DelegatingConfiguration {
     public Object getConfigurationNode(Path path, Class configurableClass) throws ConfigurationException {
 
         ConfigNodeTypesafeFilter applyDefaults = new ConfigNodeTypesafeFilter() {
-            @Override
+          
             public boolean beforeNode(Map<String, Object> containerNode, Class containerNodeClass, ConfigProperty property) throws ConfigurationException {
 
                 // if no value for this property, see if there is default and set it

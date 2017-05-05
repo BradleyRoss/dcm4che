@@ -543,7 +543,6 @@ public class QidoRS {
                         JSONReader reader = new JSONReader(
                                 Json.createParser(new InputStreamReader(in, "UTF-8")));
                         reader.readDatasets(new Callback() {
-                            @Override
                             public void onDataset(Attributes fmi, Attributes dataset) {
                                 if(qidors.getTimeFirst() == 0)
                                     qidors.setTimeFirst(System.currentTimeMillis());

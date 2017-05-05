@@ -81,12 +81,12 @@ public class BasicQueryTask implements QueryTask {
         this.optionalKeysNotSupported = optionalKeysNotSupported;
     }
 
-    @Override
+    
     public void onCancelRQ(Association as) {
         canceled = true;
     }
 
-    @Override
+    
     public void run() {
         try {
             int msgId = rq.getInt(Tag.MessageID, -1);

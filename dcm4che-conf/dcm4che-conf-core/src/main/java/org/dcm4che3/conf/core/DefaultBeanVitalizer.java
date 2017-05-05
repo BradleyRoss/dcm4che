@@ -98,13 +98,13 @@ public class DefaultBeanVitalizer implements BeanVitalizer {
     }
 
 
-    @Override
+    
     public ConfigTypeAdapter getReferenceTypeAdapter() {
         return referenceTypeAdapter;
     }
 
 
-    @Override
+    
     public Object resolveFutureOrFail(String uuid, Future<Object> f) {
         try {
 
@@ -131,13 +131,12 @@ public class DefaultBeanVitalizer implements BeanVitalizer {
     }
 
 
-    @Override
+    
     public <T> T newConfiguredInstance(Map<String, Object> configNode, Class<T> clazz) throws ConfigurationException {
         return newConfiguredInstance(configNode, clazz, contextFactory.newLoadingContext());
     }
 
     @SuppressWarnings("unchecked")
-    @Override
     public <T> T newConfiguredInstance(Map<String, Object> configurationNode, Class<T> clazz, LoadingContext ctx) {
         ConfigProperty propertyForClass = ConfigReflection.getDummyPropertyForClass(clazz);
         return (T) lookupTypeAdapter(propertyForClass)
@@ -152,7 +151,7 @@ public class DefaultBeanVitalizer implements BeanVitalizer {
      * @return
      * @throws ConfigurationException
      */
-    @Override
+    
     public <T> T newInstance(Class<T> clazz) throws ConfigurationException {
         try {
 
@@ -166,7 +165,7 @@ public class DefaultBeanVitalizer implements BeanVitalizer {
     }
 
 
-    @Override
+    
     public Map<String, Object> createConfigNodeFromInstance(Object object) throws ConfigurationException {
         if (object == null) return null;
         return createConfigNodeFromInstance(object, object.getClass());
@@ -174,14 +173,12 @@ public class DefaultBeanVitalizer implements BeanVitalizer {
 
 
     @SuppressWarnings("unchecked")
-    @Override
     public Map<String, Object> createConfigNodeFromInstance(Object object, Class clazz) throws ConfigurationException {
         ConfigProperty propertyForClass = ConfigReflection.getDummyPropertyForClass(clazz);
         return (Map<String, Object>) lookupTypeAdapter(propertyForClass)
                 .toConfigNode(object, propertyForClass, contextFactory.newSavingContext());
     }
 
-    @Override
     public List<Class> getExtensionClassesByBaseClass(Class extensionBaseClass) {
 
         List<Class> classes = extensionsByClass.get(extensionBaseClass);
@@ -193,7 +190,6 @@ public class DefaultBeanVitalizer implements BeanVitalizer {
     }
 
 
-    @Override
     @SuppressWarnings("unchecked")
     public ConfigTypeAdapter lookupTypeAdapter(ConfigProperty property) throws ConfigurationException {
 
@@ -215,7 +211,6 @@ public class DefaultBeanVitalizer implements BeanVitalizer {
         return lookupDefaultTypeAdapter(clazz);
     }
 
-    @Override
     @SuppressWarnings("unchecked")
     public ConfigTypeAdapter lookupDefaultTypeAdapter(Class clazz) throws ConfigurationException {
 
@@ -243,13 +238,11 @@ public class DefaultBeanVitalizer implements BeanVitalizer {
      * @param clazz
      * @param typeAdapter
      */
-    @Override
     public void registerCustomConfigTypeAdapter(Class clazz, ConfigTypeAdapter typeAdapter) {
         customConfigTypeAdapters.put(clazz, typeAdapter);
     }
 
     @SuppressWarnings("unchecked")
-    @Override
     public Map<String, Object> getSchemaForConfigurableClass(Class<?> clazz) {
         return lookupDefaultTypeAdapter(clazz).getSchema(new ConfigProperty(clazz), contextFactory.newProcessingContext());
     }

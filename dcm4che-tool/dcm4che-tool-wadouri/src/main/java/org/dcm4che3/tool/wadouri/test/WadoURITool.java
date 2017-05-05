@@ -167,12 +167,12 @@ public class WadoURITool implements TestTool {
         return wadouri;
     }
 
-    @Override
+    
     public void init(TestResult result) {
         this.result = result;
     }
 
-    @Override
+   
     public TestResult getResult() {
         return this.result;
     }

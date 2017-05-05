@@ -70,7 +70,7 @@ class TCPListener implements Listener {
             ss.bind(conn.getBindPoint(), conn.getBacklog());
             conn.getDevice().execute(new Runnable(){
     
-                @Override
+                
                 public void run() { listen(); }
             });
         
@@ -138,12 +138,12 @@ class TCPListener implements Listener {
     }
 
 
-    @Override
+    
     public SocketAddress getEndPoint() {
         return ss.getLocalSocketAddress();
     }
 
-    @Override
+
     public void close() throws IOException {
          try {
             ss.close();

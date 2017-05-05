@@ -110,7 +110,7 @@ public class StoreSCU {
 
     private RSPHandlerFactory rspHandlerFactory = new RSPHandlerFactory() {
 
-        @Override
+        
         public DimseRSPHandler createDimseRSPHandler(final File f) {
 
             return new DimseRSPHandler(as.nextMessageID()) {
@@ -385,7 +385,7 @@ public class StoreSCU {
         try {
             DicomFiles.scan(fnames, printout, new DicomFiles.Callback() {
 
-                @Override
+               
                 public boolean dicomFile(File f, Attributes fmi, long dsPos,
                         Attributes ds) throws IOException {
                     if (!addFile(fileInfos, f, dsPos, fmi, ds))

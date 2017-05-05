@@ -80,19 +80,19 @@ public class DicomConsumer extends DefaultConsumer implements DimseRQHandler{
         getEndpoint().getComponent().registerDicomConsumer(this);
     }
 
-    @Override
+    
     protected void doStop() throws Exception {
         getEndpoint().getComponent().unregisterDicomConsumer(this);
         super.doStop();
     }
 
-    @Override
+    
     public void onClose(Association as) {
         // TODO Auto-generated method stub
         
     }
 
-    @Override
+    
     public void onDimseRQ(Association as, PresentationContext pc, Dimse dimse,
             Attributes cmd, PDVInputStream data) throws IOException {
         final int msgid = cmd.getInt(Tag.MessageID, 0);
@@ -121,7 +121,7 @@ public class DicomConsumer extends DefaultConsumer implements DimseRQHandler{
             this.exchange = exchange;
         }
     
-        @Override
+       
         public void done(boolean doneSync) {
             Attributes cmd;
             Attributes data;

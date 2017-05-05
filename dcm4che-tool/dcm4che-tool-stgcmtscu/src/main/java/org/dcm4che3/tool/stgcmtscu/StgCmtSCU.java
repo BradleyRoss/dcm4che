@@ -210,7 +210,7 @@ public class StgCmtSCU {
                 LOG.info(rb.getString("scanning"));
                 DicomFiles.scan(argList, new DicomFiles.Callback() {
                     
-                    @Override
+                    
                     public boolean dicomFile(File f, Attributes fmi, long dsPos,
                             Attributes ds) {
                         return stgcmtscu.addInstance(ds);

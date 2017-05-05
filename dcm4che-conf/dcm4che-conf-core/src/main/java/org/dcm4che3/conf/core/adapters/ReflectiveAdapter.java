@@ -84,7 +84,6 @@ public class ReflectiveAdapter<T> implements ConfigTypeAdapter<T, Map<String, Ob
         this.providedConfObj = providedConfigurationObjectInstance;
     }
 
-    @Override
     public T fromConfigNode(Map<String, Object> configNode, ConfigProperty property, LoadingContext ctx, Object parent) throws ConfigurationException {
 
         if (configNode == null) return null;
@@ -241,7 +240,7 @@ public class ReflectiveAdapter<T> implements ConfigTypeAdapter<T, Map<String, Ob
     }
 
 
-    @Override
+    
     public Map<String, Object> toConfigNode(T object, ConfigProperty property, SavingContext ctx) throws ConfigurationException {
 
         if (object == null) return null;
@@ -264,7 +263,7 @@ public class ReflectiveAdapter<T> implements ConfigTypeAdapter<T, Map<String, Ob
     }
 
 
-    @Override
+   
     public Map<String, Object> getSchema(ConfigProperty property, ProcessingContext ctx) throws ConfigurationException {
 
         Class<T> clazz = (Class<T>) property.getType();
@@ -317,7 +316,7 @@ public class ReflectiveAdapter<T> implements ConfigTypeAdapter<T, Map<String, Ob
         return classMetaDataWrapper;
     }
 
-    @Override
+    
     public Map<String, Object> normalize(Object configNode, ConfigProperty property, ProcessingContext ctx) throws ConfigurationException {
         return (Map<String, Object>) configNode;
     }

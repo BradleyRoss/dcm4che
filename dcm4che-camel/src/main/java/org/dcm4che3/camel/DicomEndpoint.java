@@ -79,18 +79,18 @@ public class DicomEndpoint extends DefaultEndpoint {
         this.sopClasses = StringUtils.split(sopClasses, ',');
     }
 
-    @Override
+    
     public Producer createProducer() throws Exception {
         // TODO Auto-generated method stub
         return null;
     }
 
-    @Override
+   
     public Consumer createConsumer(Processor processor) throws Exception {
         return new DicomConsumer(this, processor);
     }
 
-    @Override
+   
     public boolean isSingleton() {
         // TODO Auto-generated method stub
         return false;

@@ -53,12 +53,12 @@ public class PropertyTypeAdapter extends DefaultConfigTypeAdapters.CommonAbstrac
         metadata.put("class", "Property");
     }
 
-    @Override
+    
     public Property fromConfigNode(String configNode, ConfigProperty property, LoadingContext ctx, Object parent) throws ConfigurationException {
         return new Property(configNode);
     }
 
-    @Override
+    
     public String toConfigNode(Property object, ConfigProperty property, SavingContext ctx) throws ConfigurationException {
         return object.toString();
     }

@@ -56,7 +56,7 @@ public class AuditSimpleTypeAdapters {
             metadata.put("class", "EventTypeCode");
         }
 
-        @Override
+        
         public EventTypeCode fromConfigNode(String configNode, ConfigProperty property, LoadingContext ctx, Object parent) throws ConfigurationException {
             Code code = new Code(configNode);
 
@@ -68,7 +68,7 @@ public class AuditSimpleTypeAdapters {
             return eventTypeCode;
         }
 
-        @Override
+        
         public String toConfigNode(EventTypeCode object, ConfigProperty property, SavingContext ctx) throws ConfigurationException {
             return new Code(
                     object.getCode(),
@@ -85,7 +85,7 @@ public class AuditSimpleTypeAdapters {
             metadata.put("class", "EventID");
         }
 
-        @Override
+       
         public EventID fromConfigNode(String configNode, ConfigProperty property, LoadingContext ctx, Object parent) throws ConfigurationException {
             Code code = new Code(configNode);
 
@@ -97,7 +97,7 @@ public class AuditSimpleTypeAdapters {
             return eventID;
         }
 
-        @Override
+        
         public String toConfigNode(EventID object, ConfigProperty property, SavingContext ctx) throws ConfigurationException {
             return new Code(
                     object.getCode(),
@@ -114,7 +114,7 @@ public class AuditSimpleTypeAdapters {
             metadata.put("class", "RoleIDType");
         }
 
-        @Override
+        
         public RoleIDCode fromConfigNode(String configNode, ConfigProperty property, LoadingContext ctx, Object parent) throws ConfigurationException {
             Code code = new Code(configNode);
 
@@ -126,7 +126,7 @@ public class AuditSimpleTypeAdapters {
             return roleIDcode;
         }
 
-        @Override
+        
         public String toConfigNode(RoleIDCode object, ConfigProperty property, SavingContext ctx) throws ConfigurationException {
             return new Code(
                     object.getCode(),

@@ -55,7 +55,6 @@ public class InputStreamDataWriter implements DataWriter {
         this.in = in;
     }
 
-    @Override
     public void writeTo(PDVOutputStream out, String tsuid) throws IOException {
         out.copyFrom(in);
         in.close();

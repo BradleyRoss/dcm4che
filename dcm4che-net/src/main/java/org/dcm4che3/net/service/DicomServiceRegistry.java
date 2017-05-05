@@ -79,7 +79,7 @@ public class DicomServiceRegistry implements DimseRQHandler {
             services.remove(uid);
     }
 
-    @Override
+    
     public void onDimseRQ(Association as, PresentationContext pc,
             Dimse dimse, Attributes cmd, PDVInputStream data) throws IOException {
         try {
@@ -127,7 +127,7 @@ public class DicomServiceRegistry implements DimseRQHandler {
     }
 
 
-    @Override
+   
     public void onClose(Association as) {
         for (DimseRQHandler service : services.values())
             service.onClose(as);

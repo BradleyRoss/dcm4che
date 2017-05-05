@@ -106,12 +106,12 @@ public class SingleJsonFileConfigurationStorage implements Configuration {
 
     }
 
-    @Override
+    
     public synchronized boolean nodeExists(Path path) throws ConfigurationException {
         return Nodes.nodeExists(getConfigurationRoot(), path.getPathItems());
     }
 
-    @Override
+    
     public synchronized Map<String, Object> getConfigurationRoot() throws ConfigurationException {
         try {
             return objectMapper.readValue(new File(fileName), Map.class);
@@ -122,14 +122,14 @@ public class SingleJsonFileConfigurationStorage implements Configuration {
         }
     }
 
-    @Override
+    
     public synchronized Object getConfigurationNode(Path path, Class configurableClass) throws ConfigurationException {
         Object node = Nodes.getNode(getConfigurationRoot(), path.getPathItems());
         return node;
     }
 
 
-    @Override
+    
     public synchronized void persistNode(Path path, Map<String, Object> configNode, Class configurableClass) throws ConfigurationException {
         Map<String, Object> configurationRoot = getConfigurationRoot();
 
@@ -153,12 +153,12 @@ public class SingleJsonFileConfigurationStorage implements Configuration {
 
     }
 
-    @Override
+    
     public void refreshNode(Path path) {
 
     }
 
-    @Override
+    
     public synchronized void removeNode(Path path) throws ConfigurationException {
 
         Map<String, Object> configurationRoot = getConfigurationRoot();
@@ -167,22 +167,22 @@ public class SingleJsonFileConfigurationStorage implements Configuration {
 
     }
 
-    @Override
+    
     public Path getPathByUUID(String uuid) {
         throw new ConfigurationException("Unexpected error - uuid index is missing");
     }
 
-    @Override
+    
     public synchronized Iterator search(String liteXPathExpression) throws IllegalArgumentException, ConfigurationException {
         return Nodes.search(getConfigurationRoot(), liteXPathExpression);
     }
 
-    @Override
+    
     public void lock() {
         // ostrich
     }
 
-    @Override
+    
     public void runBatch(Batch batch) {
         batch.run();
     }

@@ -79,7 +79,7 @@ import java.nio.ByteOrder;
 /**
  * Compresses the pixel data of DICOM images to a lossless or lossy encapsulated transfer syntax format.
  * <p>
- * If the source image is already compressed it will be transcoded (i.e. first decompressed then compressed again).
+ * If the source image is already compressed it will be transcoded (i.e. first decompressed then compressed again).</p>
  *
  * @author Gunter Zeilinger <gunterze@gmail.com>
  * @author Hermann Czedik-Eysenberg <hermann-agfa@czedik.net>
@@ -252,29 +252,29 @@ public class Compressor implements Closeable {
             this.frameIndex = frameIndex;
         }
 
-        @Override
+        
         public boolean isEmpty() {
             return false;
         }
 
-        @Override
+        
         public byte[] toBytes(VR vr, boolean bigEndian) throws IOException {
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             writeTo(out);
             return out.toByteArray();
         }
 
-        @Override
+        
         public void writeTo(DicomOutputStream out, VR vr) throws IOException {
             writeTo(out);
         }
 
-        @Override
+        
         public int calcLength(DicomEncodingOptions encOpts, boolean explicitVR, VR vr) {
             return getEncodedLength(encOpts, explicitVR, vr);
         }
 
-        @Override
+        
         public int getEncodedLength(DicomEncodingOptions encOpts, boolean explicitVR, VR vr) {
             try {
                 compress();

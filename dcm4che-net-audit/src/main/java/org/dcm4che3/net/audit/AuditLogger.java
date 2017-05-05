@@ -162,7 +162,7 @@ public class AuditLogger extends DeviceExtension {
     private static final InetAddress localHost = localHost();
     private static final String processID = processID();
     private static final Comparator<File> FILE_COMPARATOR = new Comparator<File>() {
-        @Override
+        
         public int compare(File o1, File o2) {
             long diff = o1.lastModified() - o2.lastModified();
             return diff < 0 ? -1 : diff > 0 ? 1 : 0;
@@ -283,7 +283,7 @@ public class AuditLogger extends DeviceExtension {
     private transient Exception lastException;
     private transient long lastSentTimeInMillis;
     private transient final FilenameFilter FILENAME_FILTER = new FilenameFilter() {
-        @Override
+        
         public boolean accept(File dir, String name) {
             return name.startsWith(spoolFileNamePrefix) && name.endsWith(spoolFileNameSuffix);
         }
@@ -871,7 +871,7 @@ public class AuditLogger extends DeviceExtension {
         LOG.debug("Scheduled retry in {} s", retryInterval);
         retryTimer = getDevice().schedule(
                 new Runnable() {
-                    @Override
+                    
                     public void run() {
                         synchronized (AuditLogger.this) {
                             retryTimer = null;
@@ -917,7 +917,7 @@ public class AuditLogger extends DeviceExtension {
 	        try {
 	        	FilenameFilter fnFilter = new FilenameFilter() {
 	        		String prefix = spoolFileNamePrefix+DEVICE_NAME_IN_FILENAME_SEPARATOR+arrDev.getDeviceName()+DEVICE_NAME_IN_FILENAME_SEPARATOR;
-	                @Override
+	                
 	                public boolean accept(File dir, String name) {
 	                    return name.startsWith(prefix) 
 	                    		&& name.endsWith(spoolFileNameSuffix);
@@ -986,7 +986,7 @@ public class AuditLogger extends DeviceExtension {
         try {
         	FilenameFilter fnFilter = new FilenameFilter() {
         		String prefix = spoolFileNamePrefix+DEVICE_NAME_IN_FILENAME_SEPARATOR+deviceName+DEVICE_NAME_IN_FILENAME_SEPARATOR;
-                @Override
+                
                 public boolean accept(File dir, String name) {
                     return name.startsWith(prefix) 
                     		&& name.endsWith(spoolFileNameSuffix);
@@ -1271,7 +1271,7 @@ public class AuditLogger extends DeviceExtension {
             ds.send(msg);
         }
 
-        @Override
+       
         public void close() {
             if (ds != null) {
                 ds.close();
@@ -1332,7 +1332,7 @@ public class AuditLogger extends DeviceExtension {
                 try {
                     idleTimer = conn.getDevice().schedule(
                             new Runnable() {
-                                @Override
+                                
                                 public void run() {
                                     onIdleTimerExpired();
                                 }
@@ -1353,7 +1353,7 @@ public class AuditLogger extends DeviceExtension {
             }
         }
 
-        @Override
+       
         public synchronized void close() {
             stopIdleTimer();
             closeSocket();

@@ -87,7 +87,7 @@ public class MPPSSCPTool implements TestTool {
         ae.setDimseRQHandler(serviceRegistry);
     }
 
-    @Override
+    
     public void init(TestResult resultIn) {
 
 
@@ -120,7 +120,7 @@ public class MPPSSCPTool implements TestTool {
         }
     }
 
-    @Override
+    
     public MPPSResult getResult() {
         return new MPPSResult();
     }

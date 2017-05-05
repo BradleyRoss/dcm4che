@@ -60,52 +60,52 @@ public class DelegatingConfiguration implements Configuration {
         this.delegate = delegate;
     }
 
-    @Override
+    
     public Map<String, Object> getConfigurationRoot() throws ConfigurationException {
         return delegate.getConfigurationRoot();
     }
 
-    @Override
+    
     public Object getConfigurationNode(Path path, Class configurableClass) throws ConfigurationException {
         return delegate.getConfigurationNode(path, configurableClass);
     }
 
-    @Override
+    
     public boolean nodeExists(Path path) throws ConfigurationException {
         return delegate.nodeExists(path);
     }
 
-    @Override
+    
     public void persistNode(Path path, Map<String, Object> configNode, Class configurableClass) throws ConfigurationException {
         delegate.persistNode(path, configNode, configurableClass);
     }
 
-    @Override
+    
     public void refreshNode(Path path) throws ConfigurationException {
         delegate.refreshNode(path);
     }
 
-    @Override
+    
     public void removeNode(Path path) throws ConfigurationException {
         delegate.removeNode(path);
     }
 
-    @Override
+    
     public Path getPathByUUID(String uuid) {
         return delegate.getPathByUUID(uuid);
     }
 
-    @Override
+    
     public Iterator search(String liteXPathExpression) throws IllegalArgumentException, ConfigurationException {
         return delegate.search(liteXPathExpression);
     }
 
-    @Override
+    
     public void lock() {
         delegate.lock();
     }
 
-    @Override
+    
     public void runBatch(Batch batch) {
         delegate.runBatch(batch);
     }

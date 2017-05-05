@@ -218,7 +218,7 @@ public class MppsSCU {
     //default response handler
     private RSPHandlerFactory rspHandlerFactory = new RSPHandlerFactory(){
 
-        @Override
+        
         public DimseRSPHandler createDimseRSPHandlerForNCreate(final MppsWithIUID mppsWithUID) {
             
             return new DimseRSPHandler(as.nextMessageID()) {
@@ -238,7 +238,7 @@ public class MppsSCU {
             };
         }
         
-        @Override
+        
         public DimseRSPHandler createDimseRSPHandlerForNSet() {
             
             return new DimseRSPHandler(as.nextMessageID());
@@ -428,7 +428,7 @@ public class MppsSCU {
         if (printout) System.out.println(rb.getString("scanning"));
         DicomFiles.scan(fnames, printout, new DicomFiles.Callback() {
             
-            @Override
+            
             public boolean dicomFile(File f, Attributes fmi, 
                     long dsPos, Attributes ds) {
                 if (UID.ModalityPerformedProcedureStepSOPClass.equals(

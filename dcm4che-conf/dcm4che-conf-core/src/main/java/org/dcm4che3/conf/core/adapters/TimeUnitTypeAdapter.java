@@ -54,12 +54,11 @@ public class TimeUnitTypeAdapter extends DefaultConfigTypeAdapters.CommonAbstrac
         metadata.put("class", "TimeUnit");
     }
 
-    @Override
     public TimeUnit fromConfigNode(String configNode, ConfigProperty property, LoadingContext ctx, Object parent) throws ConfigurationException {
         return TimeUnit.valueOf(configNode);
     }
 
-    @Override
+  
     public String toConfigNode(TimeUnit object, ConfigProperty property, SavingContext ctx) throws ConfigurationUnserializableException {
         return object.toString();
     }

@@ -20,17 +20,17 @@ public class BasicProxyManager implements ProxyManager {
     public static final String PROVIDER_NAME = "org.dcm4che.basic";
     public static final String VERSION = "1.0";
 
-    @Override
+    
     public String getProviderName() {
         return PROVIDER_NAME;
     }
 
-    @Override
+    
     public String getVersion() {
         return VERSION;
     }
 
-    @Override
+    
     public void doProxyHandshake(Socket s, String hostname, int port, String userauth, int connectTimeout)
             throws IOException {
 

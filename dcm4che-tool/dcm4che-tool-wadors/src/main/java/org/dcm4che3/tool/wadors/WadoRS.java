@@ -302,7 +302,6 @@ public class WadoRS {
                     FileInputStream fin = new FileInputStream(spool);
                     new MultipartParser(boundary).parse(fin, new MultipartParser.Handler() {
 
-                        @Override
                         public void bodyPart(int partNumber, MultipartInputStream partIn) throws IOException {
 
                             Map<String, List<String>> headerParams = partIn.readHeaderParams();

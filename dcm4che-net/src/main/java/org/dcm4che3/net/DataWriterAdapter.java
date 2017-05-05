@@ -62,7 +62,7 @@ public class DataWriterAdapter implements DataWriter {
         return data != null ? new DataWriterAdapter(data) : null;
     }
 
-    @Override
+    
     public void writeTo(PDVOutputStream out, String tsuid) throws IOException {
         DicomOutputStream dos = new DicomOutputStream(out, tsuid);
         dos.writeDataset(null, data);

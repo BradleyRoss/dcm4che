@@ -59,50 +59,50 @@ public class InMemoryReadOnlyConfiguration implements Configuration {
         this.root = root;
     }
 
-    @Override
+    
     public Map<String, Object> getConfigurationRoot() throws ConfigurationException {
         return root;
     }
 
-    @Override
+    
     public Object getConfigurationNode(Path path, Class configurableClass) throws ConfigurationException {
         return Nodes.getNode(root, path.getPathItems());
     }
 
-    @Override
+    
     public boolean nodeExists(Path path) throws ConfigurationException {
         return Nodes.nodeExists(root, path.getPathItems());
     }
 
-    @Override
+    
     public void refreshNode(Path path) throws ConfigurationException {
     }
 
-    @Override
+    
     public void persistNode(Path path, Map<String, Object> configNode, Class configurableClass) throws ConfigurationException {
         throw new RuntimeException("Configuration is read-only");
     }
 
-    @Override
+    
     public void removeNode(Path path) throws ConfigurationException {
         throw new RuntimeException("Configuration is read-only");
     }
 
-    @Override
+    
     public Path getPathByUUID(String uuid) {
         throw new ConfigurationException("Unexpected error - uuid index is missing");
     }
 
-    @Override
+    
     public Iterator search(String liteXPathExpression) throws IllegalArgumentException, ConfigurationException {
         return Nodes.search(root, liteXPathExpression);
     }
 
-    @Override
+    
     public void lock() {
     }
 
-    @Override
+    
     public void runBatch(Batch batch) {
         batch.run();
     }

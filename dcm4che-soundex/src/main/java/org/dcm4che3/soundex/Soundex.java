@@ -66,7 +66,6 @@ public class Soundex implements FuzzyStr {
         this.map = map.toCharArray();
     }
 
-    @Override
     public String toFuzzy(String s) {
         if (s == null || s.length() == 0)
             return "";

@@ -77,12 +77,12 @@ public class DefaultTypeSafeConfiguration<R> implements TypeSafeConfiguration<R>
 
     }
 
-    @Override
+    
     public <T> T load(Path path, Class<T> clazz) {
         return load(path, clazz, contextFactory.newLoadingContext());
     }
 
-    @Override
+    
     public <T> T load(Path path, Class<T> clazz, LoadingContext ctx) {
 
         Object configurationNode = confStorage.getConfigurationNode(path, clazz);
@@ -98,7 +98,7 @@ public class DefaultTypeSafeConfiguration<R> implements TypeSafeConfiguration<R>
         return findByUUID(uuid, clazz, contextFactory.newLoadingContext());
     }
 
-    @Override
+    
     public <T> T findByUUID(String uuid, Class<T> clazz, LoadingContext ctx) {
 
         // TODO: proper cast checks!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -128,28 +128,28 @@ public class DefaultTypeSafeConfiguration<R> implements TypeSafeConfiguration<R>
 
     }
 
-    @Override
+    
     public <T> void save(Path path, T object, Class<T> clazz) {
         Map<String, Object> node = vitalizer.createConfigNodeFromInstance(object, clazz);
         confStorage.persistNode(path, node, clazz);
     }
 
-    @Override
+   
     public Configuration getLowLevelAccess() {
         return confStorage;
     }
 
-    @Override
+    
     public BeanVitalizer getVitalizer() {
         return vitalizer;
     }
 
-    @Override
+    
     public ContextFactory getContextFactory() {
         return contextFactory;
     }
 
-    @Override
+    
     public Class<R> getRootClass() {
         return rootClass;
     }

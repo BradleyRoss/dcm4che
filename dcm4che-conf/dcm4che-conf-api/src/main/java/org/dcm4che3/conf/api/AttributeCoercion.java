@@ -141,7 +141,7 @@ public class AttributeCoercion
         return condition.matches(sopClass, dimse, role, aeTitle, deviceName);
     }
 
-    @Override
+    
     public int compareTo(AttributeCoercion o) {
         return condition.compareTo(o.condition);
     }
@@ -279,7 +279,7 @@ public class AttributeCoercion
             this.aeTitles = aeTitles;
         }
 
-        @Override
+
         public int compareTo(Condition o) {
             return o.weight - weight;
         }

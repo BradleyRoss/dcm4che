@@ -66,7 +66,6 @@ class UDPListener implements Listener {
         conn.setReceiveBufferSize(ds);
         conn.getDevice().execute(new Runnable(){
 
-            @Override
             public void run() { listen(); }
         });
     }
@@ -104,12 +103,10 @@ class UDPListener implements Listener {
     }
 
 
-    @Override
     public SocketAddress getEndPoint()  {
         return ds.getLocalSocketAddress();
     }
 
-    @Override
     public void close() throws IOException {
          try {
             ds.close();

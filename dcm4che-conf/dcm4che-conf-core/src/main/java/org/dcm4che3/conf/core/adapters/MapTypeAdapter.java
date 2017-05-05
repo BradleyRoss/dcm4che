@@ -56,7 +56,6 @@ import java.util.TreeMap;
 public class MapTypeAdapter<K, V> implements ConfigTypeAdapter<Map<K, V>, Map<String, Object>> {
 
 
-    @Override
     public Map<K, V> fromConfigNode(Map<String, Object> configNode, ConfigProperty property, LoadingContext ctx, Object parent) throws ConfigurationException {
 
         ConfigProperty keyPseudoProperty = property.getPseudoPropertyForGenericsParamater(0);
@@ -80,7 +79,6 @@ public class MapTypeAdapter<K, V> implements ConfigTypeAdapter<Map<K, V>, Map<St
         return map;
     }
 
-    @Override
     public Map<String, Object> toConfigNode(Map<K, V> object, ConfigProperty property, SavingContext ctx) throws ConfigurationException {
 
         ConfigProperty keyPseudoProperty = property.getPseudoPropertyForGenericsParamater(0);
@@ -105,7 +103,6 @@ public class MapTypeAdapter<K, V> implements ConfigTypeAdapter<Map<K, V>, Map<St
         return configNode;
     }
 
-    @Override
     public Map<String, Object> getSchema(ConfigProperty property, ProcessingContext ctx) throws ConfigurationException {
 
         Map<String, Object> metadata = new HashMap<String, Object>();
@@ -138,7 +135,6 @@ public class MapTypeAdapter<K, V> implements ConfigTypeAdapter<Map<K, V>, Map<St
         return metadata;
     }
 
-    @Override
     public Map<String, Object> normalize(Object configNode, ConfigProperty property, ProcessingContext ctx) throws ConfigurationException {
         if (configNode == null) return new HashMap<String, Object>();
         return (Map<String, Object>) configNode;

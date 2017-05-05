@@ -126,7 +126,7 @@ public class MppsTool implements TestTool{
         
         main.setRspHandlerFactory(new MppsSCU.RSPHandlerFactory() {
             
-            @Override
+            
             public DimseRSPHandler createDimseRSPHandlerForNCreate(final MppsSCU.MppsWithIUID mppsWithUID) {
                 return new DimseRSPHandler(0) {
                     @Override
@@ -148,7 +148,7 @@ public class MppsTool implements TestTool{
                 };
             }
             
-            @Override
+            
             public DimseRSPHandler createDimseRSPHandlerForNSet() {
                 
                 return new DimseRSPHandler(0) {
@@ -242,12 +242,12 @@ public class MppsTool implements TestTool{
         }
     }
 
-    @Override
+    
     public void init(TestResult result) {
         this.result = result;
     }
 
-    @Override
+    
     public TestResult getResult() {
         return this.result;
     }

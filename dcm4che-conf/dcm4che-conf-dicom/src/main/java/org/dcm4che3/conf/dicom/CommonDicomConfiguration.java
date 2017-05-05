@@ -72,6 +72,8 @@ import org.slf4j.LoggerFactory;
 import java.util.*;
 
 /**
+ * 
+ * <p>This class is part of the Maven module dcm4che-conf-dicom.</p>
  * @author Roman K
  */
 @SuppressWarnings("unchecked")
@@ -132,7 +134,7 @@ public class CommonDicomConfiguration implements DicomConfigurationManager, Tran
      * @param <T>
      * @return
      */
-    @Override
+    
     public <T> List<Class<? extends T>> getExtensionClassesByBaseClass(Class<T> clazz) {
         List<Class> classes = extensionsByClass.get(clazz);
 
@@ -170,44 +172,44 @@ public class CommonDicomConfiguration implements DicomConfigurationManager, Tran
         return rootNode;
     }
 
-    @Override
+    
     public TypeSafeConfiguration<DicomConfigurationRoot> getTypeSafeConfiguration() {
         return config;
     }
 
-    @Override
+    
     public boolean configurationExists() throws ConfigurationException {
         return lowLevelConfig.nodeExists(DicomPath.CONFIG_ROOT_PATH);
     }
 
-    @Override
+    
     public boolean purgeConfiguration() throws ConfigurationException {
         if (!configurationExists()) return false;
         lowLevelConfig.persistNode(DicomPath.CONFIG_ROOT_PATH, new HashMap<String, Object>(), null);
         return true;
     }
 
-    @Override
+    
     public void preventDeviceModifications(Device d) {
         readOnlyDevices.put(d, true);
     }
 
-    @Override
+    
     public void refreshTCGroups() {
         alternativeTCLoader.refreshTCGroups();
     }
 
-    @Override
+    
     public boolean registerAETitle(String aet) throws ConfigurationException {
         return true;
     }
 
 
-    @Override
+    
     public void unregisterAETitle(String aet) throws ConfigurationException {
     }
 
-    @Override
+    
     public ApplicationEntity findApplicationEntity(String aet) throws ConfigurationException {
 
         if (aet == null) throw new IllegalArgumentException("Requested AE's title cannot be null");
@@ -233,7 +235,7 @@ public class CommonDicomConfiguration implements DicomConfigurationManager, Tran
 
     }
 
-    @Override
+    
     public ApplicationEntity findApplicationEntityByUUID(String uuid) throws ConfigurationException {
 
         if (uuid == null) throw new IllegalArgumentException("Requested AE's uuid cannot be null");
@@ -257,7 +259,7 @@ public class CommonDicomConfiguration implements DicomConfigurationManager, Tran
         }
     }
 
-    @Override
+    
     public Device findDeviceByUUID(String uuid) throws ConfigurationException {
         if (uuid == null) throw new IllegalArgumentException("Requested Device's uuid cannot be null");
 
@@ -271,7 +273,7 @@ public class CommonDicomConfiguration implements DicomConfigurationManager, Tran
         }
     }
 
-    @Override
+    
     public Device findDevice(String name) throws ConfigurationException {
         if (name == null) throw new IllegalArgumentException("Requested device name cannot be null");
 
@@ -293,12 +295,12 @@ public class CommonDicomConfiguration implements DicomConfigurationManager, Tran
         }
     }
 
-    @Override
+    
     public DeviceInfo[] listDeviceInfos(DeviceInfo keys) throws ConfigurationException {
         throw new RuntimeException("Not yet implemented");
     }
 
-    @Override
+
     public String[] listDeviceNames() throws ConfigurationException {
         Iterator search = lowLevelConfig.search(DicomPath.AllDeviceNames.path());
         List<String> deviceNames = null;
@@ -312,7 +314,7 @@ public class CommonDicomConfiguration implements DicomConfigurationManager, Tran
         return deviceNames.toArray(new String[deviceNames.size()]);
     }
 
-    @Override
+
     public List<String> listAllAETitles() throws ConfigurationException {
         List<String> aeNames = new ArrayList<String>();
         try {
@@ -325,7 +327,7 @@ public class CommonDicomConfiguration implements DicomConfigurationManager, Tran
         return aeNames;
     }
 
-    @Override
+
     public void persist(Device device) throws ConfigurationException {
 
         if (readOnlyDevices.containsKey(device)) handleReadOnlyDeviceModification();
@@ -349,7 +351,7 @@ public class CommonDicomConfiguration implements DicomConfigurationManager, Tran
         log.warn(message, exception);
     }
 
-    @Override
+ 
     public void merge(Device device) throws ConfigurationException {
 
         if (readOnlyDevices.containsKey(device)) handleReadOnlyDeviceModification();
@@ -370,34 +372,34 @@ public class CommonDicomConfiguration implements DicomConfigurationManager, Tran
         return deviceConfigNode;
     }
 
-    @Override
+ 
     public void removeDevice(String name) throws ConfigurationException {
         lowLevelConfig.removeNode(DicomPath.devicePath(name));
     }
 
 
-    @Override
+ 
     public void close() {
 
     }
 
-    @Override
+ 
     public void sync() throws ConfigurationException {
         lowLevelConfig.refreshNode(DicomPath.CONFIG_ROOT_PATH);
     }
 
-    @Override
+ 
     public <T> T getDicomConfigurationExtension(Class<T> clazz) {
 
         // trick CDI
         if (TransferCapabilityConfigExtension.class.equals(clazz)) {
             return (T) new TransferCapabilityConfigExtension() {
-                @Override
+                
                 public void persistTransferCapabilityConfig(TCConfiguration tcConfig) throws ConfigurationException {
                     CommonDicomConfiguration.this.persistTransferCapabilityConfig(tcConfig);
                 }
 
-                @Override
+                
                 public TCConfiguration getTransferCapabilityConfig() throws ConfigurationException {
                     return CommonDicomConfiguration.this.getTransferCapabilityConfig();
                 }
@@ -411,24 +413,24 @@ public class CommonDicomConfiguration implements DicomConfigurationManager, Tran
         return (T) this;
     }
 
-    @Override
+    
     public BeanVitalizer getVitalizer() {
         return vitalizer;
     }
 
 
-    @Override
+    
     public Configuration getConfigurationStorage() {
         return lowLevelConfig;
     }
 
-    @Override
+    
     public void persistTransferCapabilityConfig(TCConfiguration tcConfig) throws ConfigurationException {
         Map<String, Object> configNode = vitalizer.createConfigNodeFromInstance(tcConfig);
         lowLevelConfig.persistNode(DicomPath.TC_GROUPS_PATH, configNode, TCConfiguration.class);
     }
 
-    @Override
+    
     public TCConfiguration getTransferCapabilityConfig() throws ConfigurationException {
         Map<String, Object> configurationNode = (Map<String, Object>) lowLevelConfig.getConfigurationNode(DicomPath.TC_GROUPS_PATH, TCConfiguration.class);
 
@@ -440,14 +442,14 @@ public class CommonDicomConfiguration implements DicomConfigurationManager, Tran
                 TCConfiguration.class);
     }
 
-    @Override
+    
     public void runBatch(final DicomConfigBatch dicomConfigBatch) {
         /*
          * Use the batch support of underlying configuration storage to execute batch
          */
         lowLevelConfig.runBatch(new Batch() {
 
-            @Override
+            
             public void run() {
                 dicomConfigBatch.run();
             }

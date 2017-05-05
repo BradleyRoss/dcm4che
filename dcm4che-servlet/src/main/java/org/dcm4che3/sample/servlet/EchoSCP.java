@@ -67,7 +67,6 @@ public class EchoSCP extends DeviceService implements EchoSCPMBean {
         EchoSCP.instance = this;
     }
 
-    @Override
     public void reload() throws Exception {
         device.reconfigure(dicomConfiguration.findDevice(device.getDeviceName()));
     }

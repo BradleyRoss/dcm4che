@@ -276,7 +276,6 @@ public class StowRS {
         try {
             dataset.accept(new Visitor() {
 
-                @Override
                 public boolean visit(Attributes attrs, int tag, VR vr, Object value) {
 
                     if (attrs.isRoot() && tag == Tag.PixelData) {

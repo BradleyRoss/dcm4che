@@ -134,29 +134,29 @@ public class Decompressor {
 
         dataset.setValue(Tag.PixelData, VR.OW, new Value() {
 
-            @Override
+            
             public boolean isEmpty() {
                 return false;
             }
 
-            @Override
+            
             public byte[] toBytes(VR vr, boolean bigEndian) throws IOException {
                 ByteArrayOutputStream out = new ByteArrayOutputStream();
                 Decompressor.this.writeTo(out);
                 return out.toByteArray();
             }
 
-            @Override
+            
             public void writeTo(DicomOutputStream out, VR vr) throws IOException {
                 Decompressor.this.writeTo(out);
             }
 
-            @Override
+            
             public int calcLength(DicomEncodingOptions encOpts, boolean explicitVR, VR vr) {
                 return imageParams.getEncodedLength();
             }
 
-            @Override
+            
             public int getEncodedLength(DicomEncodingOptions encOpts, boolean explicitVR, VR vr) {
                 return imageParams.getEncodedLength();
             }

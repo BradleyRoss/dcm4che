@@ -169,7 +169,7 @@ public class CompressionRule
                 sopClass, imgTypes, bodyPart);
     }
 
-    @Override
+    
     public int compareTo(CompressionRule o) {
         return condition.compareTo(o.condition);
     }
@@ -329,7 +329,7 @@ public class CompressionRule
             this.bitsStoredMask = toBitsStoredMask(bitsStoredMaskArray);
         }
 
-        @Override
+        
         public int compareTo(Condition o) {
             return o.weight - weight;
         }

@@ -46,7 +46,6 @@ import org.dcm4che3.util.UIDUtils;
  */
 public class HashUIDMapper implements UIDMapper {
 
-    @Override
     public String get(String uid) {
         return UIDUtils.createNameBasedUID(uid.getBytes());
     }

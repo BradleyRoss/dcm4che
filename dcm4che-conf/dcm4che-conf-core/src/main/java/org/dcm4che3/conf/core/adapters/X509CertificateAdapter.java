@@ -62,7 +62,7 @@ public class X509CertificateAdapter implements ConfigTypeAdapter<X509Certificate
 
     private CertificateFactory certificateFactory;
 
-    @Override
+    
     public X509Certificate fromConfigNode(String configNode, ConfigProperty property, LoadingContext ctx, Object parent) throws ConfigurationException {
         try {
             final byte[] base64 = Base64.fromBase64(configNode);
@@ -79,7 +79,7 @@ public class X509CertificateAdapter implements ConfigTypeAdapter<X509Certificate
         return certificateFactory;
     }
 
-    @Override
+    
     public String toConfigNode(X509Certificate object, ConfigProperty property, SavingContext ctx) throws ConfigurationException {
         try {
             return Base64.toBase64(object.getEncoded());
@@ -88,7 +88,7 @@ public class X509CertificateAdapter implements ConfigTypeAdapter<X509Certificate
         }
     }
 
-    @Override
+    
     public Map<String, Object> getSchema(ConfigProperty property, ProcessingContext ctx) throws ConfigurationException {
         Map<String, Object> metadata = new HashMap<String, Object>();
         metadata.put("type", "string");
@@ -96,7 +96,7 @@ public class X509CertificateAdapter implements ConfigTypeAdapter<X509Certificate
         return metadata;
     }
 
-    @Override
+    
     public String normalize(Object configNode, ConfigProperty property, ProcessingContext ctx) throws ConfigurationException {
         return (String) configNode;
     }

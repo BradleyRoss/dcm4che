@@ -87,16 +87,16 @@ public class DcmDump implements DicomInputHandler {
         dis.readDataset(-1, -1);
     }
 
-    @Override
+    
     public void startDataset(DicomInputStream dis) throws IOException {
         promptPreamble(dis.getPreamble());
     }
 
-    @Override
+    
     public void endDataset(DicomInputStream dis) throws IOException {
     }
 
-    @Override
+    
     public void readValue(DicomInputStream dis, Attributes attrs)
             throws IOException {
         StringBuilder line = new StringBuilder(width + 30);
@@ -136,7 +136,7 @@ public class DcmDump implements DicomInputHandler {
             attrs.setBytes(tag, vr, b);
     }
 
-    @Override
+    
     public void readValue(DicomInputStream dis, Sequence seq)
             throws IOException {
         StringBuilder line = new StringBuilder(width);
@@ -156,7 +156,7 @@ public class DcmDump implements DicomInputHandler {
         }
     }
 
-    @Override
+    
     public void readValue(DicomInputStream dis, Fragments frags)
             throws IOException {
         StringBuilder line = new StringBuilder(width + 20);

@@ -105,7 +105,6 @@ public class HL7Rcv {
     private String[] xsltParams;
     private final HL7MessageListener handler = new HL7MessageListener() {
 
-        @Override
         public byte[] onMessage(HL7Application hl7App, Connection conn,
                 Socket s, HL7Segment msh, byte[] msg, int off, int len,
                 int mshlen) throws HL7Exception {

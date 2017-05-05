@@ -69,7 +69,7 @@ public class EchoDeviceServiceImpl extends DeviceService implements EchoDeviceSe
         this.dicomConfiguration = dicomConfiguration;
     }
 
-    @Override
+    
     public DicomServiceRegistry getServiceRegistry() {
         return serviceRegistry;
     }
@@ -91,7 +91,7 @@ public class EchoDeviceServiceImpl extends DeviceService implements EchoDeviceSe
             stop();
     }
 
-    @Override
+   
     public void reload() throws Exception {
         device.reconfigure(dicomConfiguration.findDevice(device.getDeviceName()));
         device.rebindConnections();

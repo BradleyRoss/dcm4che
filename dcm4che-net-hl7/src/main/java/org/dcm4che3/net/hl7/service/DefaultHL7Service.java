@@ -53,7 +53,7 @@ public class DefaultHL7Service extends DefaultHL7MessageListener
         this.messageTypes = messageTypes;
     }
 
-    @Override
+    
     public String[] getMessageTypes() {
         return messageTypes;
     }

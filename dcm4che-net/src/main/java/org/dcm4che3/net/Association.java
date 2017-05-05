@@ -303,7 +303,7 @@ public class Association {
         if (delay > 0)
             device.schedule(new Runnable() {
 
-                @Override
+                
                 public void run() {
                     closeSocket();
                 }
@@ -468,7 +468,7 @@ public class Association {
     private void activate() {
         device.execute(new Runnable() {
 
-            @Override
+            
             public void run() {
                 decoder = new PDUDecoder(Association.this, in);
                 device.incrementNumberOfOpenAssociations();
@@ -496,7 +496,7 @@ public class Association {
             IntHashMap.Visitor<DimseRSPHandler> visitor =
                     new IntHashMap.Visitor<DimseRSPHandler>() {
 
-                @Override
+                
                 public boolean visit(int key, DimseRSPHandler value) {
                     value.onClose(Association.this);
                     return true;

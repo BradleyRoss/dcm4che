@@ -88,7 +88,7 @@ public class JSONWriter implements DicomInputHandler {
         final SpecificCharacterSet cs = attrs.getSpecificCharacterSet();
         try {
             attrs.accept(new Attributes.Visitor() {
-                             @Override
+                             
                              public boolean visit(Attributes attrs, int tag, VR vr, Object value)
                                      throws Exception {
                                  writeAttribute(tag, vr, value, cs, attrs);
@@ -145,7 +145,7 @@ public class JSONWriter implements DicomInputHandler {
         }
     }
 
-    @Override
+    
     public void readValue(DicomInputStream dis, Attributes attrs)
             throws IOException {
         int tag = dis.tag();
@@ -320,7 +320,7 @@ public class JSONWriter implements DicomInputHandler {
         gen.write("BulkDataURI", blkdata.uri);
     }
 
-    @Override
+    
     public void readValue(DicomInputStream dis, Sequence seq)
             throws IOException {
         if (!hasItems.getLast()) {
@@ -333,7 +333,7 @@ public class JSONWriter implements DicomInputHandler {
         gen.writeEnd();
     }
 
-    @Override
+    
     public void readValue(DicomInputStream dis, Fragments frags)
             throws IOException {
         int len = dis.length();
@@ -358,12 +358,12 @@ public class JSONWriter implements DicomInputHandler {
         }
     }
 
-    @Override
+    
     public void startDataset(DicomInputStream dis) throws IOException {
         gen.writeStartObject();
     }
 
-    @Override
+    
     public void endDataset(DicomInputStream dis) throws IOException {
         gen.writeEnd();
     }

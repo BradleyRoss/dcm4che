@@ -49,7 +49,11 @@ import org.dcm4che3.net.hl7.HL7Application;
 import org.dcm4che3.net.hl7.HL7DeviceExtension;
 
 import java.util.*;
-
+/**
+ * 
+ * <p>This class is part of the Maven module dcm4che-conf-dicom.</p>
+ *
+ */
 public class CommonDicomConfigurationWithHL7 extends CommonDicomConfiguration implements HL7Configuration {
 
 
@@ -61,16 +65,16 @@ public class CommonDicomConfigurationWithHL7 extends CommonDicomConfiguration im
     }
 
 
-    @Override
+    
     public boolean registerHL7Application(String name) throws ConfigurationException {
         return true;
     }
 
-    @Override
+    
     public void unregisterHL7Application(String name) throws ConfigurationException {
     }
 
-    @Override
+    
     public HL7Application findHL7Application(String name) throws ConfigurationException {
         String pathForDeviceName = DicomPath.DeviceNameByHL7AppName.set("hl7AppName", name).path();
 
@@ -88,7 +92,7 @@ public class CommonDicomConfigurationWithHL7 extends CommonDicomConfiguration im
         }
     }
 
-    @Override
+    
     public String[] listRegisteredHL7ApplicationNames() throws ConfigurationException {
         String hl7NamesPath = DicomPath.AllHL7AppNames.path();
         List<String> list = new ArrayList<String>();
@@ -108,22 +112,22 @@ public class CommonDicomConfigurationWithHL7 extends CommonDicomConfiguration im
         // workaround for Weld, if we just return 'this' - it will replace it with a proxy
         if (clazz.equals(HL7Configuration.class)) {
             return (T) new HL7Configuration() {
-                @Override
+               
                 public boolean registerHL7Application(String name) throws ConfigurationException {
                     return CommonDicomConfigurationWithHL7.this.registerHL7Application(name);
                 }
 
-                @Override
+                
                 public void unregisterHL7Application(String name) throws ConfigurationException {
                     CommonDicomConfigurationWithHL7.this.unregisterHL7Application(name);
                 }
 
-                @Override
+                
                 public HL7Application findHL7Application(String name) throws ConfigurationException {
                     return CommonDicomConfigurationWithHL7.this.findHL7Application(name);
                 }
 
-                @Override
+                
                 public String[] listRegisteredHL7ApplicationNames() throws ConfigurationException {
                     return CommonDicomConfigurationWithHL7.this.listRegisteredHL7ApplicationNames();
                 }

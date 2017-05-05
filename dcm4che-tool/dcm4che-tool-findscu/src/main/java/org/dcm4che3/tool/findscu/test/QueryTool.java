@@ -262,12 +262,12 @@ public class QueryTool implements TestTool {
             ++numMatches;
         }
     }
-    @Override
+    
     public void init(TestResult result) {
         this.result = result;
     }
 
-    @Override
+    
     public TestResult getResult() {
         return this.result;
     }

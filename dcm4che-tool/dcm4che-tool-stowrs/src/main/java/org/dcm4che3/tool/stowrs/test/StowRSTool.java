@@ -86,12 +86,10 @@ public class StowRSTool implements TestTool{
         keys.setString(tag, vr, value);
     }
 
-    @Override
     public void init(TestResult resultIn) {
         this.result = resultIn;
     }
 
-    @Override
     public TestResult getResult() {
      return this.result;
     }

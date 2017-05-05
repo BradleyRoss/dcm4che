@@ -49,7 +49,7 @@ public class DeepEqualsDiffer {
         DiffNode root = ObjectDifferBuilder.buildDefault().compare(actual, expected);
         final StringBuilder builder = new StringBuilder("");
         root.visitChildren(new DiffNode.Visitor() {
-            @Override
+            
             public void node(DiffNode diffNode, Visit visit) {
                 builder.append(diffNode.getPath().toString() + "\n");
             }

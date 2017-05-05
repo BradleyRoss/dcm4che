@@ -78,12 +78,12 @@ public class BasicCStoreSCU<T extends InstanceLocator> extends Observable
     protected int outstandingRSP = 0;
     protected Object outstandingRSPLock = new Object();
 
-    @Override
+    
     public int getStatus() {
         return status;
     }
 
-    @Override
+    
     public boolean cancel() {
         if (status==Status.Pending) {
             this.status = Status.Cancel;
@@ -92,33 +92,33 @@ public class BasicCStoreSCU<T extends InstanceLocator> extends Observable
         return false;
     }
 
-    @Override
+    
     public int getPriority() {
         return priority;
     }
 
-    @Override
+    
     public List<T> getCompleted() {
         return completed;
     }
 
-    @Override
+    
     public List<T> getWarning() {
         return warning;
     }
 
-    @Override
+    
     public List<T> getFailed() {
         return failed;
     }
 
-    @Override
+    
     public int getRemaining() {
         return (nr_instances - completed.size() - warning.size() - failed
                 .size());
     }
 
-    @Override
+    
     public BasicCStoreSCUResp cstore(List<T> instances, Association storeas,
             int priority) {
 

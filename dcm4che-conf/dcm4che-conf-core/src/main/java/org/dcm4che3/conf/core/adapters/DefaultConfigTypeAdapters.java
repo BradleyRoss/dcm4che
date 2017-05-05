@@ -153,12 +153,12 @@ public class DefaultConfigTypeAdapters {
         public PrimitiveTypeAdapter() {
         }
 
-        @Override
+        
         public T fromConfigNode(T configNode, ConfigProperty property, LoadingContext ctx, Object parent) throws ConfigurationException {
             return configNode;
         }
 
-        @Override
+        
         public T toConfigNode(T object, ConfigProperty property, SavingContext ctx) throws ConfigurationUnserializableException {
             return object;
         }
@@ -166,13 +166,12 @@ public class DefaultConfigTypeAdapters {
         /**
          * Constant metadata
          */
-        @Override
+        
         public Map<String, Object> getSchema(ConfigProperty property, ProcessingContext ctx) throws ConfigurationException {
             return metadata;
         }
 
         @SuppressWarnings("unchecked")
-        @Override
         public T normalize(Object configNode, ConfigProperty property, ProcessingContext ctx) throws ConfigurationException {
             try {
                 if (metadata.get("type").equals("integer")) {
@@ -309,22 +308,22 @@ public class DefaultConfigTypeAdapters {
         }
 
 
-        @Override
+        
         public Map<String, Object> getSchema(ConfigProperty property, ProcessingContext ctx) throws ConfigurationException {
             return metadata;
         }
 
-        @Override
+        
         public String normalize(Object configNode, ConfigProperty property, ProcessingContext ctx) throws ConfigurationException {
             return (String) configNode;
         }
 
-        @Override
+        
         public T fromConfigNode(String configNode, ConfigProperty property, LoadingContext ctx, Object parent) throws ConfigurationException {
             return fromConfigNode(configNode, (AnnotatedConfigurableProperty) null, null, null);
         }
 
-        @Override
+        
         public String toConfigNode(T object, ConfigProperty property, SavingContext ctx) throws ConfigurationException {
             return toConfigNode(object, (AnnotatedConfigurableProperty) null, null);
         }
@@ -347,12 +346,12 @@ public class DefaultConfigTypeAdapters {
         }
 
 
-        @Override
+        
         public Map<String, Object> getSchema(ConfigProperty property, ProcessingContext ctx) throws ConfigurationException {
             return metadata;
         }
 
-        @Override
+        
         public String normalize(Object configNode, ConfigProperty property, ProcessingContext ctx) throws ConfigurationException {
             return (String) configNode;
         }
@@ -375,7 +374,7 @@ public class DefaultConfigTypeAdapters {
      */
     public static class EnumTypeAdapter implements ConfigTypeAdapter<Enum<?>, Object> {
 
-        @Override
+        
         public Enum<?> fromConfigNode(Object configNode, ConfigProperty property, LoadingContext ctx, Object parent) throws ConfigurationException {
 
             ConfigurableProperty.EnumRepresentation howToRepresent = property.getEnumRepresentation();
@@ -390,7 +389,7 @@ public class DefaultConfigTypeAdapters {
             }
         }
 
-        @Override
+        
         public Object toConfigNode(Enum<?> object, ConfigProperty property, SavingContext ctx) throws ConfigurationUnserializableException {
 
             ConfigurableProperty.EnumRepresentation howToRepresent = property.getEnumRepresentation();
@@ -404,7 +403,7 @@ public class DefaultConfigTypeAdapters {
             }
         }
 
-        @Override
+        
         public Map<String, Object> getSchema(ConfigProperty property, ProcessingContext ctx) throws ConfigurationException {
             try {
                 Map<String, Object> metadata = new HashMap<String, Object>();
@@ -445,7 +444,7 @@ public class DefaultConfigTypeAdapters {
             }
         }
 
-        @Override
+        
         public Object normalize(Object configNode, ConfigProperty property, ProcessingContext ctx) throws ConfigurationException {
 
             if (configNode == null) return null;

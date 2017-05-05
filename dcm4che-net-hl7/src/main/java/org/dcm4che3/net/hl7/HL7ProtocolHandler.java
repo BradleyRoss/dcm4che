@@ -56,7 +56,6 @@ import org.dcm4che3.net.TCPProtocolHandler;
 enum HL7ProtocolHandler implements TCPProtocolHandler {
     INSTANCE;
 
-    @Override
     public void onAccept(Connection conn, Socket s) throws IOException {
         s.setSoTimeout(conn.getIdleTimeout());
         MLLPConnection mllp = new MLLPConnection(s);

@@ -66,7 +66,7 @@ enum SyslogProtocolHandler implements TCPProtocolHandler, UDPProtocolHandler {
 
     private static Logger LOG = LoggerFactory.getLogger(SyslogProtocolHandler.class);
 
-    @Override
+    
     public void onAccept(Connection conn, Socket s) throws IOException {
         InputStream in = s.getInputStream();
         byte[] data = new byte[INIT_MSG_LEN];
@@ -126,7 +126,7 @@ enum SyslogProtocolHandler implements TCPProtocolHandler, UDPProtocolHandler {
         return n;
     }
 
-    @Override
+    
     public void onReceive(Connection conn, DatagramPacket packet) {
         LOG.info("Received UDP Syslog message of {} bytes from {}", 
                 packet.getLength(), packet.getAddress());

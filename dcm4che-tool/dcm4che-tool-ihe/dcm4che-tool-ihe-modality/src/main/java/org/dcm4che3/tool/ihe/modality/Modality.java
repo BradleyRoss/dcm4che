@@ -236,7 +236,7 @@ public class Modality {
         mkkos.setEncodingOptions(CLIUtils.encodingOptionsOf(cl));
         DicomFiles.scan(cl.getArgList(), new DicomFiles.Callback() {
 
-            @Override
+            
             public boolean dicomFile(File f, Attributes fmi,
                     long dsPos, Attributes ds) {
                 return mkkos.addInstance(ds);
@@ -383,7 +383,7 @@ public class Modality {
         try {
             DicomFiles.scan(fnames, new DicomFiles.Callback() {
 
-                @Override
+                
                 public boolean dicomFile(File f, Attributes fmi, long dsPos,
                         Attributes ds) throws Exception {
                     return mppsscu.addInstance(ds)

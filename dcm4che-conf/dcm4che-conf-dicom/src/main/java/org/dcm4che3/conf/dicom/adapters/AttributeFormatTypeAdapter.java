@@ -57,12 +57,12 @@ public class AttributeFormatTypeAdapter extends DefaultConfigTypeAdapters.Common
         metadata.put("class", "AttributesFormat");
     }
 
-    @Override
+    
     public AttributesFormat fromConfigNode(String configNode, ConfigProperty property, LoadingContext ctx, Object parent) throws ConfigurationException {
         return AttributesFormat.valueOf(configNode);
     }
 
-    @Override
+    
     public String toConfigNode(AttributesFormat object, ConfigProperty property, SavingContext ctx) throws ConfigurationUnserializableException {
         return object.toString();
     }

@@ -161,7 +161,7 @@ public class CompressionRules
         return null;
     }
 
-    @Override
+    
     public Iterator<CompressionRule> iterator() {
         return weightedList.iterator();
     }

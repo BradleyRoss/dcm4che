@@ -120,7 +120,7 @@ public class AttributeCoercions
         return null;
     }
 
-    @Override
+    
     public Iterator<AttributeCoercion> iterator() {
         return list.iterator();
     }

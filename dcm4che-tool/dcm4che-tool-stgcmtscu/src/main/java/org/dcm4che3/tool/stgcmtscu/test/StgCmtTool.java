@@ -221,7 +221,7 @@ public class StgCmtTool implements TestTool {
         t1 = System.currentTimeMillis();
         DicomFiles.scan(Arrays.asList(file.getAbsolutePath()), new DicomFiles.Callback() {
 
-            @Override
+           
             public boolean dicomFile(File f, Attributes fmi, long dsPos,
                                      Attributes ds) {
                 return stgCmtSCU.addInstance(ds);
@@ -253,12 +253,12 @@ public class StgCmtTool implements TestTool {
         }
         init(new StgCmtResult(description,t2-t1,success, fails, nEventReqData));
     }
-    @Override
+    
     public void init(TestResult result) {
         this.result = result;
     }
 
-    @Override
+    
     public TestResult getResult() {
         return this.result;
     }

@@ -90,7 +90,7 @@ public class CollectionTypeAdapter< V extends Collection,T extends Collection> i
             return createCollection();
     }
 
-    @Override
+    
     public V fromConfigNode(T configNode, ConfigProperty property, LoadingContext ctx, Object parent) throws ConfigurationException {
 
         ConfigProperty elementPseudoProperty = property.getPseudoPropertyForCollectionElement();
@@ -109,7 +109,7 @@ public class CollectionTypeAdapter< V extends Collection,T extends Collection> i
         return collection;
     }
 
-    @Override
+   
     public T toConfigNode(V object, ConfigProperty property, SavingContext ctx) throws ConfigurationException {
 
         ConfigProperty elementPseudoProperty = property.getPseudoPropertyForCollectionElement();
@@ -127,7 +127,7 @@ public class CollectionTypeAdapter< V extends Collection,T extends Collection> i
         return node;
     }
 
-    @Override
+    
     public Map<String, Object> getSchema(ConfigProperty property, ProcessingContext ctx) throws ConfigurationException {
 
         Map<String, Object> metadata = new HashMap<String, Object>();
@@ -149,7 +149,7 @@ public class CollectionTypeAdapter< V extends Collection,T extends Collection> i
         return metadata;
     }
 
-    @Override
+    
     public T normalize(Object configNode, ConfigProperty property, ProcessingContext ctx) throws ConfigurationException {
         if (configNode == null)
             return createCollectionNode();

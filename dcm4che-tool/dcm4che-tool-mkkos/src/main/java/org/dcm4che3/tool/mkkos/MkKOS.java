@@ -179,7 +179,6 @@ public class MkKOS {
             System.out.println(rb.getString("scanning"));
             DicomFiles.scan(cl.getArgList(), new DicomFiles.Callback() {
                 
-                @Override
                 public boolean dicomFile(File f, Attributes fmi,
                         long dsPos, Attributes ds) {
                     return main.addInstance(ds);

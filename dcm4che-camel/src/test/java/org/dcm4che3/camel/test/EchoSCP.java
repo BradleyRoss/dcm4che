@@ -75,7 +75,7 @@ public class EchoSCP implements Processor {
         main.run();
     }
 
-    @Override
+  
     public void process(Exchange exchange) throws Exception {
         DicomMessage in = exchange.getIn(DicomMessage.class);
         Dimse dimse = in.getHeader("dimse", Dimse.class);

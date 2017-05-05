@@ -88,7 +88,7 @@ public class MMPVersion implements Comparable<MMPVersion> {
         return major + "." + minor + "-" + patch;
     }
 
-    @Override
+
     public int compareTo(MMPVersion otherVersion) {
         if (major < otherVersion.major) return -1;
         if (major > otherVersion.major) return 1;

@@ -105,12 +105,10 @@ public class WadoRSTool implements TestTool {
         return this.retrieveDir;
     }
 
-    @Override
     public void init(TestResult resultIn) {
         this.result = (WadoRSResult) resultIn;
     }
 
-    @Override
     public WadoRSResult getResult() {
         return this.result;
     }

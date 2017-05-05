@@ -100,7 +100,7 @@ public class EchoDeviceServiceImpl extends DeviceService implements EchoDeviceSe
         }
     }
 
-    @Override
+    
     public void reload() throws Exception {
         device.reconfigure(conf.findDevice(device.getDeviceName()));
         device.rebindConnections();

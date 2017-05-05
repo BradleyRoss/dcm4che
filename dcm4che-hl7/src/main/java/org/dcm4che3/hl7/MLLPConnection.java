@@ -100,7 +100,7 @@ public class MLLPConnection implements Closeable {
             LOG.debug(format, sock, new String(b, off, len).replace('\r', '\n'));
     }
 
-    @Override
+    
     public void close() throws IOException {
         sock.close();
     }
