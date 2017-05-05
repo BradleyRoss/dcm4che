@@ -63,7 +63,7 @@
     </dependency>
     <!-- The dependency appears twice in this pom file and also in the 
          dcm4che-parent module.  Does it really want scope compile
-         instead of test.  If it appears in parent, should it be removd from 
+         instead of test.  If it appears in parent, should it be removed from 
          here entirely. -->
     <!-- 
     <dependency>

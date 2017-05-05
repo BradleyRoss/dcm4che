@@ -17,11 +17,12 @@
    -
    - The Initial Developer of the Original Code is
    - Agfa Healthcare.
-   - Portions created by the Initial Developer are Copyright (C) 2014
+   - Portions created by the Initial Developer are Copyright (C) 2011
    - the Initial Developer. All Rights Reserved.
    -
    - Contributor(s):
    - Gunter Zeilinger <gunterze@gmail.com>
+   - Michael Backhaus <michael.backhaus@agfa.com>
    -
    - Alternatively, the contents of this file may be used under the terms of
    - either the GNU General Public License Version 2 or later (the "GPL"), or
@@ -37,36 +38,36 @@
    -
    - ***** END LICENSE BLOCK *****  -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+ 
   <parent>
-    <groupId>org.dcm4che.tool</groupId>
-    <artifactId>dcm4che-tool</artifactId>
+    <artifactId>dcm4che-parent</artifactId>
+    <groupId>org.dcm4che</groupId>
     <version>3.3.9-SNAPSHOT</version>
   </parent>
-  <artifactId>dcm4che-tool-dcm2json</artifactId>
-  <description>Convert DICOM file to JSON</description>
+
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>dcm4che-short</artifactId>
+  <packaging>pom</packaging>
+  <name>dcm4che-short</name>
+  <description>dcm4che-all module with some dependencies removed.</description>
   <dependencies>
     <dependency>
       <groupId>org.dcm4che</groupId>
-      <artifactId>dcm4che-json</artifactId>
+      <artifactId>dcm4che-all</artifactId>
       <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.dcm4che.tool</groupId>
-      <artifactId>dcm4che-tool-common</artifactId>
-      <version>${project.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <!-- 
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
-    </dependency>
-    -->
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-log4j12</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-api</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
   </dependencies>
 </project>

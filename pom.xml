@@ -84,6 +84,35 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
+  <!--
+        The dependencies will be copied to every module.  Placing them here
+        allows centralized control of the sources and the version numbers.
+  -->
+    <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>bradleyross</groupId>
+          <artifactId>dcm4che-log</artifactId>
+        </dependency>
+        
+        <dependency>
+          <groupId>bradleyross</groupId>
+          <artifactId>dcm4che-log</artifactId>
+          <version>0.0.1-SNAPSHOT</version>
+          <scope>provided</scope>
+        </dependency>
+    </dependencies>
   <build>
     <extensions>
       <extension>
@@ -92,6 +121,8 @@
         <version>2.9</version>
       </extension>
     </extensions>
+    <!--
+    -->
     <pluginManagement>
       <plugins>
         <plugin>
@@ -102,6 +133,12 @@
             <target>1.6</target>
           </configuration>
         </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <version>2.6</version>
+        </plugin>
+
         <plugin>
           <groupId>org.apache.felix</groupId>
           <artifactId>maven-bundle-plugin</artifactId>
@@ -127,7 +164,7 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
           <version>2.10.4</version>
-          <configuration>
+          <configuration> 
             <!--
                  http://stackoverflow.com/questions/3084629/finding-the-root-directory-of-a-multi-module-maven-reactor-project?rq=1
             -->
@@ -150,25 +187,45 @@
               </offlineLink>            
             </offlineLinks>
             <failOnError>false</failOnError>
+            <show>private</show>
           </configuration>
         </plugin>
-        <plugin>
-          <!--
-                 Changed from maven-site-info-reports to
-                 maven-project-info-reports.
-          -->
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-project-info-reports-plugin</artifactId>
-          <version>2.9</version>
-        </plugin>
+ 
+
+        <!--
+              This is used in the modules dcm4che-assembly,
+              dcm4che-jboss-modules, dcm4che-js-dict
+        -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-jar-plugin</artifactId>
-          <version>2.6</version>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>2.3</version>
         </plugin>
+        <!--
+              This plugin is used by the modules
+              dcm4che-core and dcm4che-js-dict
+        -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-remote-resources-plugin</artifactId>
+          <version>1.5</version>
+        </plugin>
+        <plugin>
+            <!--
+             Changed from maven-site-info-reports to
+             maven-project-info-reports.
+             
+             https://maven.apache.org/plugins/maven-project-info-reports-plugin/index.html
+             -->
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-project-info-reports-plugin</artifactId>
+            <version>2.9</version>
+            </plugin>
       </plugins>
     </pluginManagement>
+
   </build>
+
   <modules>
     <module>dcm4che-all</module>
     <module>dcm4che-audit</module>
@@ -186,6 +243,7 @@
     <module>dcm4che-net-audit</module>
     <module>dcm4che-net-hl7</module>
     <module>dcm4che-net-imageio</module>
+    <!-- <module>dcm4che-short</module> -->
     <module>dcm4che-soundex</module>
     <module>dcm4che-tool</module>
     <module>dcm4che-assembly</module>
@@ -225,6 +283,11 @@
     -->
     <dependencies>
       <dependency>
+        <groupId>bradleyross</groupId>
+        <artifactId>dcm4che-log</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+      </dependency>
+      <dependency>
         <groupId>org.jboss.resteasy</groupId>
         <artifactId>jaxrs-api</artifactId>
         <version>3.0.4.Final</version>
@@ -233,12 +296,19 @@
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>
         <version>1.7.5</version>
+        <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-log4j12</artifactId>
         <version>1.7.5</version>
-        <scope>runtime</scope>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>log4j</groupId>
+        <artifactId>log4j</artifactId>
+        <version>1.2.16</version>
+        <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.glassfish</groupId>
