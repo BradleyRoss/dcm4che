@@ -5,16 +5,18 @@ This document represents some notes on the bradleyross/dcm4che fork
 \([Project](https://www.github.com/bradleyross/dcm4che)  
 [Documentation](https://bradleyross.github.io/dcm4che) \) of dcm4che/dcm4che.
 
-##Installing jar file
 
-mvn org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file \
--Dfile=dcm4che-log-3.3.9-SNAPSHOT.jar \
--DgroupId=org.dcm4che \
--DartifactId=dcm4che-log \
--Dversion=3.3.9-SNAPSHOT \
--Dpackaging=jar \
--DlocalRepositoryPath=/Users/bradleyross/.m2/repository
+##dcm4che-log
 
+The Maven artifact org.dcm4che:dcm4che-log:3.3.9-SNAPSHOT is not a
+module of org.dcm4che:dcm4che-parent:3.3.9-SNAPSHOT.  It therefore
+must be generated in a separate Maven run.  The purpose of this
+artifact is to provide configuration files for slf4j and log4j.  
+I'm not clear on the best method of incorporating this capability.
+
+Having dcm4che-log as a module of dcm4che-parent resulted in a
+circular dependency that prevented the program from being
+built.
 ##Running Maven
 
 mvn >log.txt clean compile javadoc:aggregate dependency:tree  site
@@ -33,7 +35,14 @@ mvn >log.txt clean compile install javadoc:aggregate package  site
 
 * compile
 
-* javadoc:aggregate
+* javadoc:aggregate - This causes a Javadoc in the target
+directory of the parent module that contains all of the main java 
+code in a multi-module project.  javadoc:test-aggregate does the same 
+for the test java classes.
+
+
+* javadoc:aggregate-jar - This is similar to the goal aggregare, except
+that it archives the entire Javadoc set of files into a single jar file.  javadoc:test-aggregate-jar does the same for the test Java classes.
 
 * package
 
