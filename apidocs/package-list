@@ -28,6 +28,7 @@ org.dcm4che3.hl7
 org.dcm4che3.image
 org.dcm4che3.imageio.codec
 org.dcm4che3.imageio.codec.jpeg
+org.dcm4che3.imageio.codec.mpeg
 org.dcm4che3.imageio.plugins.dcm
 org.dcm4che3.imageio.plugins.rle
 org.dcm4che3.imageio.stream

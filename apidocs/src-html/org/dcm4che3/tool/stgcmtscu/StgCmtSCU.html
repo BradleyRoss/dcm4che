@@ -1,0 +1,554 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+<title>Source code</title>
+<link rel="stylesheet" type="text/css" href="../../../../../stylesheet.css" title="Style">
+</head>
+<body>
+<div class="sourceContainer">
+<pre><span class="sourceLineNo">001</span>/* ***** BEGIN LICENSE BLOCK *****<a name="line.1"></a>
+<span class="sourceLineNo">002</span> * Version: MPL 1.1/GPL 2.0/LGPL 2.1<a name="line.2"></a>
+<span class="sourceLineNo">003</span> *<a name="line.3"></a>
+<span class="sourceLineNo">004</span> * The contents of this file are subject to the Mozilla Public License Version<a name="line.4"></a>
+<span class="sourceLineNo">005</span> * 1.1 (the "License"); you may not use this file except in compliance with<a name="line.5"></a>
+<span class="sourceLineNo">006</span> * the License. You may obtain a copy of the License at<a name="line.6"></a>
+<span class="sourceLineNo">007</span> * http://www.mozilla.org/MPL/<a name="line.7"></a>
+<span class="sourceLineNo">008</span> *<a name="line.8"></a>
+<span class="sourceLineNo">009</span> * Software distributed under the License is distributed on an "AS IS" basis,<a name="line.9"></a>
+<span class="sourceLineNo">010</span> * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License<a name="line.10"></a>
+<span class="sourceLineNo">011</span> * for the specific language governing rights and limitations under the<a name="line.11"></a>
+<span class="sourceLineNo">012</span> * License.<a name="line.12"></a>
+<span class="sourceLineNo">013</span> *<a name="line.13"></a>
+<span class="sourceLineNo">014</span> * The Original Code is part of dcm4che, an implementation of DICOM(TM) in<a name="line.14"></a>
+<span class="sourceLineNo">015</span> * Java(TM), hosted at https://github.com/gunterze/dcm4che.<a name="line.15"></a>
+<span class="sourceLineNo">016</span> *<a name="line.16"></a>
+<span class="sourceLineNo">017</span> * The Initial Developer of the Original Code is<a name="line.17"></a>
+<span class="sourceLineNo">018</span> * Agfa Healthcare.<a name="line.18"></a>
+<span class="sourceLineNo">019</span> * Portions created by the Initial Developer are Copyright (C) 2011<a name="line.19"></a>
+<span class="sourceLineNo">020</span> * the Initial Developer. All Rights Reserved.<a name="line.20"></a>
+<span class="sourceLineNo">021</span> *<a name="line.21"></a>
+<span class="sourceLineNo">022</span> * Contributor(s):<a name="line.22"></a>
+<span class="sourceLineNo">023</span> * See @authors listed below<a name="line.23"></a>
+<span class="sourceLineNo">024</span> *<a name="line.24"></a>
+<span class="sourceLineNo">025</span> * Alternatively, the contents of this file may be used under the terms of<a name="line.25"></a>
+<span class="sourceLineNo">026</span> * either the GNU General Public License Version 2 or later (the "GPL"), or<a name="line.26"></a>
+<span class="sourceLineNo">027</span> * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),<a name="line.27"></a>
+<span class="sourceLineNo">028</span> * in which case the provisions of the GPL or the LGPL are applicable instead<a name="line.28"></a>
+<span class="sourceLineNo">029</span> * of those above. If you wish to allow use of your version of this file only<a name="line.29"></a>
+<span class="sourceLineNo">030</span> * under the terms of either the GPL or the LGPL, and not to allow others to<a name="line.30"></a>
+<span class="sourceLineNo">031</span> * use your version of this file under the terms of the MPL, indicate your<a name="line.31"></a>
+<span class="sourceLineNo">032</span> * decision by deleting the provisions above and replace them with the notice<a name="line.32"></a>
+<span class="sourceLineNo">033</span> * and other provisions required by the GPL or the LGPL. If you do not delete<a name="line.33"></a>
+<span class="sourceLineNo">034</span> * the provisions above, a recipient may use your version of this file under<a name="line.34"></a>
+<span class="sourceLineNo">035</span> * the terms of any one of the MPL, the GPL or the LGPL.<a name="line.35"></a>
+<span class="sourceLineNo">036</span> *<a name="line.36"></a>
+<span class="sourceLineNo">037</span> * ***** END LICENSE BLOCK ***** */<a name="line.37"></a>
+<span class="sourceLineNo">038</span><a name="line.38"></a>
+<span class="sourceLineNo">039</span>package org.dcm4che3.tool.stgcmtscu;<a name="line.39"></a>
+<span class="sourceLineNo">040</span><a name="line.40"></a>
+<span class="sourceLineNo">041</span>import java.io.File;<a name="line.41"></a>
+<span class="sourceLineNo">042</span>import java.io.IOException;<a name="line.42"></a>
+<span class="sourceLineNo">043</span>import java.security.GeneralSecurityException;<a name="line.43"></a>
+<span class="sourceLineNo">044</span>import java.text.MessageFormat;<a name="line.44"></a>
+<span class="sourceLineNo">045</span>import java.util.ArrayList;<a name="line.45"></a>
+<span class="sourceLineNo">046</span>import java.util.HashMap;<a name="line.46"></a>
+<span class="sourceLineNo">047</span>import java.util.HashSet;<a name="line.47"></a>
+<span class="sourceLineNo">048</span>import java.util.List;<a name="line.48"></a>
+<span class="sourceLineNo">049</span>import java.util.ResourceBundle;<a name="line.49"></a>
+<span class="sourceLineNo">050</span>import java.util.concurrent.ExecutorService;<a name="line.50"></a>
+<span class="sourceLineNo">051</span>import java.util.concurrent.Executors;<a name="line.51"></a>
+<span class="sourceLineNo">052</span>import java.util.concurrent.ScheduledExecutorService;<a name="line.52"></a>
+<span class="sourceLineNo">053</span><a name="line.53"></a>
+<span class="sourceLineNo">054</span>import org.apache.commons.cli.CommandLine;<a name="line.54"></a>
+<span class="sourceLineNo">055</span>import org.apache.commons.cli.OptionBuilder;<a name="line.55"></a>
+<span class="sourceLineNo">056</span>import org.apache.commons.cli.Options;<a name="line.56"></a>
+<span class="sourceLineNo">057</span>import org.apache.commons.cli.ParseException;<a name="line.57"></a>
+<span class="sourceLineNo">058</span>import org.dcm4che3.data.Tag;<a name="line.58"></a>
+<span class="sourceLineNo">059</span>import org.dcm4che3.data.UID;<a name="line.59"></a>
+<span class="sourceLineNo">060</span>import org.dcm4che3.data.Attributes;<a name="line.60"></a>
+<span class="sourceLineNo">061</span>import org.dcm4che3.data.Sequence;<a name="line.61"></a>
+<span class="sourceLineNo">062</span>import org.dcm4che3.data.VR;<a name="line.62"></a>
+<span class="sourceLineNo">063</span>import org.dcm4che3.io.DicomOutputStream;<a name="line.63"></a>
+<span class="sourceLineNo">064</span>import org.dcm4che3.net.ApplicationEntity;<a name="line.64"></a>
+<span class="sourceLineNo">065</span>import org.dcm4che3.net.Association;<a name="line.65"></a>
+<span class="sourceLineNo">066</span>import org.dcm4che3.net.AssociationStateException;<a name="line.66"></a>
+<span class="sourceLineNo">067</span>import org.dcm4che3.net.Commands;<a name="line.67"></a>
+<span class="sourceLineNo">068</span>import org.dcm4che3.net.Connection;<a name="line.68"></a>
+<span class="sourceLineNo">069</span>import org.dcm4che3.net.Device;<a name="line.69"></a>
+<span class="sourceLineNo">070</span>import org.dcm4che3.net.Dimse;<a name="line.70"></a>
+<span class="sourceLineNo">071</span>import org.dcm4che3.net.DimseRSPHandler;<a name="line.71"></a>
+<span class="sourceLineNo">072</span>import org.dcm4che3.net.IncompatibleConnectionException;<a name="line.72"></a>
+<span class="sourceLineNo">073</span>import org.dcm4che3.net.Status;<a name="line.73"></a>
+<span class="sourceLineNo">074</span>import org.dcm4che3.net.TransferCapability;<a name="line.74"></a>
+<span class="sourceLineNo">075</span>import org.dcm4che3.net.pdu.AAssociateRQ;<a name="line.75"></a>
+<span class="sourceLineNo">076</span>import org.dcm4che3.net.pdu.PresentationContext;<a name="line.76"></a>
+<span class="sourceLineNo">077</span>import org.dcm4che3.net.service.AbstractDicomService;<a name="line.77"></a>
+<span class="sourceLineNo">078</span>import org.dcm4che3.net.service.BasicCEchoSCP;<a name="line.78"></a>
+<span class="sourceLineNo">079</span>import org.dcm4che3.net.service.DicomService;<a name="line.79"></a>
+<span class="sourceLineNo">080</span>import org.dcm4che3.net.service.DicomServiceException;<a name="line.80"></a>
+<span class="sourceLineNo">081</span>import org.dcm4che3.net.service.DicomServiceRegistry;<a name="line.81"></a>
+<span class="sourceLineNo">082</span>import org.dcm4che3.tool.common.CLIUtils;<a name="line.82"></a>
+<span class="sourceLineNo">083</span>import org.dcm4che3.tool.common.DicomFiles;<a name="line.83"></a>
+<span class="sourceLineNo">084</span>import org.dcm4che3.util.SafeClose;<a name="line.84"></a>
+<span class="sourceLineNo">085</span>import org.dcm4che3.util.UIDUtils;<a name="line.85"></a>
+<span class="sourceLineNo">086</span>import org.slf4j.Logger;<a name="line.86"></a>
+<span class="sourceLineNo">087</span>import org.slf4j.LoggerFactory;<a name="line.87"></a>
+<span class="sourceLineNo">088</span><a name="line.88"></a>
+<span class="sourceLineNo">089</span>/**<a name="line.89"></a>
+<span class="sourceLineNo">090</span> * @author Gunter Zeilinger &lt;gunterze@gmail.com&gt;<a name="line.90"></a>
+<span class="sourceLineNo">091</span> * @author Michael Backhaus &lt;michael.backhaus@agfa.com&gt;<a name="line.91"></a>
+<span class="sourceLineNo">092</span> */<a name="line.92"></a>
+<span class="sourceLineNo">093</span>public class StgCmtSCU {<a name="line.93"></a>
+<span class="sourceLineNo">094</span><a name="line.94"></a>
+<span class="sourceLineNo">095</span>    private static ResourceBundle rb =<a name="line.95"></a>
+<span class="sourceLineNo">096</span>            ResourceBundle.getBundle("org.dcm4che3.tool.stgcmtscu.messages");<a name="line.96"></a>
+<span class="sourceLineNo">097</span>    <a name="line.97"></a>
+<span class="sourceLineNo">098</span>    private static final Logger LOG = LoggerFactory.getLogger(StgCmtSCU.class);<a name="line.98"></a>
+<span class="sourceLineNo">099</span><a name="line.99"></a>
+<span class="sourceLineNo">100</span>    private final ApplicationEntity ae;<a name="line.100"></a>
+<span class="sourceLineNo">101</span>    private final Connection remote;<a name="line.101"></a>
+<span class="sourceLineNo">102</span>    private final AAssociateRQ rq = new AAssociateRQ();<a name="line.102"></a>
+<span class="sourceLineNo">103</span>    private Attributes attrs;<a name="line.103"></a>
+<span class="sourceLineNo">104</span>    private String uidSuffix;<a name="line.104"></a>
+<span class="sourceLineNo">105</span>    private File storageDir;<a name="line.105"></a>
+<span class="sourceLineNo">106</span>    private boolean keepAlive;<a name="line.106"></a>
+<span class="sourceLineNo">107</span>    private int splitTag;<a name="line.107"></a>
+<span class="sourceLineNo">108</span>    private int status;<a name="line.108"></a>
+<span class="sourceLineNo">109</span>    private HashMap&lt;String,List&lt;String&gt;&gt; map = new HashMap&lt;String,List&lt;String&gt;&gt;();<a name="line.109"></a>
+<span class="sourceLineNo">110</span>    private Association as;<a name="line.110"></a>
+<span class="sourceLineNo">111</span><a name="line.111"></a>
+<span class="sourceLineNo">112</span>    private final HashSet&lt;String&gt; outstandingResults = new HashSet&lt;String&gt;(2);<a name="line.112"></a>
+<span class="sourceLineNo">113</span>    private final DicomService stgcmtResultHandler =<a name="line.113"></a>
+<span class="sourceLineNo">114</span>            new AbstractDicomService(UID.StorageCommitmentPushModelSOPClass) {<a name="line.114"></a>
+<span class="sourceLineNo">115</span><a name="line.115"></a>
+<span class="sourceLineNo">116</span>             @Override<a name="line.116"></a>
+<span class="sourceLineNo">117</span>             public void onDimseRQ(Association as, PresentationContext pc,<a name="line.117"></a>
+<span class="sourceLineNo">118</span>                     Dimse dimse, Attributes cmd, Attributes data)<a name="line.118"></a>
+<span class="sourceLineNo">119</span>                     throws IOException {<a name="line.119"></a>
+<span class="sourceLineNo">120</span>                 if (dimse != Dimse.N_EVENT_REPORT_RQ)<a name="line.120"></a>
+<span class="sourceLineNo">121</span>                     throw new DicomServiceException(Status.UnrecognizedOperation);<a name="line.121"></a>
+<span class="sourceLineNo">122</span><a name="line.122"></a>
+<span class="sourceLineNo">123</span>                 int eventTypeID = cmd.getInt(Tag.EventTypeID, 0);<a name="line.123"></a>
+<span class="sourceLineNo">124</span>                 if (eventTypeID != 1 &amp;&amp; eventTypeID != 2) <a name="line.124"></a>
+<span class="sourceLineNo">125</span>                     throw new DicomServiceException(Status.NoSuchEventType)<a name="line.125"></a>
+<span class="sourceLineNo">126</span>                                 .setEventTypeID(eventTypeID);<a name="line.126"></a>
+<span class="sourceLineNo">127</span>                 String tuid = data.getString(Tag.TransactionUID);<a name="line.127"></a>
+<span class="sourceLineNo">128</span>                 try {<a name="line.128"></a>
+<span class="sourceLineNo">129</span>                     Attributes rsp = Commands.mkNEventReportRSP(cmd, status);<a name="line.129"></a>
+<span class="sourceLineNo">130</span>                     Attributes rspAttrs = StgCmtSCU.this.eventRecord(as, cmd, data);<a name="line.130"></a>
+<span class="sourceLineNo">131</span>                     as.writeDimseRSP(pc, rsp, rspAttrs);<a name="line.131"></a>
+<span class="sourceLineNo">132</span>                     removeOutstandingResult(tuid);<a name="line.132"></a>
+<span class="sourceLineNo">133</span>                 } catch (AssociationStateException e) {<a name="line.133"></a>
+<span class="sourceLineNo">134</span>                     LOG.warn("{} &lt;&lt; N-EVENT-RECORD-RSP failed: {}", as, e.getMessage());<a name="line.134"></a>
+<span class="sourceLineNo">135</span>                 }<a name="line.135"></a>
+<span class="sourceLineNo">136</span>             }<a name="line.136"></a>
+<span class="sourceLineNo">137</span>    };<a name="line.137"></a>
+<span class="sourceLineNo">138</span><a name="line.138"></a>
+<span class="sourceLineNo">139</span>    public StgCmtSCU(ApplicationEntity ae) throws IOException {<a name="line.139"></a>
+<span class="sourceLineNo">140</span>        this.remote = new Connection();<a name="line.140"></a>
+<span class="sourceLineNo">141</span>        this.ae = ae;<a name="line.141"></a>
+<span class="sourceLineNo">142</span>        DicomServiceRegistry serviceRegistry = new DicomServiceRegistry();<a name="line.142"></a>
+<span class="sourceLineNo">143</span>        serviceRegistry.addDicomService(new BasicCEchoSCP());<a name="line.143"></a>
+<span class="sourceLineNo">144</span>        serviceRegistry.addDicomService(stgcmtResultHandler);<a name="line.144"></a>
+<span class="sourceLineNo">145</span>        ae.setDimseRQHandler(serviceRegistry);<a name="line.145"></a>
+<span class="sourceLineNo">146</span>    }<a name="line.146"></a>
+<span class="sourceLineNo">147</span><a name="line.147"></a>
+<span class="sourceLineNo">148</span>    public StgCmtSCU(ApplicationEntity ae, DicomService stgCmtResultHndlr ) throws IOException {<a name="line.148"></a>
+<span class="sourceLineNo">149</span>        this.remote = new Connection();<a name="line.149"></a>
+<span class="sourceLineNo">150</span>        this.ae = ae;<a name="line.150"></a>
+<span class="sourceLineNo">151</span>        DicomServiceRegistry serviceRegistry = new DicomServiceRegistry();<a name="line.151"></a>
+<span class="sourceLineNo">152</span>        serviceRegistry.addDicomService(new BasicCEchoSCP());<a name="line.152"></a>
+<span class="sourceLineNo">153</span>        serviceRegistry.addDicomService(stgCmtResultHndlr);<a name="line.153"></a>
+<span class="sourceLineNo">154</span>        ae.setDimseRQHandler(serviceRegistry);<a name="line.154"></a>
+<span class="sourceLineNo">155</span>    }<a name="line.155"></a>
+<span class="sourceLineNo">156</span><a name="line.156"></a>
+<span class="sourceLineNo">157</span>    public Connection getRemoteConnection() {<a name="line.157"></a>
+<span class="sourceLineNo">158</span>        return remote;<a name="line.158"></a>
+<span class="sourceLineNo">159</span>    }<a name="line.159"></a>
+<span class="sourceLineNo">160</span><a name="line.160"></a>
+<span class="sourceLineNo">161</span>    public AAssociateRQ getAAssociateRQ() {<a name="line.161"></a>
+<span class="sourceLineNo">162</span>        return rq;<a name="line.162"></a>
+<span class="sourceLineNo">163</span>    }<a name="line.163"></a>
+<span class="sourceLineNo">164</span><a name="line.164"></a>
+<span class="sourceLineNo">165</span>    public void setStorageDirectory(File storageDir) {<a name="line.165"></a>
+<span class="sourceLineNo">166</span>        if (storageDir != null)<a name="line.166"></a>
+<span class="sourceLineNo">167</span>            storageDir.mkdirs();<a name="line.167"></a>
+<span class="sourceLineNo">168</span>        this.storageDir = storageDir;<a name="line.168"></a>
+<span class="sourceLineNo">169</span>    }<a name="line.169"></a>
+<span class="sourceLineNo">170</span><a name="line.170"></a>
+<span class="sourceLineNo">171</span>    public File getStorageDirectory() {<a name="line.171"></a>
+<span class="sourceLineNo">172</span>        return storageDir;<a name="line.172"></a>
+<span class="sourceLineNo">173</span>    }<a name="line.173"></a>
+<span class="sourceLineNo">174</span><a name="line.174"></a>
+<span class="sourceLineNo">175</span>    public final void setUIDSuffix(String uidSuffix) {<a name="line.175"></a>
+<span class="sourceLineNo">176</span>        this.uidSuffix = uidSuffix;<a name="line.176"></a>
+<span class="sourceLineNo">177</span>    }<a name="line.177"></a>
+<span class="sourceLineNo">178</span><a name="line.178"></a>
+<span class="sourceLineNo">179</span>    public void setAttributes(Attributes attrs) {<a name="line.179"></a>
+<span class="sourceLineNo">180</span>        this.attrs = attrs;<a name="line.180"></a>
+<span class="sourceLineNo">181</span>    }<a name="line.181"></a>
+<span class="sourceLineNo">182</span><a name="line.182"></a>
+<span class="sourceLineNo">183</span>    @SuppressWarnings("unchecked")<a name="line.183"></a>
+<span class="sourceLineNo">184</span>    public static void main(String[] args) {<a name="line.184"></a>
+<span class="sourceLineNo">185</span>        try {<a name="line.185"></a>
+<span class="sourceLineNo">186</span>            CommandLine cl = parseComandLine(args);<a name="line.186"></a>
+<span class="sourceLineNo">187</span>            Device device = new Device("stgcmtscu");<a name="line.187"></a>
+<span class="sourceLineNo">188</span>            Connection conn = new Connection();<a name="line.188"></a>
+<span class="sourceLineNo">189</span>            device.addConnection(conn);<a name="line.189"></a>
+<span class="sourceLineNo">190</span>            ApplicationEntity ae = new ApplicationEntity("STGCMTSCU");<a name="line.190"></a>
+<span class="sourceLineNo">191</span>            device.addApplicationEntity(ae);<a name="line.191"></a>
+<span class="sourceLineNo">192</span>            ae.addConnection(conn);<a name="line.192"></a>
+<span class="sourceLineNo">193</span>            final StgCmtSCU stgcmtscu = new StgCmtSCU(ae);<a name="line.193"></a>
+<span class="sourceLineNo">194</span>            CLIUtils.configureConnect(stgcmtscu.remote, stgcmtscu.rq, cl);<a name="line.194"></a>
+<span class="sourceLineNo">195</span>            CLIUtils.configureBind(conn, stgcmtscu.ae, cl);<a name="line.195"></a>
+<span class="sourceLineNo">196</span>            CLIUtils.configure(conn, cl);<a name="line.196"></a>
+<span class="sourceLineNo">197</span>            stgcmtscu.remote.setTlsProtocols(conn.tlsProtocols());<a name="line.197"></a>
+<span class="sourceLineNo">198</span>            stgcmtscu.remote.setTlsCipherSuites(conn.getTlsCipherSuites());<a name="line.198"></a>
+<span class="sourceLineNo">199</span>            stgcmtscu.setTransferSyntaxes(CLIUtils.transferSyntaxesOf(cl));<a name="line.199"></a>
+<span class="sourceLineNo">200</span>            stgcmtscu.setStatus(CLIUtils.getIntOption(cl, "status", 0));<a name="line.200"></a>
+<span class="sourceLineNo">201</span>            stgcmtscu.setSplitTag(getSplitTag(cl));<a name="line.201"></a>
+<span class="sourceLineNo">202</span>            stgcmtscu.setKeepAlive(cl.hasOption("keep-alive"));<a name="line.202"></a>
+<span class="sourceLineNo">203</span>            stgcmtscu.setStorageDirectory(getStorageDirectory(cl));<a name="line.203"></a>
+<span class="sourceLineNo">204</span>            stgcmtscu.setAttributes(new Attributes());<a name="line.204"></a>
+<span class="sourceLineNo">205</span>            CLIUtils.addAttributes(stgcmtscu.attrs, cl.getOptionValues("s"));<a name="line.205"></a>
+<span class="sourceLineNo">206</span>            stgcmtscu.setUIDSuffix(cl.getOptionValue("uid-suffix"));<a name="line.206"></a>
+<span class="sourceLineNo">207</span>            List&lt;String&gt; argList = cl.getArgList();<a name="line.207"></a>
+<span class="sourceLineNo">208</span>            boolean echo = argList.isEmpty();<a name="line.208"></a>
+<span class="sourceLineNo">209</span>            if (!echo) {<a name="line.209"></a>
+<span class="sourceLineNo">210</span>                LOG.info(rb.getString("scanning"));<a name="line.210"></a>
+<span class="sourceLineNo">211</span>                DicomFiles.scan(argList, new DicomFiles.Callback() {<a name="line.211"></a>
+<span class="sourceLineNo">212</span>                    <a name="line.212"></a>
+<span class="sourceLineNo">213</span>                    <a name="line.213"></a>
+<span class="sourceLineNo">214</span>                    public boolean dicomFile(File f, Attributes fmi, long dsPos,<a name="line.214"></a>
+<span class="sourceLineNo">215</span>                            Attributes ds) {<a name="line.215"></a>
+<span class="sourceLineNo">216</span>                        return stgcmtscu.addInstance(ds);<a name="line.216"></a>
+<span class="sourceLineNo">217</span>                    }<a name="line.217"></a>
+<span class="sourceLineNo">218</span>                });<a name="line.218"></a>
+<span class="sourceLineNo">219</span>            }<a name="line.219"></a>
+<span class="sourceLineNo">220</span>            ExecutorService executorService =<a name="line.220"></a>
+<span class="sourceLineNo">221</span>                    Executors.newCachedThreadPool();<a name="line.221"></a>
+<span class="sourceLineNo">222</span>            ScheduledExecutorService scheduledExecutorService =<a name="line.222"></a>
+<span class="sourceLineNo">223</span>                    Executors.newSingleThreadScheduledExecutor();<a name="line.223"></a>
+<span class="sourceLineNo">224</span>            device.setExecutor(executorService);<a name="line.224"></a>
+<span class="sourceLineNo">225</span>            device.setScheduledExecutor(scheduledExecutorService);<a name="line.225"></a>
+<span class="sourceLineNo">226</span>            device.bindConnections();<a name="line.226"></a>
+<span class="sourceLineNo">227</span>            try {<a name="line.227"></a>
+<span class="sourceLineNo">228</span>                stgcmtscu.open();<a name="line.228"></a>
+<span class="sourceLineNo">229</span>                if (echo)<a name="line.229"></a>
+<span class="sourceLineNo">230</span>                    stgcmtscu.echo();<a name="line.230"></a>
+<span class="sourceLineNo">231</span>                else<a name="line.231"></a>
+<span class="sourceLineNo">232</span>                    stgcmtscu.sendRequests();<a name="line.232"></a>
+<span class="sourceLineNo">233</span>             } finally {<a name="line.233"></a>
+<span class="sourceLineNo">234</span>                stgcmtscu.close();<a name="line.234"></a>
+<span class="sourceLineNo">235</span>                if (conn.isListening()) {<a name="line.235"></a>
+<span class="sourceLineNo">236</span>                    device.waitForNoOpenConnections();<a name="line.236"></a>
+<span class="sourceLineNo">237</span>                    device.unbindConnections();<a name="line.237"></a>
+<span class="sourceLineNo">238</span>                }<a name="line.238"></a>
+<span class="sourceLineNo">239</span>                executorService.shutdown();<a name="line.239"></a>
+<span class="sourceLineNo">240</span>                scheduledExecutorService.shutdown();<a name="line.240"></a>
+<span class="sourceLineNo">241</span>            }<a name="line.241"></a>
+<span class="sourceLineNo">242</span>        } catch (ParseException e) {<a name="line.242"></a>
+<span class="sourceLineNo">243</span>            System.err.println("stgcmtscu: " + e.getMessage());<a name="line.243"></a>
+<span class="sourceLineNo">244</span>            System.err.println(rb.getString("try"));<a name="line.244"></a>
+<span class="sourceLineNo">245</span>            System.exit(2);<a name="line.245"></a>
+<span class="sourceLineNo">246</span>        } catch (Exception e) {<a name="line.246"></a>
+<span class="sourceLineNo">247</span>            System.err.println("stgcmtscu: " + e.getMessage());<a name="line.247"></a>
+<span class="sourceLineNo">248</span>            e.printStackTrace();<a name="line.248"></a>
+<span class="sourceLineNo">249</span>            System.exit(2);<a name="line.249"></a>
+<span class="sourceLineNo">250</span>        }<a name="line.250"></a>
+<span class="sourceLineNo">251</span>    }<a name="line.251"></a>
+<span class="sourceLineNo">252</span><a name="line.252"></a>
+<span class="sourceLineNo">253</span>    public static File getStorageDirectory(CommandLine cl) {<a name="line.253"></a>
+<span class="sourceLineNo">254</span>        return cl.hasOption("ignore")<a name="line.254"></a>
+<span class="sourceLineNo">255</span>                ? null<a name="line.255"></a>
+<span class="sourceLineNo">256</span>                : new File(cl.getOptionValue("directory", "."));<a name="line.256"></a>
+<span class="sourceLineNo">257</span>    }<a name="line.257"></a>
+<span class="sourceLineNo">258</span><a name="line.258"></a>
+<span class="sourceLineNo">259</span>    public static int getSplitTag(CommandLine cl) {<a name="line.259"></a>
+<span class="sourceLineNo">260</span>        return cl.hasOption("one-by-study") <a name="line.260"></a>
+<span class="sourceLineNo">261</span>                ? Tag.StudyInstanceUID<a name="line.261"></a>
+<span class="sourceLineNo">262</span>                : cl.hasOption("one-by-series")<a name="line.262"></a>
+<span class="sourceLineNo">263</span>                        ? Tag.SeriesInstanceUID<a name="line.263"></a>
+<span class="sourceLineNo">264</span>                        : 0;<a name="line.264"></a>
+<span class="sourceLineNo">265</span>    }<a name="line.265"></a>
+<span class="sourceLineNo">266</span><a name="line.266"></a>
+<span class="sourceLineNo">267</span>    public void setSplitTag(int splitTag) {<a name="line.267"></a>
+<span class="sourceLineNo">268</span>        this.splitTag = splitTag;<a name="line.268"></a>
+<span class="sourceLineNo">269</span>    }<a name="line.269"></a>
+<span class="sourceLineNo">270</span><a name="line.270"></a>
+<span class="sourceLineNo">271</span>    public void setKeepAlive(boolean keepAlive) {<a name="line.271"></a>
+<span class="sourceLineNo">272</span>        this.keepAlive = keepAlive;<a name="line.272"></a>
+<span class="sourceLineNo">273</span>    }<a name="line.273"></a>
+<span class="sourceLineNo">274</span><a name="line.274"></a>
+<span class="sourceLineNo">275</span>    public void setStatus(int status) {<a name="line.275"></a>
+<span class="sourceLineNo">276</span>        this.status = status;<a name="line.276"></a>
+<span class="sourceLineNo">277</span>    }<a name="line.277"></a>
+<span class="sourceLineNo">278</span><a name="line.278"></a>
+<span class="sourceLineNo">279</span>    public void setTransferSyntaxes(String[] tss) {<a name="line.279"></a>
+<span class="sourceLineNo">280</span>        rq.addPresentationContext(<a name="line.280"></a>
+<span class="sourceLineNo">281</span>                new PresentationContext(1, UID.VerificationSOPClass,<a name="line.281"></a>
+<span class="sourceLineNo">282</span>                        UID.ImplicitVRLittleEndian));<a name="line.282"></a>
+<span class="sourceLineNo">283</span>        rq.addPresentationContext(<a name="line.283"></a>
+<span class="sourceLineNo">284</span>                new PresentationContext(2,<a name="line.284"></a>
+<span class="sourceLineNo">285</span>                        UID.StorageCommitmentPushModelSOPClass,<a name="line.285"></a>
+<span class="sourceLineNo">286</span>                        tss));<a name="line.286"></a>
+<span class="sourceLineNo">287</span>        ae.addTransferCapability(<a name="line.287"></a>
+<span class="sourceLineNo">288</span>                new TransferCapability(null,<a name="line.288"></a>
+<span class="sourceLineNo">289</span>                        UID.VerificationSOPClass,<a name="line.289"></a>
+<span class="sourceLineNo">290</span>                        TransferCapability.Role.SCP,<a name="line.290"></a>
+<span class="sourceLineNo">291</span>                        UID.ImplicitVRLittleEndian));<a name="line.291"></a>
+<span class="sourceLineNo">292</span>        ae.addTransferCapability(<a name="line.292"></a>
+<span class="sourceLineNo">293</span>                new TransferCapability(null,<a name="line.293"></a>
+<span class="sourceLineNo">294</span>                        UID.StorageCommitmentPushModelSOPClass,<a name="line.294"></a>
+<span class="sourceLineNo">295</span>                        TransferCapability.Role.SCU,<a name="line.295"></a>
+<span class="sourceLineNo">296</span>                        tss));<a name="line.296"></a>
+<span class="sourceLineNo">297</span>    }<a name="line.297"></a>
+<span class="sourceLineNo">298</span><a name="line.298"></a>
+<span class="sourceLineNo">299</span>    public boolean addInstance(Attributes inst) {<a name="line.299"></a>
+<span class="sourceLineNo">300</span>        CLIUtils.updateAttributes(inst, attrs, uidSuffix);<a name="line.300"></a>
+<span class="sourceLineNo">301</span>        String cuid = inst.getString(Tag.SOPClassUID);<a name="line.301"></a>
+<span class="sourceLineNo">302</span>        String iuid = inst.getString(Tag.SOPInstanceUID);<a name="line.302"></a>
+<span class="sourceLineNo">303</span>        String splitkey = splitTag != 0 ? inst.getString(splitTag) : "";<a name="line.303"></a>
+<span class="sourceLineNo">304</span>        if (cuid == null || iuid == null || splitkey == null)<a name="line.304"></a>
+<span class="sourceLineNo">305</span>            return false;<a name="line.305"></a>
+<span class="sourceLineNo">306</span><a name="line.306"></a>
+<span class="sourceLineNo">307</span>        List&lt;String&gt; refSOPs = map.get(splitkey);<a name="line.307"></a>
+<span class="sourceLineNo">308</span>        if (refSOPs == null)<a name="line.308"></a>
+<span class="sourceLineNo">309</span>            map.put(splitkey, refSOPs = new ArrayList&lt;String&gt;());<a name="line.309"></a>
+<span class="sourceLineNo">310</span><a name="line.310"></a>
+<span class="sourceLineNo">311</span>        refSOPs.add(cuid);<a name="line.311"></a>
+<span class="sourceLineNo">312</span>        refSOPs.add(iuid);<a name="line.312"></a>
+<span class="sourceLineNo">313</span>        return true;<a name="line.313"></a>
+<span class="sourceLineNo">314</span>    }<a name="line.314"></a>
+<span class="sourceLineNo">315</span><a name="line.315"></a>
+<span class="sourceLineNo">316</span>    private static CommandLine parseComandLine(String[] args)<a name="line.316"></a>
+<span class="sourceLineNo">317</span>            throws ParseException{<a name="line.317"></a>
+<span class="sourceLineNo">318</span>        Options opts = new Options();<a name="line.318"></a>
+<span class="sourceLineNo">319</span>        CLIUtils.addTransferSyntaxOptions(opts);<a name="line.319"></a>
+<span class="sourceLineNo">320</span>        CLIUtils.addConnectOption(opts);<a name="line.320"></a>
+<span class="sourceLineNo">321</span>        CLIUtils.addBindOption(opts, "STGCMTSCU");<a name="line.321"></a>
+<span class="sourceLineNo">322</span>        CLIUtils.addRequestTimeoutOption(opts);<a name="line.322"></a>
+<span class="sourceLineNo">323</span>        CLIUtils.addAEOptions(opts);<a name="line.323"></a>
+<span class="sourceLineNo">324</span>        CLIUtils.addResponseTimeoutOption(opts);<a name="line.324"></a>
+<span class="sourceLineNo">325</span>        CLIUtils.addCommonOptions(opts);<a name="line.325"></a>
+<span class="sourceLineNo">326</span>        addStgCmtOptions(opts);<a name="line.326"></a>
+<span class="sourceLineNo">327</span>        return CLIUtils.parseComandLine(args, opts, rb, StgCmtSCU.class);<a name="line.327"></a>
+<span class="sourceLineNo">328</span>    }<a name="line.328"></a>
+<span class="sourceLineNo">329</span><a name="line.329"></a>
+<span class="sourceLineNo">330</span>    @SuppressWarnings("static-access")<a name="line.330"></a>
+<span class="sourceLineNo">331</span>    public static void addStgCmtOptions(Options opts) {<a name="line.331"></a>
+<span class="sourceLineNo">332</span>        opts.addOption(null, "ignore", false,<a name="line.332"></a>
+<span class="sourceLineNo">333</span>                rb.getString("ignore"));<a name="line.333"></a>
+<span class="sourceLineNo">334</span>        opts.addOption(OptionBuilder<a name="line.334"></a>
+<span class="sourceLineNo">335</span>                .hasArg()<a name="line.335"></a>
+<span class="sourceLineNo">336</span>                .withArgName("path")<a name="line.336"></a>
+<span class="sourceLineNo">337</span>                .withDescription(rb.getString("directory"))<a name="line.337"></a>
+<span class="sourceLineNo">338</span>                .withLongOpt("directory")<a name="line.338"></a>
+<span class="sourceLineNo">339</span>                .create(null));<a name="line.339"></a>
+<span class="sourceLineNo">340</span>        opts.addOption(OptionBuilder<a name="line.340"></a>
+<span class="sourceLineNo">341</span>                .hasArg()<a name="line.341"></a>
+<span class="sourceLineNo">342</span>                .withArgName("code")<a name="line.342"></a>
+<span class="sourceLineNo">343</span>                .withDescription(rb.getString("status"))<a name="line.343"></a>
+<span class="sourceLineNo">344</span>                .withLongOpt("status")<a name="line.344"></a>
+<span class="sourceLineNo">345</span>                .create(null));<a name="line.345"></a>
+<span class="sourceLineNo">346</span>        opts.addOption(null, "keep-alive", false, rb.getString("keep-alive"));<a name="line.346"></a>
+<span class="sourceLineNo">347</span>        opts.addOption(null, "one-per-study", false, rb.getString("one-per-study"));<a name="line.347"></a>
+<span class="sourceLineNo">348</span>        opts.addOption(null, "one-per-series", false, rb.getString("one-per-series"));<a name="line.348"></a>
+<span class="sourceLineNo">349</span>        opts.addOption(OptionBuilder<a name="line.349"></a>
+<span class="sourceLineNo">350</span>                .hasArgs()<a name="line.350"></a>
+<span class="sourceLineNo">351</span>                .withArgName("[seq/]attr=value")<a name="line.351"></a>
+<span class="sourceLineNo">352</span>                .withValueSeparator('=')<a name="line.352"></a>
+<span class="sourceLineNo">353</span>                .withDescription(rb.getString("set"))<a name="line.353"></a>
+<span class="sourceLineNo">354</span>                .create("s"));<a name="line.354"></a>
+<span class="sourceLineNo">355</span>        opts.addOption(OptionBuilder<a name="line.355"></a>
+<span class="sourceLineNo">356</span>                .hasArg()<a name="line.356"></a>
+<span class="sourceLineNo">357</span>                .withArgName("suffix")<a name="line.357"></a>
+<span class="sourceLineNo">358</span>                .withDescription(rb.getString("uid-suffix"))<a name="line.358"></a>
+<span class="sourceLineNo">359</span>                .withLongOpt("uid-suffix")<a name="line.359"></a>
+<span class="sourceLineNo">360</span>                .create(null));<a name="line.360"></a>
+<span class="sourceLineNo">361</span>    }<a name="line.361"></a>
+<span class="sourceLineNo">362</span><a name="line.362"></a>
+<span class="sourceLineNo">363</span>    public void open() throws IOException, InterruptedException,<a name="line.363"></a>
+<span class="sourceLineNo">364</span>            IncompatibleConnectionException, GeneralSecurityException {<a name="line.364"></a>
+<span class="sourceLineNo">365</span>        as = ae.connect(remote, rq);<a name="line.365"></a>
+<span class="sourceLineNo">366</span>    }<a name="line.366"></a>
+<span class="sourceLineNo">367</span><a name="line.367"></a>
+<span class="sourceLineNo">368</span>    public void echo() throws IOException, InterruptedException {<a name="line.368"></a>
+<span class="sourceLineNo">369</span>        as.cecho().next();<a name="line.369"></a>
+<span class="sourceLineNo">370</span>    }<a name="line.370"></a>
+<span class="sourceLineNo">371</span><a name="line.371"></a>
+<span class="sourceLineNo">372</span>    public void close() throws IOException, InterruptedException {<a name="line.372"></a>
+<span class="sourceLineNo">373</span>        if (as != null) {<a name="line.373"></a>
+<span class="sourceLineNo">374</span>            if (as.isReadyForDataTransfer()) {<a name="line.374"></a>
+<span class="sourceLineNo">375</span>                as.waitForOutstandingRSP();<a name="line.375"></a>
+<span class="sourceLineNo">376</span>                if (keepAlive)<a name="line.376"></a>
+<span class="sourceLineNo">377</span>                    waitForOutstandingResults(as);<a name="line.377"></a>
+<span class="sourceLineNo">378</span>                as.release();<a name="line.378"></a>
+<span class="sourceLineNo">379</span>            }<a name="line.379"></a>
+<span class="sourceLineNo">380</span>            as.waitForSocketClose();<a name="line.380"></a>
+<span class="sourceLineNo">381</span>        }<a name="line.381"></a>
+<span class="sourceLineNo">382</span>        waitForOutstandingResults(as);<a name="line.382"></a>
+<span class="sourceLineNo">383</span>    }<a name="line.383"></a>
+<span class="sourceLineNo">384</span><a name="line.384"></a>
+<span class="sourceLineNo">385</span>    public void addOutstandingResult(String tuid) {<a name="line.385"></a>
+<span class="sourceLineNo">386</span>        synchronized (outstandingResults ) {<a name="line.386"></a>
+<span class="sourceLineNo">387</span>            outstandingResults.add(tuid);<a name="line.387"></a>
+<span class="sourceLineNo">388</span>        }<a name="line.388"></a>
+<span class="sourceLineNo">389</span>    }<a name="line.389"></a>
+<span class="sourceLineNo">390</span><a name="line.390"></a>
+<span class="sourceLineNo">391</span>    public void removeOutstandingResult(String tuid) {<a name="line.391"></a>
+<span class="sourceLineNo">392</span>        synchronized (outstandingResults ) {<a name="line.392"></a>
+<span class="sourceLineNo">393</span>            outstandingResults.remove(tuid);<a name="line.393"></a>
+<span class="sourceLineNo">394</span>            outstandingResults.notify();<a name="line.394"></a>
+<span class="sourceLineNo">395</span>        }<a name="line.395"></a>
+<span class="sourceLineNo">396</span>    }<a name="line.396"></a>
+<span class="sourceLineNo">397</span><a name="line.397"></a>
+<span class="sourceLineNo">398</span>    private void waitForOutstandingResults(Association as) throws InterruptedException {<a name="line.398"></a>
+<span class="sourceLineNo">399</span>        synchronized (outstandingResults) {<a name="line.399"></a>
+<span class="sourceLineNo">400</span><a name="line.400"></a>
+<span class="sourceLineNo">401</span>            int requestTimeout = as.getConnection().getRequestTimeout();<a name="line.401"></a>
+<span class="sourceLineNo">402</span>            long started = System.currentTimeMillis();<a name="line.402"></a>
+<span class="sourceLineNo">403</span><a name="line.403"></a>
+<span class="sourceLineNo">404</span>            int lastSize = -1;<a name="line.404"></a>
+<span class="sourceLineNo">405</span>            while (!outstandingResults.isEmpty()) {<a name="line.405"></a>
+<span class="sourceLineNo">406</span>                if (outstandingResults.size() != lastSize) {<a name="line.406"></a>
+<span class="sourceLineNo">407</span>                    lastSize = outstandingResults.size();<a name="line.407"></a>
+<span class="sourceLineNo">408</span>                    System.out.println(MessageFormat.format(rb.getString("wait-for-results"),outstandingResults.size()));<a name="line.408"></a>
+<span class="sourceLineNo">409</span>                }<a name="line.409"></a>
+<span class="sourceLineNo">410</span><a name="line.410"></a>
+<span class="sourceLineNo">411</span>                outstandingResults.wait(100);<a name="line.411"></a>
+<span class="sourceLineNo">412</span><a name="line.412"></a>
+<span class="sourceLineNo">413</span>                // timeout 10 sec<a name="line.413"></a>
+<span class="sourceLineNo">414</span>                if (requestTimeout &gt; 0 &amp;&amp; System.currentTimeMillis() - started &gt; requestTimeout)<a name="line.414"></a>
+<span class="sourceLineNo">415</span>                    throw new RuntimeException("Timeout (10 sec) while waiting for storage commitment");<a name="line.415"></a>
+<span class="sourceLineNo">416</span>            }<a name="line.416"></a>
+<span class="sourceLineNo">417</span>        }<a name="line.417"></a>
+<span class="sourceLineNo">418</span>    }<a name="line.418"></a>
+<span class="sourceLineNo">419</span><a name="line.419"></a>
+<span class="sourceLineNo">420</span>    public Attributes makeActionInfo(List&lt;String&gt; refSOPs) {<a name="line.420"></a>
+<span class="sourceLineNo">421</span>        Attributes actionInfo = new Attributes(2);<a name="line.421"></a>
+<span class="sourceLineNo">422</span>        actionInfo.setString(Tag.TransactionUID, VR.UI, UIDUtils.createUID());<a name="line.422"></a>
+<span class="sourceLineNo">423</span>        int n = refSOPs.size() / 2;<a name="line.423"></a>
+<span class="sourceLineNo">424</span>        Sequence refSOPSeq = actionInfo.newSequence(Tag.ReferencedSOPSequence, n);<a name="line.424"></a>
+<span class="sourceLineNo">425</span>        for (int i = 0, j = 0; j &lt; n; j++) {<a name="line.425"></a>
+<span class="sourceLineNo">426</span>            Attributes refSOP = new Attributes(2);<a name="line.426"></a>
+<span class="sourceLineNo">427</span>            refSOP.setString(Tag.ReferencedSOPClassUID, VR.UI, refSOPs.get(i++));<a name="line.427"></a>
+<span class="sourceLineNo">428</span>            refSOP.setString(Tag.ReferencedSOPInstanceUID, VR.UI, refSOPs.get(i++));<a name="line.428"></a>
+<span class="sourceLineNo">429</span>            refSOPSeq.add(refSOP);<a name="line.429"></a>
+<span class="sourceLineNo">430</span>        }<a name="line.430"></a>
+<span class="sourceLineNo">431</span>        return actionInfo;<a name="line.431"></a>
+<span class="sourceLineNo">432</span>    }<a name="line.432"></a>
+<span class="sourceLineNo">433</span><a name="line.433"></a>
+<span class="sourceLineNo">434</span>    public void sendRequests() throws IOException, InterruptedException {<a name="line.434"></a>
+<span class="sourceLineNo">435</span>        for (List&lt;String&gt; refSOPs : map.values())<a name="line.435"></a>
+<span class="sourceLineNo">436</span>            sendRequest(makeActionInfo(refSOPs));<a name="line.436"></a>
+<span class="sourceLineNo">437</span>    }<a name="line.437"></a>
+<span class="sourceLineNo">438</span><a name="line.438"></a>
+<span class="sourceLineNo">439</span>    private void sendRequest(Attributes actionInfo) throws IOException, InterruptedException {<a name="line.439"></a>
+<span class="sourceLineNo">440</span>        final String tuid = actionInfo.getString(Tag.TransactionUID);<a name="line.440"></a>
+<span class="sourceLineNo">441</span>        DimseRSPHandler rspHandler = new DimseRSPHandler(as.nextMessageID()) {<a name="line.441"></a>
+<span class="sourceLineNo">442</span><a name="line.442"></a>
+<span class="sourceLineNo">443</span>            @Override<a name="line.443"></a>
+<span class="sourceLineNo">444</span>            public void onDimseRSP(Association as, Attributes cmd, Attributes data) {<a name="line.444"></a>
+<span class="sourceLineNo">445</span>                if (cmd.getInt(Tag.Status, -1) != Status.Success)<a name="line.445"></a>
+<span class="sourceLineNo">446</span>                    removeOutstandingResult(tuid );<a name="line.446"></a>
+<span class="sourceLineNo">447</span>                super.onDimseRSP(as, cmd, data);<a name="line.447"></a>
+<span class="sourceLineNo">448</span>            }<a name="line.448"></a>
+<span class="sourceLineNo">449</span>        };<a name="line.449"></a>
+<span class="sourceLineNo">450</span><a name="line.450"></a>
+<span class="sourceLineNo">451</span>        as.naction(UID.StorageCommitmentPushModelSOPClass,<a name="line.451"></a>
+<span class="sourceLineNo">452</span>                UID.StorageCommitmentPushModelSOPInstance,<a name="line.452"></a>
+<span class="sourceLineNo">453</span>                1, actionInfo, null, rspHandler);<a name="line.453"></a>
+<span class="sourceLineNo">454</span>        addOutstandingResult(tuid);<a name="line.454"></a>
+<span class="sourceLineNo">455</span>    }<a name="line.455"></a>
+<span class="sourceLineNo">456</span><a name="line.456"></a>
+<span class="sourceLineNo">457</span>    private Attributes eventRecord(Association as, Attributes cmd, Attributes eventInfo)<a name="line.457"></a>
+<span class="sourceLineNo">458</span>            throws DicomServiceException {<a name="line.458"></a>
+<span class="sourceLineNo">459</span>        if (storageDir == null)<a name="line.459"></a>
+<span class="sourceLineNo">460</span>            return null;<a name="line.460"></a>
+<span class="sourceLineNo">461</span><a name="line.461"></a>
+<span class="sourceLineNo">462</span>        String cuid = cmd.getString(Tag.AffectedSOPClassUID);<a name="line.462"></a>
+<span class="sourceLineNo">463</span>        String iuid = cmd.getString(Tag.AffectedSOPInstanceUID);<a name="line.463"></a>
+<span class="sourceLineNo">464</span>        String tuid = eventInfo.getString(Tag.TransactionUID);<a name="line.464"></a>
+<span class="sourceLineNo">465</span>        File file = new File(storageDir, tuid );<a name="line.465"></a>
+<span class="sourceLineNo">466</span>        DicomOutputStream out = null;<a name="line.466"></a>
+<span class="sourceLineNo">467</span>        LOG.info("{}: M-WRITE {}", as, file);<a name="line.467"></a>
+<span class="sourceLineNo">468</span>        try {<a name="line.468"></a>
+<span class="sourceLineNo">469</span>            out = new DicomOutputStream(file);<a name="line.469"></a>
+<span class="sourceLineNo">470</span>            out.writeDataset(<a name="line.470"></a>
+<span class="sourceLineNo">471</span>                    Attributes.createFileMetaInformation(iuid, cuid,<a name="line.471"></a>
+<span class="sourceLineNo">472</span>                            UID.ExplicitVRLittleEndian),<a name="line.472"></a>
+<span class="sourceLineNo">473</span>                    eventInfo);<a name="line.473"></a>
+<span class="sourceLineNo">474</span>        } catch (IOException e) {<a name="line.474"></a>
+<span class="sourceLineNo">475</span>            LOG.warn(as + ": Failed to store Storage Commitment Result:", e);<a name="line.475"></a>
+<span class="sourceLineNo">476</span>            throw new DicomServiceException(Status.ProcessingFailure, e);<a name="line.476"></a>
+<span class="sourceLineNo">477</span>        } finally {<a name="line.477"></a>
+<span class="sourceLineNo">478</span>            SafeClose.close(out);<a name="line.478"></a>
+<span class="sourceLineNo">479</span>        }<a name="line.479"></a>
+<span class="sourceLineNo">480</span>        return null;<a name="line.480"></a>
+<span class="sourceLineNo">481</span>    }<a name="line.481"></a>
+<span class="sourceLineNo">482</span>}<a name="line.482"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre>
+</div>
+</body>
+</html>

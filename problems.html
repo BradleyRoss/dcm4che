@@ -14,13 +14,19 @@
     org.dcm4che3.audit/AuditMessages.  The problem could be in the 
     artifact javax.xml.bind/jaxb-api/2.1 
     whose homepage is http://jaxb.java.net.</p>
-<p>There is a fix <i>549 - Unescaped javadoc in @XmlElements<i> that 
+<p>There is a fix <i>549 - Unescaped javadoc in @XmlElements</i> that 
        was changed between 2.2.3u2 and 2.2.4 that may be relevant.  See
        <a href="https://jaxb.java.net/2.2.5/docs/release-documentation.html"
        target="_blank">
        https://jaxb.java.net/2.2.5/docs/release-documentation.html</a>
        for a reference.<p>
 </li>
+<li>The dependencies for junit and slf4j appear in many places.  Should they
+    appear only in parent and should slf4j dependencies have a scope of test.
+</li>
+<li>The module dcm4che-all apparently lists all of the submodules.  However, the
+    modules list dcm4che-parent as the parent.  Should the contents of 
+    dc4che-all be moved to dcm4che-parent.</li>
 </ul>
 </body>
 </html>

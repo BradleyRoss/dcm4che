@@ -1,0 +1,336 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+<title>Source code</title>
+<link rel="stylesheet" type="text/css" href="../../../../stylesheet.css" title="Style">
+</head>
+<body>
+<div class="sourceContainer">
+<pre><span class="sourceLineNo">001</span>/* ***** BEGIN LICENSE BLOCK *****<a name="line.1"></a>
+<span class="sourceLineNo">002</span> * Version: MPL 1.1/GPL 2.0/LGPL 2.1<a name="line.2"></a>
+<span class="sourceLineNo">003</span> *<a name="line.3"></a>
+<span class="sourceLineNo">004</span> * The contents of this file are subject to the Mozilla Public License Version<a name="line.4"></a>
+<span class="sourceLineNo">005</span> * 1.1 (the "License"); you may not use this file except in compliance with<a name="line.5"></a>
+<span class="sourceLineNo">006</span> * the License. You may obtain a copy of the License at<a name="line.6"></a>
+<span class="sourceLineNo">007</span> * http://www.mozilla.org/MPL/<a name="line.7"></a>
+<span class="sourceLineNo">008</span> *<a name="line.8"></a>
+<span class="sourceLineNo">009</span> * Software distributed under the License is distributed on an "AS IS" basis,<a name="line.9"></a>
+<span class="sourceLineNo">010</span> * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License<a name="line.10"></a>
+<span class="sourceLineNo">011</span> * for the specific language governing rights and limitations under the<a name="line.11"></a>
+<span class="sourceLineNo">012</span> * License.<a name="line.12"></a>
+<span class="sourceLineNo">013</span> *<a name="line.13"></a>
+<span class="sourceLineNo">014</span> * The Original Code is part of dcm4che, an implementation of DICOM(TM) in<a name="line.14"></a>
+<span class="sourceLineNo">015</span> * Java(TM), hosted at https://github.com/gunterze/dcm4che.<a name="line.15"></a>
+<span class="sourceLineNo">016</span> *<a name="line.16"></a>
+<span class="sourceLineNo">017</span> * The Initial Developer of the Original Code is<a name="line.17"></a>
+<span class="sourceLineNo">018</span> * Agfa Healthcare.<a name="line.18"></a>
+<span class="sourceLineNo">019</span> * Portions created by the Initial Developer are Copyright (C) 2011<a name="line.19"></a>
+<span class="sourceLineNo">020</span> * the Initial Developer. All Rights Reserved.<a name="line.20"></a>
+<span class="sourceLineNo">021</span> *<a name="line.21"></a>
+<span class="sourceLineNo">022</span> * Contributor(s):<a name="line.22"></a>
+<span class="sourceLineNo">023</span> * See @authors listed below<a name="line.23"></a>
+<span class="sourceLineNo">024</span> *<a name="line.24"></a>
+<span class="sourceLineNo">025</span> * Alternatively, the contents of this file may be used under the terms of<a name="line.25"></a>
+<span class="sourceLineNo">026</span> * either the GNU General Public License Version 2 or later (the "GPL"), or<a name="line.26"></a>
+<span class="sourceLineNo">027</span> * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),<a name="line.27"></a>
+<span class="sourceLineNo">028</span> * in which case the provisions of the GPL or the LGPL are applicable instead<a name="line.28"></a>
+<span class="sourceLineNo">029</span> * of those above. If you wish to allow use of your version of this file only<a name="line.29"></a>
+<span class="sourceLineNo">030</span> * under the terms of either the GPL or the LGPL, and not to allow others to<a name="line.30"></a>
+<span class="sourceLineNo">031</span> * use your version of this file under the terms of the MPL, indicate your<a name="line.31"></a>
+<span class="sourceLineNo">032</span> * decision by deleting the provisions above and replace them with the notice<a name="line.32"></a>
+<span class="sourceLineNo">033</span> * and other provisions required by the GPL or the LGPL. If you do not delete<a name="line.33"></a>
+<span class="sourceLineNo">034</span> * the provisions above, a recipient may use your version of this file under<a name="line.34"></a>
+<span class="sourceLineNo">035</span> * the terms of any one of the MPL, the GPL or the LGPL.<a name="line.35"></a>
+<span class="sourceLineNo">036</span> *<a name="line.36"></a>
+<span class="sourceLineNo">037</span> * ***** END LICENSE BLOCK ***** */<a name="line.37"></a>
+<span class="sourceLineNo">038</span><a name="line.38"></a>
+<span class="sourceLineNo">039</span>package org.dcm4che3.net;<a name="line.39"></a>
+<span class="sourceLineNo">040</span><a name="line.40"></a>
+<span class="sourceLineNo">041</span>import org.dcm4che3.data.Tag;<a name="line.41"></a>
+<span class="sourceLineNo">042</span>import org.dcm4che3.data.Attributes;<a name="line.42"></a>
+<span class="sourceLineNo">043</span>import org.dcm4che3.data.VR;<a name="line.43"></a>
+<span class="sourceLineNo">044</span>import org.dcm4che3.util.UIDUtils;<a name="line.44"></a>
+<span class="sourceLineNo">045</span><a name="line.45"></a>
+<span class="sourceLineNo">046</span>/**<a name="line.46"></a>
+<span class="sourceLineNo">047</span> * @author Gunter Zeilinger &lt;gunterze@gmail.com&gt;<a name="line.47"></a>
+<span class="sourceLineNo">048</span> *<a name="line.48"></a>
+<span class="sourceLineNo">049</span> */<a name="line.49"></a>
+<span class="sourceLineNo">050</span>public class Commands {<a name="line.50"></a>
+<span class="sourceLineNo">051</span><a name="line.51"></a>
+<span class="sourceLineNo">052</span>    public static final int NO_DATASET = 0x0101;<a name="line.52"></a>
+<span class="sourceLineNo">053</span>    private static int withDatasetType = 0x0000;<a name="line.53"></a>
+<span class="sourceLineNo">054</span><a name="line.54"></a>
+<span class="sourceLineNo">055</span>    public static Attributes mkCStoreRQ(int msgId, String cuid, String iuid,<a name="line.55"></a>
+<span class="sourceLineNo">056</span>            int priority)  {<a name="line.56"></a>
+<span class="sourceLineNo">057</span>       Attributes rq = mkRQ(msgId, 0x0001, withDatasetType);<a name="line.57"></a>
+<span class="sourceLineNo">058</span>       rq.setString(Tag.AffectedSOPClassUID, VR.UI, cuid);<a name="line.58"></a>
+<span class="sourceLineNo">059</span>       rq.setString(Tag.AffectedSOPInstanceUID, VR.UI, iuid);<a name="line.59"></a>
+<span class="sourceLineNo">060</span>       rq.setInt(Tag.Priority, VR.US, priority);<a name="line.60"></a>
+<span class="sourceLineNo">061</span>       return rq;<a name="line.61"></a>
+<span class="sourceLineNo">062</span>    }<a name="line.62"></a>
+<span class="sourceLineNo">063</span><a name="line.63"></a>
+<span class="sourceLineNo">064</span>    public static Attributes mkCStoreRQ(int msgId, String cuid, String iuid,<a name="line.64"></a>
+<span class="sourceLineNo">065</span>            int priority, String moveOriginatorAET, int moveOriginatorMsgId) {<a name="line.65"></a>
+<span class="sourceLineNo">066</span>       Attributes rq = mkCStoreRQ(msgId, cuid, iuid, priority);<a name="line.66"></a>
+<span class="sourceLineNo">067</span>       rq.setString(Tag.MoveOriginatorApplicationEntityTitle, VR.AE,<a name="line.67"></a>
+<span class="sourceLineNo">068</span>               moveOriginatorAET);<a name="line.68"></a>
+<span class="sourceLineNo">069</span>       rq.setInt(Tag.MoveOriginatorMessageID, VR.US, moveOriginatorMsgId);<a name="line.69"></a>
+<span class="sourceLineNo">070</span>       return rq;<a name="line.70"></a>
+<span class="sourceLineNo">071</span>    }<a name="line.71"></a>
+<span class="sourceLineNo">072</span><a name="line.72"></a>
+<span class="sourceLineNo">073</span>    public static Attributes mkCStoreRSP(Attributes cmd, int status) {<a name="line.73"></a>
+<span class="sourceLineNo">074</span>        return mkRSP(cmd, status, Dimse.C_STORE_RQ);<a name="line.74"></a>
+<span class="sourceLineNo">075</span>    }<a name="line.75"></a>
+<span class="sourceLineNo">076</span><a name="line.76"></a>
+<span class="sourceLineNo">077</span>    public static Attributes mkCFindRQ(int msgId, String cuid, int priority) {<a name="line.77"></a>
+<span class="sourceLineNo">078</span>       Attributes rq = mkRQ(msgId, 0x0020, withDatasetType);<a name="line.78"></a>
+<span class="sourceLineNo">079</span>       rq.setString(Tag.AffectedSOPClassUID, VR.UI, cuid);<a name="line.79"></a>
+<span class="sourceLineNo">080</span>       rq.setInt(Tag.Priority, VR.US, priority);<a name="line.80"></a>
+<span class="sourceLineNo">081</span>       return rq;<a name="line.81"></a>
+<span class="sourceLineNo">082</span>    }<a name="line.82"></a>
+<span class="sourceLineNo">083</span><a name="line.83"></a>
+<span class="sourceLineNo">084</span>    public static Attributes mkCFindRSP(Attributes cmd, int status) {<a name="line.84"></a>
+<span class="sourceLineNo">085</span>        return mkRSP(cmd, status, Dimse.C_FIND_RQ);<a name="line.85"></a>
+<span class="sourceLineNo">086</span>    }<a name="line.86"></a>
+<span class="sourceLineNo">087</span><a name="line.87"></a>
+<span class="sourceLineNo">088</span>    public static Attributes mkCGetRQ(int msgId, String cuid, int priority) {<a name="line.88"></a>
+<span class="sourceLineNo">089</span>       Attributes rq = mkRQ(msgId, 0x0010, withDatasetType);<a name="line.89"></a>
+<span class="sourceLineNo">090</span>       rq.setString(Tag.AffectedSOPClassUID, VR.UI, cuid);<a name="line.90"></a>
+<span class="sourceLineNo">091</span>       rq.setInt(Tag.Priority, VR.US, priority);<a name="line.91"></a>
+<span class="sourceLineNo">092</span>       return rq;<a name="line.92"></a>
+<span class="sourceLineNo">093</span>    }<a name="line.93"></a>
+<span class="sourceLineNo">094</span><a name="line.94"></a>
+<span class="sourceLineNo">095</span>    public static Attributes mkCGetRSP(Attributes cmd, int status) {<a name="line.95"></a>
+<span class="sourceLineNo">096</span>        return mkRSP(cmd, status, Dimse.C_GET_RQ);<a name="line.96"></a>
+<span class="sourceLineNo">097</span>    }<a name="line.97"></a>
+<span class="sourceLineNo">098</span><a name="line.98"></a>
+<span class="sourceLineNo">099</span>    public static Attributes mkCMoveRQ(int msgId, String cuid, int priority,<a name="line.99"></a>
+<span class="sourceLineNo">100</span>            String destination) {<a name="line.100"></a>
+<span class="sourceLineNo">101</span>       Attributes rq = mkRQ(msgId, 0x0021, withDatasetType);<a name="line.101"></a>
+<span class="sourceLineNo">102</span>       rq.setString(Tag.AffectedSOPClassUID, VR.UI, cuid);<a name="line.102"></a>
+<span class="sourceLineNo">103</span>       rq.setInt(Tag.Priority, VR.US, priority);<a name="line.103"></a>
+<span class="sourceLineNo">104</span>       rq.setString(Tag.MoveDestination, VR.AE, destination);<a name="line.104"></a>
+<span class="sourceLineNo">105</span>       return rq;<a name="line.105"></a>
+<span class="sourceLineNo">106</span>    }<a name="line.106"></a>
+<span class="sourceLineNo">107</span><a name="line.107"></a>
+<span class="sourceLineNo">108</span>    public static Attributes mkCMoveRSP(Attributes cmd, int status) {<a name="line.108"></a>
+<span class="sourceLineNo">109</span>        return mkRSP(cmd, status, Dimse.C_MOVE_RQ);<a name="line.109"></a>
+<span class="sourceLineNo">110</span>    }<a name="line.110"></a>
+<span class="sourceLineNo">111</span><a name="line.111"></a>
+<span class="sourceLineNo">112</span>    public static Attributes mkCCancelRQ(int msgId) {<a name="line.112"></a>
+<span class="sourceLineNo">113</span>        Attributes rq = new Attributes();<a name="line.113"></a>
+<span class="sourceLineNo">114</span>        rq.setInt(Tag.CommandField, VR.US, Dimse.C_CANCEL_RQ.commandField());<a name="line.114"></a>
+<span class="sourceLineNo">115</span>        rq.setInt(Tag.CommandDataSetType, VR.US, NO_DATASET);<a name="line.115"></a>
+<span class="sourceLineNo">116</span>        rq.setInt(Tag.MessageIDBeingRespondedTo, VR.US, msgId);<a name="line.116"></a>
+<span class="sourceLineNo">117</span>        return rq;<a name="line.117"></a>
+<span class="sourceLineNo">118</span>    }<a name="line.118"></a>
+<span class="sourceLineNo">119</span><a name="line.119"></a>
+<span class="sourceLineNo">120</span>    public static Attributes mkCEchoRQ(int msgId, String cuid) {<a name="line.120"></a>
+<span class="sourceLineNo">121</span>       Attributes rq = mkRQ(msgId, 0x0030, NO_DATASET);<a name="line.121"></a>
+<span class="sourceLineNo">122</span>       rq.setString(Tag.AffectedSOPClassUID, VR.UI, cuid);<a name="line.122"></a>
+<span class="sourceLineNo">123</span>       return rq;<a name="line.123"></a>
+<span class="sourceLineNo">124</span>    }<a name="line.124"></a>
+<span class="sourceLineNo">125</span><a name="line.125"></a>
+<span class="sourceLineNo">126</span>    public static Attributes mkEchoRSP(Attributes cmd, int status) {<a name="line.126"></a>
+<span class="sourceLineNo">127</span>        return mkRSP(cmd, status, Dimse.C_ECHO_RQ);<a name="line.127"></a>
+<span class="sourceLineNo">128</span>    }<a name="line.128"></a>
+<span class="sourceLineNo">129</span><a name="line.129"></a>
+<span class="sourceLineNo">130</span>    public static Attributes mkNEventReportRQ(int msgId, String cuid,<a name="line.130"></a>
+<span class="sourceLineNo">131</span>            String iuid, int eventTypeID, Attributes data) {<a name="line.131"></a>
+<span class="sourceLineNo">132</span>       Attributes rq = mkRQ(msgId, 0x0100,<a name="line.132"></a>
+<span class="sourceLineNo">133</span>               data == null ? NO_DATASET : withDatasetType);<a name="line.133"></a>
+<span class="sourceLineNo">134</span>       rq.setString(Tag.AffectedSOPClassUID, VR.UI, cuid);<a name="line.134"></a>
+<span class="sourceLineNo">135</span>       rq.setString(Tag.AffectedSOPInstanceUID, VR.UI, iuid);<a name="line.135"></a>
+<span class="sourceLineNo">136</span>       rq.setInt(Tag.EventTypeID, VR.US, eventTypeID);<a name="line.136"></a>
+<span class="sourceLineNo">137</span>       return rq;<a name="line.137"></a>
+<span class="sourceLineNo">138</span>    }<a name="line.138"></a>
+<span class="sourceLineNo">139</span><a name="line.139"></a>
+<span class="sourceLineNo">140</span>    public static Attributes mkNEventReportRSP(Attributes cmd, int status) {<a name="line.140"></a>
+<span class="sourceLineNo">141</span>        return mkRSP(cmd, status, Dimse.N_EVENT_REPORT_RQ);<a name="line.141"></a>
+<span class="sourceLineNo">142</span>    }<a name="line.142"></a>
+<span class="sourceLineNo">143</span><a name="line.143"></a>
+<span class="sourceLineNo">144</span>    public static Attributes mkNGetRQ(int msgId, String cuid, String iuid,<a name="line.144"></a>
+<span class="sourceLineNo">145</span>            int[] tags) {<a name="line.145"></a>
+<span class="sourceLineNo">146</span>       Attributes rq = mkRQ(msgId, 0x0110, NO_DATASET);<a name="line.146"></a>
+<span class="sourceLineNo">147</span>       rq.setString(Tag.RequestedSOPClassUID, VR.UI, cuid);<a name="line.147"></a>
+<span class="sourceLineNo">148</span>       rq.setString(Tag.RequestedSOPInstanceUID, VR.UI, iuid);<a name="line.148"></a>
+<span class="sourceLineNo">149</span>       if (tags != null)<a name="line.149"></a>
+<span class="sourceLineNo">150</span>           rq.setInt(Tag.AttributeIdentifierList, VR.AT, tags);<a name="line.150"></a>
+<span class="sourceLineNo">151</span>       return rq;<a name="line.151"></a>
+<span class="sourceLineNo">152</span>    }<a name="line.152"></a>
+<span class="sourceLineNo">153</span><a name="line.153"></a>
+<span class="sourceLineNo">154</span>    public static Attributes mkNGetRSP(Attributes cmd, int status) {<a name="line.154"></a>
+<span class="sourceLineNo">155</span>        return mkRSP(cmd, status, Dimse.N_GET_RQ);<a name="line.155"></a>
+<span class="sourceLineNo">156</span>    }<a name="line.156"></a>
+<span class="sourceLineNo">157</span><a name="line.157"></a>
+<span class="sourceLineNo">158</span>    public static Attributes mkNSetRQ(int msgId, String cuid, String iuid) {<a name="line.158"></a>
+<span class="sourceLineNo">159</span>        Attributes rq = mkRQ(msgId, 0x0120, withDatasetType);<a name="line.159"></a>
+<span class="sourceLineNo">160</span>        rq.setString(Tag.RequestedSOPClassUID, VR.UI, cuid);<a name="line.160"></a>
+<span class="sourceLineNo">161</span>        rq.setString(Tag.RequestedSOPInstanceUID, VR.UI, iuid);<a name="line.161"></a>
+<span class="sourceLineNo">162</span>        return rq;<a name="line.162"></a>
+<span class="sourceLineNo">163</span>    }<a name="line.163"></a>
+<span class="sourceLineNo">164</span><a name="line.164"></a>
+<span class="sourceLineNo">165</span>    public static Attributes mkNSetRSP(Attributes cmd, int status) {<a name="line.165"></a>
+<span class="sourceLineNo">166</span>        return mkRSP(cmd, status, Dimse.N_SET_RQ);<a name="line.166"></a>
+<span class="sourceLineNo">167</span>    }<a name="line.167"></a>
+<span class="sourceLineNo">168</span><a name="line.168"></a>
+<span class="sourceLineNo">169</span>    public static Attributes mkNActionRQ(int msgId, String cuid,<a name="line.169"></a>
+<span class="sourceLineNo">170</span>            String iuid, int actionTypeID, Attributes data) {<a name="line.170"></a>
+<span class="sourceLineNo">171</span>       Attributes rq = mkRQ(msgId, 0x0130, <a name="line.171"></a>
+<span class="sourceLineNo">172</span>               data == null ? NO_DATASET : withDatasetType);<a name="line.172"></a>
+<span class="sourceLineNo">173</span>       rq.setString(Tag.RequestedSOPClassUID, VR.UI, cuid);<a name="line.173"></a>
+<span class="sourceLineNo">174</span>       rq.setString(Tag.RequestedSOPInstanceUID, VR.UI, iuid);<a name="line.174"></a>
+<span class="sourceLineNo">175</span>       rq.setInt(Tag.ActionTypeID, VR.US, actionTypeID);<a name="line.175"></a>
+<span class="sourceLineNo">176</span>       return rq;<a name="line.176"></a>
+<span class="sourceLineNo">177</span>    }<a name="line.177"></a>
+<span class="sourceLineNo">178</span><a name="line.178"></a>
+<span class="sourceLineNo">179</span>    public static Attributes mkNActionRSP(Attributes cmd, int status) {<a name="line.179"></a>
+<span class="sourceLineNo">180</span>        return mkRSP(cmd, status, Dimse.N_ACTION_RQ);<a name="line.180"></a>
+<span class="sourceLineNo">181</span>    }<a name="line.181"></a>
+<span class="sourceLineNo">182</span><a name="line.182"></a>
+<span class="sourceLineNo">183</span>    public static Attributes mkNCreateRQ(int msgId, String cuid, String iuid) {<a name="line.183"></a>
+<span class="sourceLineNo">184</span>        Attributes rq = mkRQ(msgId, 0x0140, withDatasetType);<a name="line.184"></a>
+<span class="sourceLineNo">185</span>        rq.setString(Tag.AffectedSOPClassUID, VR.UI, cuid);<a name="line.185"></a>
+<span class="sourceLineNo">186</span>        if (iuid != null)<a name="line.186"></a>
+<span class="sourceLineNo">187</span>            rq.setString(Tag.AffectedSOPInstanceUID, VR.UI, iuid);<a name="line.187"></a>
+<span class="sourceLineNo">188</span>        return rq;<a name="line.188"></a>
+<span class="sourceLineNo">189</span>    }<a name="line.189"></a>
+<span class="sourceLineNo">190</span><a name="line.190"></a>
+<span class="sourceLineNo">191</span>    public static Attributes mkNCreateRSP(Attributes cmd, int status) {<a name="line.191"></a>
+<span class="sourceLineNo">192</span>        String iuid = cmd.getString(Tag.AffectedSOPInstanceUID);<a name="line.192"></a>
+<span class="sourceLineNo">193</span>        if (iuid == null)<a name="line.193"></a>
+<span class="sourceLineNo">194</span>            cmd.setString(Tag.AffectedSOPInstanceUID, VR.UI, UIDUtils.createUID());<a name="line.194"></a>
+<span class="sourceLineNo">195</span>        return mkRSP(cmd, status, Dimse.N_CREATE_RQ);<a name="line.195"></a>
+<span class="sourceLineNo">196</span>    }<a name="line.196"></a>
+<span class="sourceLineNo">197</span><a name="line.197"></a>
+<span class="sourceLineNo">198</span>    public static Attributes mkNDeleteRQ(int msgId, String cuid, String iuid) {<a name="line.198"></a>
+<span class="sourceLineNo">199</span>        Attributes rq = mkRQ(msgId, 0x0150, NO_DATASET);<a name="line.199"></a>
+<span class="sourceLineNo">200</span>        rq.setString(Tag.RequestedSOPClassUID, VR.UI, cuid);<a name="line.200"></a>
+<span class="sourceLineNo">201</span>        rq.setString(Tag.RequestedSOPInstanceUID, VR.UI, iuid);<a name="line.201"></a>
+<span class="sourceLineNo">202</span>        return rq;<a name="line.202"></a>
+<span class="sourceLineNo">203</span>    }    <a name="line.203"></a>
+<span class="sourceLineNo">204</span><a name="line.204"></a>
+<span class="sourceLineNo">205</span>    public static Attributes mkNDeleteRSP(Attributes cmd, int status) {<a name="line.205"></a>
+<span class="sourceLineNo">206</span>        return mkRSP(cmd, status, Dimse.N_DELETE_RQ);<a name="line.206"></a>
+<span class="sourceLineNo">207</span>    }<a name="line.207"></a>
+<span class="sourceLineNo">208</span><a name="line.208"></a>
+<span class="sourceLineNo">209</span>    private static Attributes mkRQ(int msgId, int cmdField, int datasetType) {<a name="line.209"></a>
+<span class="sourceLineNo">210</span>        Attributes rsp = new Attributes();<a name="line.210"></a>
+<span class="sourceLineNo">211</span>        rsp.setInt(Tag.MessageID, VR.US, msgId);<a name="line.211"></a>
+<span class="sourceLineNo">212</span>        rsp.setInt(Tag.CommandField, VR.US, cmdField);<a name="line.212"></a>
+<span class="sourceLineNo">213</span>        rsp.setInt(Tag.CommandDataSetType, VR.US, datasetType);<a name="line.213"></a>
+<span class="sourceLineNo">214</span>        return rsp;<a name="line.214"></a>
+<span class="sourceLineNo">215</span>    }<a name="line.215"></a>
+<span class="sourceLineNo">216</span><a name="line.216"></a>
+<span class="sourceLineNo">217</span>    public static Attributes mkRSP(Attributes rq, int status, Dimse rqCmd) {<a name="line.217"></a>
+<span class="sourceLineNo">218</span>        Attributes rsp = new Attributes();<a name="line.218"></a>
+<span class="sourceLineNo">219</span>        rsp.setInt(Tag.CommandField, VR.US, rqCmd.commandFieldOfRSP());<a name="line.219"></a>
+<span class="sourceLineNo">220</span>        rsp.setInt(Tag.Status, VR.US, status);<a name="line.220"></a>
+<span class="sourceLineNo">221</span>        rsp.setInt(Tag.MessageIDBeingRespondedTo, VR.US,<a name="line.221"></a>
+<span class="sourceLineNo">222</span>                rq.getInt(Tag.MessageID, 0));<a name="line.222"></a>
+<span class="sourceLineNo">223</span>        rsp.setString(Tag.AffectedSOPClassUID, VR.UI,<a name="line.223"></a>
+<span class="sourceLineNo">224</span>                rq.getString(rqCmd.tagOfSOPClassUID()));<a name="line.224"></a>
+<span class="sourceLineNo">225</span>        int tagOfIUID = rqCmd.tagOfSOPInstanceUID();<a name="line.225"></a>
+<span class="sourceLineNo">226</span>        if (tagOfIUID != 0)<a name="line.226"></a>
+<span class="sourceLineNo">227</span>            rsp.setString(Tag.AffectedSOPInstanceUID, VR.UI,<a name="line.227"></a>
+<span class="sourceLineNo">228</span>                    rq.getString(tagOfIUID));<a name="line.228"></a>
+<span class="sourceLineNo">229</span>        return rsp;<a name="line.229"></a>
+<span class="sourceLineNo">230</span>    }<a name="line.230"></a>
+<span class="sourceLineNo">231</span><a name="line.231"></a>
+<span class="sourceLineNo">232</span>    public static void initNumberOfSuboperations(Attributes rsp,<a name="line.232"></a>
+<span class="sourceLineNo">233</span>            int remaining) {<a name="line.233"></a>
+<span class="sourceLineNo">234</span>        rsp.setInt(Tag.NumberOfRemainingSuboperations, VR.US, remaining);<a name="line.234"></a>
+<span class="sourceLineNo">235</span>        rsp.setInt(Tag.NumberOfCompletedSuboperations, VR.US, 0);<a name="line.235"></a>
+<span class="sourceLineNo">236</span>        rsp.setInt(Tag.NumberOfFailedSuboperations, VR.US, 0);<a name="line.236"></a>
+<span class="sourceLineNo">237</span>        rsp.setInt(Tag.NumberOfWarningSuboperations, VR.US, 0);<a name="line.237"></a>
+<span class="sourceLineNo">238</span>    }<a name="line.238"></a>
+<span class="sourceLineNo">239</span><a name="line.239"></a>
+<span class="sourceLineNo">240</span>    public static void incNumberOfSuboperations(int tag, Attributes rsp) {<a name="line.240"></a>
+<span class="sourceLineNo">241</span>        synchronized (rsp) {<a name="line.241"></a>
+<span class="sourceLineNo">242</span>            rsp.setInt(tag, VR.US, rsp.getInt(tag, 0) + 1);<a name="line.242"></a>
+<span class="sourceLineNo">243</span>            rsp.setInt(Tag.NumberOfRemainingSuboperations, VR.US, <a name="line.243"></a>
+<span class="sourceLineNo">244</span>                    rsp.getInt(Tag.NumberOfRemainingSuboperations, 1) - 1);<a name="line.244"></a>
+<span class="sourceLineNo">245</span>        }<a name="line.245"></a>
+<span class="sourceLineNo">246</span>    }<a name="line.246"></a>
+<span class="sourceLineNo">247</span><a name="line.247"></a>
+<span class="sourceLineNo">248</span>    public static int getWithDatasetType() {<a name="line.248"></a>
+<span class="sourceLineNo">249</span>        return withDatasetType;<a name="line.249"></a>
+<span class="sourceLineNo">250</span>    }<a name="line.250"></a>
+<span class="sourceLineNo">251</span><a name="line.251"></a>
+<span class="sourceLineNo">252</span>    public static void setWithDatasetType(int withDatasetType) {<a name="line.252"></a>
+<span class="sourceLineNo">253</span>        if (withDatasetType == NO_DATASET<a name="line.253"></a>
+<span class="sourceLineNo">254</span>                || (withDatasetType &amp; 0xffff0000) != 0)<a name="line.254"></a>
+<span class="sourceLineNo">255</span>            throw new IllegalArgumentException("withDatasetType: " <a name="line.255"></a>
+<span class="sourceLineNo">256</span>                    + Integer.toHexString(withDatasetType) + "H");<a name="line.256"></a>
+<span class="sourceLineNo">257</span>        Commands.withDatasetType = withDatasetType;<a name="line.257"></a>
+<span class="sourceLineNo">258</span>    }<a name="line.258"></a>
+<span class="sourceLineNo">259</span><a name="line.259"></a>
+<span class="sourceLineNo">260</span>    public static boolean hasDataset(Attributes cmd) {<a name="line.260"></a>
+<span class="sourceLineNo">261</span>        return cmd.getInt(Tag.CommandDataSetType, 0) != NO_DATASET;<a name="line.261"></a>
+<span class="sourceLineNo">262</span>    }<a name="line.262"></a>
+<span class="sourceLineNo">263</span><a name="line.263"></a>
+<span class="sourceLineNo">264</span>}<a name="line.264"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre>
+</div>
+</body>
+</html>
