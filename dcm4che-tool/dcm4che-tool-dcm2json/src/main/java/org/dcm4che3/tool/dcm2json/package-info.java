@@ -1,5 +1,5 @@
 /**
- *  Tool to convert a DICOM image into JSON.
+ *  Program for converting a DICOM image into JSON.
  *  
  *  <p>This code is inside the Maven module dcm4che-tool-dcm2json.</p>
  */

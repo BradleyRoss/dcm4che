@@ -1,5 +1,5 @@
 /**
-  *  Tool for converting Dicom image into an XML file.
+  *  Program for converting Dicom image into an XML file.
   *  
   *  <p>This is part of the Maven module dcm4che-tool-dcm2xml.</p>
   */

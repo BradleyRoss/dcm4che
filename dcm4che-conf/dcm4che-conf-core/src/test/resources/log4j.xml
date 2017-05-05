@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<!--   
+      For the purists amongst you, the format of this file is a hack.  The file
+      log4j.dtd almost assuredly doesn't exist in an accessible location.  However, 
+      this is the only way to get the system to
+      accept the log4j:configuration tag.  The dtd file is no longer at the location that
+      was previously given in the documentation.
+      (http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd)
+      The dtd file is still in the jar file, but it contains references to directory structures
+      that no longer exist on the web site.  The log4j code complains if it doesn't see the 
+      log4j prefix.
+      
+      If you wish to eliminate the Eclipse warnings, go into the properties for this module and
+      select Validation.  Check the box that allows you to make changes to the properties and exclude
+      log4j.xml from the files being validated.  (Click on the box with the elipsis "..." next to
+      XML Validation and exclude log4j.xml.)
+      
+      https://wiki.apache.org/logging-log4j/Log4jXmlFormat
+      https://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/DailyRollingFileAppender.html
+      https://logging.apache.org/log4j/extras/apidocs/org/apache/log4j/rolling/RollingFileAppender.html
+      http://www.codejava.net/coding/configure-log4j-for-creating-daily-rolling-log-files
+      http://stackoverflow.com/questions/5000884/eclipse-referencing-log4j-dtd-in-log4j-xml
+      http://www-01.ibm.com/support/docview.wss?uid=swg21233092
+      
+      It appears that the log4j.dtd file used to be in 
+      http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd
+  -->
+<log4j:configuration >
+  <appender name="out" class="org.apache.log4j.DailyRollingFileAppender">
+    <param name="File" value="${user.home}/weblogs/dcm4che-log4j1.log" />
+    <param name="DatePattern" value="'-'yyyy-MM-dd-HH" />
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d %p %C{1} [%t] %m%n" />
+    </layout>
+  </appender> 
+  <root>
+    <priority value="debug" />
+    <appender-ref ref="out" />
+  </root>
+</log4j:configuration>
+
+
+
