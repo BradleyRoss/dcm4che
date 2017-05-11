@@ -1,5 +1,5 @@
-/*
- * Tool for converting an XML document into a DICOM image.
+/**
+ * Create/Update DICOM file from/with XML presentation.
  * 
  * <p>This package is contained in the Maven module dcm4che-tool-xml2dcm.</p>
  */

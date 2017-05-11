@@ -1,5 +1,5 @@
 /**
- * Receive DICOM Composite Objects from peer DICOM AE.
+ * Test classes for receiving DICOM Composite Objects from peer DICOM AE.
  * 
  * <p>This package is part of the Maven module dcm4che-tool-storescp.</p>
  */
