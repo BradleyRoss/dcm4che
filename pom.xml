@@ -129,6 +129,28 @@
           <version>2.10.4</version>
           <configuration>
             <failOnError>false</failOnError>
+            <!--
+                 http://stackoverflow.com/questions/3084629/finding-the-root-directory-of-a-multi-module-maven-reactor-project?rq=1
+            -->
+            <overview>${session.executionRootDirectory}/src/main/javadoc/overview.html</overview>
+            <additionalparam>-Xdoclint:none</additionalparam>
+            <quiet>true</quiet>
+            <linksource>true</linksource>
+            <offlineLinks>
+              <offlineLink>
+                <!--
+                      I was unable to download package-list from the web for Apache Camel.
+                      This problem has been reported with many documents on javadoc.io
+                -->
+                <url>http://www.javadoc.io/doc/org.apache.camel/camel-core/2.18.3</url>
+                <location>${session.executionRootDirectory}/src/main/javadoc/camel/</location>
+              </offlineLink>
+              <offlineLink>
+                <url>http://www.slf4j.org/api/</url>
+                <location>${session.executionRootDirectory}/src/main/javadoc/slf4j</location>
+              </offlineLink>            
+            </offlineLinks>
+            <show>private</show>
           </configuration>
         </plugin>
       </plugins>
