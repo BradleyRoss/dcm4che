@@ -599,7 +599,7 @@ public class Connection implements Serializable {
     /**
      * Timeout in ms for receiving A-ASSOCIATE-RQ, 5000 by default
      *
-     * @param An int value containing the milliseconds.
+     * @return An int value containing the milliseconds.
      */
     public final int getRequestTimeout() {
         return requestTimeout;
@@ -717,7 +717,7 @@ public class Connection implements Serializable {
      * TLS CipherSuites shall be described using an RFC-2246 string
      * representation (e.g. 'SSL_RSA_WITH_3DES_EDE_CBC_SHA')
      *
-     * @param tlsCipherSuite A String array containing the supported cipher suites
+     * @param tlsCipherSuites A String array containing the supported cipher suites
      */
     public void setTlsCipherSuites(String... tlsCipherSuites) {
         if (Arrays.equals(this.tlsCipherSuites, tlsCipherSuites))
@@ -771,7 +771,7 @@ public class Connection implements Serializable {
     /**
      * Set the SO_RCVBUF socket option to specified value in KB.
      *
-     * @param bufferSize An int value containing the buffer size in KB.
+     * @param size An int value containing the buffer size in KB.
      */
     public final void setReceiveBufferSize(int size) {
         if (size < 0)
@@ -791,7 +791,7 @@ public class Connection implements Serializable {
     /**
      * Set the SO_SNDBUF socket option to specified value in KB,
      *
-     * @param bufferSize An int value containing the buffer size in KB.
+     * @param size An int value containing the buffer size in KB.
      */
     public final void setSendBufferSize(int size) {
         if (size < 0)

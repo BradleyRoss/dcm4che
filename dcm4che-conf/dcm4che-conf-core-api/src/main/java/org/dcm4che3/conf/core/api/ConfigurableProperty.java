@@ -124,7 +124,6 @@ public @interface ConfigurableProperty {
          * Only may be applied on fields with type Map&lt;Class<? extends T>, T&gt;.
          * T will be treated as base extension class
          *
-         * @return
          */
         ExtensionsProperty,
 

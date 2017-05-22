@@ -58,7 +58,8 @@ public class UIDUtils {
     /**
      * UID root for UUIDs (Universally Unique Identifiers) generated in
      * accordance with Rec. ITU-T X.667 | ISO/IEC 9834-8.
-     * @see &lt;a href="http://www.oid-info.com/get/2.25">OID repository {joint-iso-itu-t(2) uuid(25)}$lt;/a>
+     *
+     * see <a href="http://www.oid-info.com/get/2.25">OID repository {joint-iso-itu-t(2) uuid(25)}</a>
      */
     private static final String UUID_ROOT = "2.25";
 
