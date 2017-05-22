@@ -61,6 +61,8 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 /**
+ * IOD stands for Information Object Definition.
+ *
  * @author Gunter Zeilinger <gunterze@gmail.com>
  *
  */
