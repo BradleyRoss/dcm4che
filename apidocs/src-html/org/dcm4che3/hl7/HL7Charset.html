@@ -68,113 +68,117 @@
 <span class="sourceLineNo">060</span>            case '2':<a name="line.60"></a>
 <span class="sourceLineNo">061</span>                if (code.equals("8859/2"))<a name="line.61"></a>
 <span class="sourceLineNo">062</span>                    return "ISO-8859-2";<a name="line.62"></a>
-<span class="sourceLineNo">063</span>                break;<a name="line.63"></a>
-<span class="sourceLineNo">064</span>            case '3':<a name="line.64"></a>
-<span class="sourceLineNo">065</span>                if (code.equals("8859/3"))<a name="line.65"></a>
-<span class="sourceLineNo">066</span>                    return "ISO-8859-3";<a name="line.66"></a>
-<span class="sourceLineNo">067</span>                break;<a name="line.67"></a>
-<span class="sourceLineNo">068</span>            case '4':<a name="line.68"></a>
-<span class="sourceLineNo">069</span>                if (code.equals("8859/4"))<a name="line.69"></a>
-<span class="sourceLineNo">070</span>                    return "ISO-8859-4";<a name="line.70"></a>
-<span class="sourceLineNo">071</span>                if (code.equals("ISO IR14"))<a name="line.71"></a>
-<span class="sourceLineNo">072</span>                    return "JIS_X0201";<a name="line.72"></a>
-<span class="sourceLineNo">073</span>                break;<a name="line.73"></a>
-<span class="sourceLineNo">074</span>            case '5':<a name="line.74"></a>
-<span class="sourceLineNo">075</span>                if (code.equals("8859/5"))<a name="line.75"></a>
-<span class="sourceLineNo">076</span>                    return "ISO-8859-5";<a name="line.76"></a>
-<span class="sourceLineNo">077</span>                break;<a name="line.77"></a>
-<span class="sourceLineNo">078</span>            case '6':<a name="line.78"></a>
-<span class="sourceLineNo">079</span>                if (code.equals("8859/6"))<a name="line.79"></a>
-<span class="sourceLineNo">080</span>                    return "ISO-8859-6";<a name="line.80"></a>
-<span class="sourceLineNo">081</span>                break;<a name="line.81"></a>
-<span class="sourceLineNo">082</span>            case '7':<a name="line.82"></a>
-<span class="sourceLineNo">083</span>                if (code.equals("8859/7"))<a name="line.83"></a>
-<span class="sourceLineNo">084</span>                    return "ISO-8859-7";<a name="line.84"></a>
-<span class="sourceLineNo">085</span>                if (code.equals("ISO IR87"))<a name="line.85"></a>
-<span class="sourceLineNo">086</span>                    return "x-JIS0208";<a name="line.86"></a>
-<span class="sourceLineNo">087</span>                break;<a name="line.87"></a>
-<span class="sourceLineNo">088</span>            case '8':<a name="line.88"></a>
-<span class="sourceLineNo">089</span>                if (code.equals("8859/8"))<a name="line.89"></a>
-<span class="sourceLineNo">090</span>                    return "ISO-8859-8";<a name="line.90"></a>
-<span class="sourceLineNo">091</span>                if (code.equals("UNICODE UTF-8"))<a name="line.91"></a>
-<span class="sourceLineNo">092</span>                    return "UTF-8";<a name="line.92"></a>
-<span class="sourceLineNo">093</span>                break;<a name="line.93"></a>
-<span class="sourceLineNo">094</span>            case '9':<a name="line.94"></a>
-<span class="sourceLineNo">095</span>                if (code.equals("8859/9"))<a name="line.95"></a>
-<span class="sourceLineNo">096</span>                    return "ISO-8859-9";<a name="line.96"></a>
-<span class="sourceLineNo">097</span>                if (code.equals("ISO IR159"))<a name="line.97"></a>
-<span class="sourceLineNo">098</span>                    return "JIS_X0212-1990";<a name="line.98"></a>
-<span class="sourceLineNo">099</span>                break;<a name="line.99"></a>
-<span class="sourceLineNo">100</span>            case 'E':<a name="line.100"></a>
-<span class="sourceLineNo">101</span>                if (code.equals("UNICODE"))<a name="line.101"></a>
-<span class="sourceLineNo">102</span>                    return "UTF-8";<a name="line.102"></a>
-<span class="sourceLineNo">103</span>                break;<a name="line.103"></a>
-<span class="sourceLineNo">104</span>            }<a name="line.104"></a>
-<span class="sourceLineNo">105</span>        return "US-ASCII";<a name="line.105"></a>
-<span class="sourceLineNo">106</span>    }<a name="line.106"></a>
-<span class="sourceLineNo">107</span><a name="line.107"></a>
-<span class="sourceLineNo">108</span>    public static String toDicomCharacterSetCode(String code) {<a name="line.108"></a>
-<span class="sourceLineNo">109</span>        if (code != null &amp;&amp; !code.isEmpty())<a name="line.109"></a>
-<span class="sourceLineNo">110</span>            switch (code.charAt(code.length()-1)) {<a name="line.110"></a>
-<span class="sourceLineNo">111</span>            case '0':<a name="line.111"></a>
-<span class="sourceLineNo">112</span>                if (code.equals("GB 18030-2000"))<a name="line.112"></a>
-<span class="sourceLineNo">113</span>                    return "GB18030";<a name="line.113"></a>
-<span class="sourceLineNo">114</span>                break;<a name="line.114"></a>
-<span class="sourceLineNo">115</span>            case '1':<a name="line.115"></a>
-<span class="sourceLineNo">116</span>                if (code.equals("8859/1"))<a name="line.116"></a>
-<span class="sourceLineNo">117</span>                    return "ISO_IR 100";<a name="line.117"></a>
-<span class="sourceLineNo">118</span>                if (code.equals("KS X 1001"))<a name="line.118"></a>
-<span class="sourceLineNo">119</span>                    return "EUC-KR";<a name="line.119"></a>
-<span class="sourceLineNo">120</span>                break;<a name="line.120"></a>
-<span class="sourceLineNo">121</span>            case '2':<a name="line.121"></a>
-<span class="sourceLineNo">122</span>                if (code.equals("8859/2"))<a name="line.122"></a>
-<span class="sourceLineNo">123</span>                    return "ISO_IR 101";<a name="line.123"></a>
-<span class="sourceLineNo">124</span>                break;<a name="line.124"></a>
-<span class="sourceLineNo">125</span>            case '3':<a name="line.125"></a>
-<span class="sourceLineNo">126</span>                if (code.equals("8859/3"))<a name="line.126"></a>
-<span class="sourceLineNo">127</span>                    return "ISO_IR 109";<a name="line.127"></a>
+<span class="sourceLineNo">063</span>                if (code.equals("CNS 11643-1992"))<a name="line.63"></a>
+<span class="sourceLineNo">064</span>                    return "TIS-620";<a name="line.64"></a>
+<span class="sourceLineNo">065</span>                break;<a name="line.65"></a>
+<span class="sourceLineNo">066</span>            case '3':<a name="line.66"></a>
+<span class="sourceLineNo">067</span>                if (code.equals("8859/3"))<a name="line.67"></a>
+<span class="sourceLineNo">068</span>                    return "ISO-8859-3";<a name="line.68"></a>
+<span class="sourceLineNo">069</span>                break;<a name="line.69"></a>
+<span class="sourceLineNo">070</span>            case '4':<a name="line.70"></a>
+<span class="sourceLineNo">071</span>                if (code.equals("8859/4"))<a name="line.71"></a>
+<span class="sourceLineNo">072</span>                    return "ISO-8859-4";<a name="line.72"></a>
+<span class="sourceLineNo">073</span>                if (code.equals("ISO IR14"))<a name="line.73"></a>
+<span class="sourceLineNo">074</span>                    return "JIS_X0201";<a name="line.74"></a>
+<span class="sourceLineNo">075</span>                break;<a name="line.75"></a>
+<span class="sourceLineNo">076</span>            case '5':<a name="line.76"></a>
+<span class="sourceLineNo">077</span>                if (code.equals("8859/5"))<a name="line.77"></a>
+<span class="sourceLineNo">078</span>                    return "ISO-8859-5";<a name="line.78"></a>
+<span class="sourceLineNo">079</span>                break;<a name="line.79"></a>
+<span class="sourceLineNo">080</span>            case '6':<a name="line.80"></a>
+<span class="sourceLineNo">081</span>                if (code.equals("8859/6"))<a name="line.81"></a>
+<span class="sourceLineNo">082</span>                    return "ISO-8859-6";<a name="line.82"></a>
+<span class="sourceLineNo">083</span>                break;<a name="line.83"></a>
+<span class="sourceLineNo">084</span>            case '7':<a name="line.84"></a>
+<span class="sourceLineNo">085</span>                if (code.equals("8859/7"))<a name="line.85"></a>
+<span class="sourceLineNo">086</span>                    return "ISO-8859-7";<a name="line.86"></a>
+<span class="sourceLineNo">087</span>                if (code.equals("ISO IR87"))<a name="line.87"></a>
+<span class="sourceLineNo">088</span>                    return "x-JIS0208";<a name="line.88"></a>
+<span class="sourceLineNo">089</span>                break;<a name="line.89"></a>
+<span class="sourceLineNo">090</span>            case '8':<a name="line.90"></a>
+<span class="sourceLineNo">091</span>                if (code.equals("8859/8"))<a name="line.91"></a>
+<span class="sourceLineNo">092</span>                    return "ISO-8859-8";<a name="line.92"></a>
+<span class="sourceLineNo">093</span>                if (code.equals("UNICODE UTF-8"))<a name="line.93"></a>
+<span class="sourceLineNo">094</span>                    return "UTF-8";<a name="line.94"></a>
+<span class="sourceLineNo">095</span>                break;<a name="line.95"></a>
+<span class="sourceLineNo">096</span>            case '9':<a name="line.96"></a>
+<span class="sourceLineNo">097</span>                if (code.equals("8859/9"))<a name="line.97"></a>
+<span class="sourceLineNo">098</span>                    return "ISO-8859-9";<a name="line.98"></a>
+<span class="sourceLineNo">099</span>                if (code.equals("ISO IR159"))<a name="line.99"></a>
+<span class="sourceLineNo">100</span>                    return "JIS_X0212-1990";<a name="line.100"></a>
+<span class="sourceLineNo">101</span>                break;<a name="line.101"></a>
+<span class="sourceLineNo">102</span>            case 'E':<a name="line.102"></a>
+<span class="sourceLineNo">103</span>                if (code.equals("UNICODE"))<a name="line.103"></a>
+<span class="sourceLineNo">104</span>                    return "UTF-8";<a name="line.104"></a>
+<span class="sourceLineNo">105</span>                break;<a name="line.105"></a>
+<span class="sourceLineNo">106</span>            }<a name="line.106"></a>
+<span class="sourceLineNo">107</span>        return "US-ASCII";<a name="line.107"></a>
+<span class="sourceLineNo">108</span>    }<a name="line.108"></a>
+<span class="sourceLineNo">109</span><a name="line.109"></a>
+<span class="sourceLineNo">110</span>    public static String toDicomCharacterSetCode(String code) {<a name="line.110"></a>
+<span class="sourceLineNo">111</span>        if (code != null &amp;&amp; !code.isEmpty())<a name="line.111"></a>
+<span class="sourceLineNo">112</span>            switch (code.charAt(code.length()-1)) {<a name="line.112"></a>
+<span class="sourceLineNo">113</span>            case '0':<a name="line.113"></a>
+<span class="sourceLineNo">114</span>                if (code.equals("GB 18030-2000"))<a name="line.114"></a>
+<span class="sourceLineNo">115</span>                    return "GB18030";<a name="line.115"></a>
+<span class="sourceLineNo">116</span>                break;<a name="line.116"></a>
+<span class="sourceLineNo">117</span>            case '1':<a name="line.117"></a>
+<span class="sourceLineNo">118</span>                if (code.equals("8859/1"))<a name="line.118"></a>
+<span class="sourceLineNo">119</span>                    return "ISO_IR 100";<a name="line.119"></a>
+<span class="sourceLineNo">120</span>                if (code.equals("KS X 1001"))<a name="line.120"></a>
+<span class="sourceLineNo">121</span>                    return "ISO 2022 IR 149";<a name="line.121"></a>
+<span class="sourceLineNo">122</span>                break;<a name="line.122"></a>
+<span class="sourceLineNo">123</span>            case '2':<a name="line.123"></a>
+<span class="sourceLineNo">124</span>                if (code.equals("8859/2"))<a name="line.124"></a>
+<span class="sourceLineNo">125</span>                    return "ISO_IR 101";<a name="line.125"></a>
+<span class="sourceLineNo">126</span>                if (code.equals("CNS 11643-1992"))<a name="line.126"></a>
+<span class="sourceLineNo">127</span>                    return "ISO_IR 166";<a name="line.127"></a>
 <span class="sourceLineNo">128</span>                break;<a name="line.128"></a>
-<span class="sourceLineNo">129</span>            case '4':<a name="line.129"></a>
-<span class="sourceLineNo">130</span>                if (code.equals("8859/4"))<a name="line.130"></a>
-<span class="sourceLineNo">131</span>                    return "ISO_IR 110";<a name="line.131"></a>
-<span class="sourceLineNo">132</span>                if (code.equals("ISO IR14"))<a name="line.132"></a>
-<span class="sourceLineNo">133</span>                    return "JIS_X0201";<a name="line.133"></a>
-<span class="sourceLineNo">134</span>                break;<a name="line.134"></a>
-<span class="sourceLineNo">135</span>            case '5':<a name="line.135"></a>
-<span class="sourceLineNo">136</span>                if (code.equals("8859/5"))<a name="line.136"></a>
-<span class="sourceLineNo">137</span>                    return "ISO_IR 144";<a name="line.137"></a>
+<span class="sourceLineNo">129</span>            case '3':<a name="line.129"></a>
+<span class="sourceLineNo">130</span>                if (code.equals("8859/3"))<a name="line.130"></a>
+<span class="sourceLineNo">131</span>                    return "ISO_IR 109";<a name="line.131"></a>
+<span class="sourceLineNo">132</span>                break;<a name="line.132"></a>
+<span class="sourceLineNo">133</span>            case '4':<a name="line.133"></a>
+<span class="sourceLineNo">134</span>                if (code.equals("8859/4"))<a name="line.134"></a>
+<span class="sourceLineNo">135</span>                    return "ISO_IR 110";<a name="line.135"></a>
+<span class="sourceLineNo">136</span>                if (code.equals("ISO IR14"))<a name="line.136"></a>
+<span class="sourceLineNo">137</span>                    return "ISO_IR 13";<a name="line.137"></a>
 <span class="sourceLineNo">138</span>                break;<a name="line.138"></a>
-<span class="sourceLineNo">139</span>            case '6':<a name="line.139"></a>
-<span class="sourceLineNo">140</span>                if (code.equals("8859/6"))<a name="line.140"></a>
-<span class="sourceLineNo">141</span>                    return "ISO_IR 127";<a name="line.141"></a>
+<span class="sourceLineNo">139</span>            case '5':<a name="line.139"></a>
+<span class="sourceLineNo">140</span>                if (code.equals("8859/5"))<a name="line.140"></a>
+<span class="sourceLineNo">141</span>                    return "ISO_IR 144";<a name="line.141"></a>
 <span class="sourceLineNo">142</span>                break;<a name="line.142"></a>
-<span class="sourceLineNo">143</span>            case '7':<a name="line.143"></a>
-<span class="sourceLineNo">144</span>                if (code.equals("8859/7"))<a name="line.144"></a>
-<span class="sourceLineNo">145</span>                    return "ISO_IR 126";<a name="line.145"></a>
-<span class="sourceLineNo">146</span>                if (code.equals("ISO IR87"))<a name="line.146"></a>
-<span class="sourceLineNo">147</span>                    return "ISO 2022 IR 87";<a name="line.147"></a>
-<span class="sourceLineNo">148</span>                break;<a name="line.148"></a>
-<span class="sourceLineNo">149</span>            case '8':<a name="line.149"></a>
-<span class="sourceLineNo">150</span>                if (code.equals("8859/8"))<a name="line.150"></a>
-<span class="sourceLineNo">151</span>                    return "ISO_IR 138";<a name="line.151"></a>
-<span class="sourceLineNo">152</span>                if (code.equals("UNICODE UTF-8"))<a name="line.152"></a>
-<span class="sourceLineNo">153</span>                    return "ISO_IR 192";<a name="line.153"></a>
-<span class="sourceLineNo">154</span>                break;<a name="line.154"></a>
-<span class="sourceLineNo">155</span>            case '9':<a name="line.155"></a>
-<span class="sourceLineNo">156</span>                if (code.equals("8859/9"))<a name="line.156"></a>
-<span class="sourceLineNo">157</span>                    return "ISO_IR 148";<a name="line.157"></a>
-<span class="sourceLineNo">158</span>                if (code.equals("ISO IR159"))<a name="line.158"></a>
-<span class="sourceLineNo">159</span>                    return "ISO 2022 IR 159";<a name="line.159"></a>
-<span class="sourceLineNo">160</span>                break;<a name="line.160"></a>
-<span class="sourceLineNo">161</span>            case 'E':<a name="line.161"></a>
-<span class="sourceLineNo">162</span>                if (code.equals("UNICODE"))<a name="line.162"></a>
-<span class="sourceLineNo">163</span>                    return "ISO_IR 192";<a name="line.163"></a>
+<span class="sourceLineNo">143</span>            case '6':<a name="line.143"></a>
+<span class="sourceLineNo">144</span>                if (code.equals("8859/6"))<a name="line.144"></a>
+<span class="sourceLineNo">145</span>                    return "ISO_IR 127";<a name="line.145"></a>
+<span class="sourceLineNo">146</span>                break;<a name="line.146"></a>
+<span class="sourceLineNo">147</span>            case '7':<a name="line.147"></a>
+<span class="sourceLineNo">148</span>                if (code.equals("8859/7"))<a name="line.148"></a>
+<span class="sourceLineNo">149</span>                    return "ISO_IR 126";<a name="line.149"></a>
+<span class="sourceLineNo">150</span>                if (code.equals("ISO IR87"))<a name="line.150"></a>
+<span class="sourceLineNo">151</span>                    return "ISO 2022 IR 87";<a name="line.151"></a>
+<span class="sourceLineNo">152</span>                break;<a name="line.152"></a>
+<span class="sourceLineNo">153</span>            case '8':<a name="line.153"></a>
+<span class="sourceLineNo">154</span>                if (code.equals("8859/8"))<a name="line.154"></a>
+<span class="sourceLineNo">155</span>                    return "ISO_IR 138";<a name="line.155"></a>
+<span class="sourceLineNo">156</span>                if (code.equals("UNICODE UTF-8"))<a name="line.156"></a>
+<span class="sourceLineNo">157</span>                    return "ISO_IR 192";<a name="line.157"></a>
+<span class="sourceLineNo">158</span>                break;<a name="line.158"></a>
+<span class="sourceLineNo">159</span>            case '9':<a name="line.159"></a>
+<span class="sourceLineNo">160</span>                if (code.equals("8859/9"))<a name="line.160"></a>
+<span class="sourceLineNo">161</span>                    return "ISO_IR 148";<a name="line.161"></a>
+<span class="sourceLineNo">162</span>                if (code.equals("ISO IR159"))<a name="line.162"></a>
+<span class="sourceLineNo">163</span>                    return "ISO 2022 IR 159";<a name="line.163"></a>
 <span class="sourceLineNo">164</span>                break;<a name="line.164"></a>
-<span class="sourceLineNo">165</span>            }<a name="line.165"></a>
-<span class="sourceLineNo">166</span>        return null;<a name="line.166"></a>
-<span class="sourceLineNo">167</span>    }<a name="line.167"></a>
-<span class="sourceLineNo">168</span><a name="line.168"></a>
-<span class="sourceLineNo">169</span>}<a name="line.169"></a>
+<span class="sourceLineNo">165</span>            case 'E':<a name="line.165"></a>
+<span class="sourceLineNo">166</span>                if (code.equals("UNICODE"))<a name="line.166"></a>
+<span class="sourceLineNo">167</span>                    return "ISO_IR 192";<a name="line.167"></a>
+<span class="sourceLineNo">168</span>                break;<a name="line.168"></a>
+<span class="sourceLineNo">169</span>            }<a name="line.169"></a>
+<span class="sourceLineNo">170</span>        return null;<a name="line.170"></a>
+<span class="sourceLineNo">171</span>    }<a name="line.171"></a>
+<span class="sourceLineNo">172</span><a name="line.172"></a>
+<span class="sourceLineNo">173</span>}<a name="line.173"></a>
 
 
 

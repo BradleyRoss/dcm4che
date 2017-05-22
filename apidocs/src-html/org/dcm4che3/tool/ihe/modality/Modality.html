@@ -244,7 +244,7 @@
 <span class="sourceLineNo">236</span>        mkkos.setEncodingOptions(CLIUtils.encodingOptionsOf(cl));<a name="line.236"></a>
 <span class="sourceLineNo">237</span>        DicomFiles.scan(cl.getArgList(), new DicomFiles.Callback() {<a name="line.237"></a>
 <span class="sourceLineNo">238</span><a name="line.238"></a>
-<span class="sourceLineNo">239</span>            <a name="line.239"></a>
+<span class="sourceLineNo">239</span>            @Override<a name="line.239"></a>
 <span class="sourceLineNo">240</span>            public boolean dicomFile(File f, Attributes fmi,<a name="line.240"></a>
 <span class="sourceLineNo">241</span>                    long dsPos, Attributes ds) {<a name="line.241"></a>
 <span class="sourceLineNo">242</span>                return mkkos.addInstance(ds);<a name="line.242"></a>
@@ -391,7 +391,7 @@
 <span class="sourceLineNo">383</span>        try {<a name="line.383"></a>
 <span class="sourceLineNo">384</span>            DicomFiles.scan(fnames, new DicomFiles.Callback() {<a name="line.384"></a>
 <span class="sourceLineNo">385</span><a name="line.385"></a>
-<span class="sourceLineNo">386</span>                <a name="line.386"></a>
+<span class="sourceLineNo">386</span>                @Override<a name="line.386"></a>
 <span class="sourceLineNo">387</span>                public boolean dicomFile(File f, Attributes fmi, long dsPos,<a name="line.387"></a>
 <span class="sourceLineNo">388</span>                        Attributes ds) throws Exception {<a name="line.388"></a>
 <span class="sourceLineNo">389</span>                    return mppsscu.addInstance(ds)<a name="line.389"></a>

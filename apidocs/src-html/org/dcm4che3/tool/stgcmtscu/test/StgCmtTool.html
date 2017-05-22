@@ -229,7 +229,7 @@
 <span class="sourceLineNo">221</span>        t1 = System.currentTimeMillis();<a name="line.221"></a>
 <span class="sourceLineNo">222</span>        DicomFiles.scan(Arrays.asList(file.getAbsolutePath()), new DicomFiles.Callback() {<a name="line.222"></a>
 <span class="sourceLineNo">223</span><a name="line.223"></a>
-<span class="sourceLineNo">224</span>           <a name="line.224"></a>
+<span class="sourceLineNo">224</span>            @Override<a name="line.224"></a>
 <span class="sourceLineNo">225</span>            public boolean dicomFile(File f, Attributes fmi, long dsPos,<a name="line.225"></a>
 <span class="sourceLineNo">226</span>                                     Attributes ds) {<a name="line.226"></a>
 <span class="sourceLineNo">227</span>                return stgCmtSCU.addInstance(ds);<a name="line.227"></a>
@@ -261,12 +261,12 @@
 <span class="sourceLineNo">253</span>        }<a name="line.253"></a>
 <span class="sourceLineNo">254</span>        init(new StgCmtResult(description,t2-t1,success, fails, nEventReqData));<a name="line.254"></a>
 <span class="sourceLineNo">255</span>    }<a name="line.255"></a>
-<span class="sourceLineNo">256</span>    <a name="line.256"></a>
+<span class="sourceLineNo">256</span>    @Override<a name="line.256"></a>
 <span class="sourceLineNo">257</span>    public void init(TestResult result) {<a name="line.257"></a>
 <span class="sourceLineNo">258</span>        this.result = result;<a name="line.258"></a>
 <span class="sourceLineNo">259</span>    }<a name="line.259"></a>
 <span class="sourceLineNo">260</span><a name="line.260"></a>
-<span class="sourceLineNo">261</span>    <a name="line.261"></a>
+<span class="sourceLineNo">261</span>    @Override<a name="line.261"></a>
 <span class="sourceLineNo">262</span>    public TestResult getResult() {<a name="line.262"></a>
 <span class="sourceLineNo">263</span>        return this.result;<a name="line.263"></a>
 <span class="sourceLineNo">264</span>    }<a name="line.264"></a>

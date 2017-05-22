@@ -88,19 +88,19 @@
 <span class="sourceLineNo">080</span>        getEndpoint().getComponent().registerDicomConsumer(this);<a name="line.80"></a>
 <span class="sourceLineNo">081</span>    }<a name="line.81"></a>
 <span class="sourceLineNo">082</span><a name="line.82"></a>
-<span class="sourceLineNo">083</span>    <a name="line.83"></a>
+<span class="sourceLineNo">083</span>    @Override<a name="line.83"></a>
 <span class="sourceLineNo">084</span>    protected void doStop() throws Exception {<a name="line.84"></a>
 <span class="sourceLineNo">085</span>        getEndpoint().getComponent().unregisterDicomConsumer(this);<a name="line.85"></a>
 <span class="sourceLineNo">086</span>        super.doStop();<a name="line.86"></a>
 <span class="sourceLineNo">087</span>    }<a name="line.87"></a>
 <span class="sourceLineNo">088</span><a name="line.88"></a>
-<span class="sourceLineNo">089</span>    <a name="line.89"></a>
+<span class="sourceLineNo">089</span>    @Override<a name="line.89"></a>
 <span class="sourceLineNo">090</span>    public void onClose(Association as) {<a name="line.90"></a>
 <span class="sourceLineNo">091</span>        // TODO Auto-generated method stub<a name="line.91"></a>
 <span class="sourceLineNo">092</span>        <a name="line.92"></a>
 <span class="sourceLineNo">093</span>    }<a name="line.93"></a>
 <span class="sourceLineNo">094</span><a name="line.94"></a>
-<span class="sourceLineNo">095</span>    <a name="line.95"></a>
+<span class="sourceLineNo">095</span>    @Override<a name="line.95"></a>
 <span class="sourceLineNo">096</span>    public void onDimseRQ(Association as, PresentationContext pc, Dimse dimse,<a name="line.96"></a>
 <span class="sourceLineNo">097</span>            Attributes cmd, PDVInputStream data) throws IOException {<a name="line.97"></a>
 <span class="sourceLineNo">098</span>        final int msgid = cmd.getInt(Tag.MessageID, 0);<a name="line.98"></a>
@@ -129,7 +129,7 @@
 <span class="sourceLineNo">121</span>            this.exchange = exchange;<a name="line.121"></a>
 <span class="sourceLineNo">122</span>        }<a name="line.122"></a>
 <span class="sourceLineNo">123</span>    <a name="line.123"></a>
-<span class="sourceLineNo">124</span>       <a name="line.124"></a>
+<span class="sourceLineNo">124</span>        @Override<a name="line.124"></a>
 <span class="sourceLineNo">125</span>        public void done(boolean doneSync) {<a name="line.125"></a>
 <span class="sourceLineNo">126</span>            Attributes cmd;<a name="line.126"></a>
 <span class="sourceLineNo">127</span>            Attributes data;<a name="line.127"></a>

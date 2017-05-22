@@ -64,90 +64,94 @@
 <span class="sourceLineNo">056</span>public class MapTypeAdapter&lt;K, V&gt; implements ConfigTypeAdapter&lt;Map&lt;K, V&gt;, Map&lt;String, Object&gt;&gt; {<a name="line.56"></a>
 <span class="sourceLineNo">057</span><a name="line.57"></a>
 <span class="sourceLineNo">058</span><a name="line.58"></a>
-<span class="sourceLineNo">059</span>    public Map&lt;K, V&gt; fromConfigNode(Map&lt;String, Object&gt; configNode, ConfigProperty property, LoadingContext ctx, Object parent) throws ConfigurationException {<a name="line.59"></a>
-<span class="sourceLineNo">060</span><a name="line.60"></a>
-<span class="sourceLineNo">061</span>        ConfigProperty keyPseudoProperty = property.getPseudoPropertyForGenericsParamater(0);<a name="line.61"></a>
-<span class="sourceLineNo">062</span>        ConfigTypeAdapter&lt;K, String&gt; keyAdapter = (ConfigTypeAdapter&lt;K, String&gt;) ctx.getVitalizer().lookupTypeAdapter(keyPseudoProperty);<a name="line.62"></a>
-<span class="sourceLineNo">063</span><a name="line.63"></a>
-<span class="sourceLineNo">064</span>        ConfigTypeAdapter&lt;V, Object&gt; valueAdapter;<a name="line.64"></a>
-<span class="sourceLineNo">065</span>        ConfigProperty valuePseudoProperty = property.getPseudoPropertyForGenericsParamater(1);<a name="line.65"></a>
-<span class="sourceLineNo">066</span>        if (property.isCollectionOfReferences())<a name="line.66"></a>
-<span class="sourceLineNo">067</span>            valueAdapter = ctx.getVitalizer().getReferenceTypeAdapter();<a name="line.67"></a>
-<span class="sourceLineNo">068</span>        else<a name="line.68"></a>
-<span class="sourceLineNo">069</span>            valueAdapter = (ConfigTypeAdapter&lt;V, Object&gt;) ctx.getVitalizer().lookupTypeAdapter(valuePseudoProperty);<a name="line.69"></a>
-<span class="sourceLineNo">070</span><a name="line.70"></a>
-<span class="sourceLineNo">071</span>        Map&lt;K, V&gt; map = new TreeMap&lt;K, V&gt;();<a name="line.71"></a>
-<span class="sourceLineNo">072</span><a name="line.72"></a>
-<span class="sourceLineNo">073</span>        for (Entry&lt;String, Object&gt; e : configNode.entrySet()) {<a name="line.73"></a>
-<span class="sourceLineNo">074</span>            map.put(keyAdapter.fromConfigNode(keyAdapter.normalize(e.getKey(), keyPseudoProperty, ctx), keyPseudoProperty, ctx, null),<a name="line.74"></a>
-<span class="sourceLineNo">075</span>                    valueAdapter.fromConfigNode(valueAdapter.normalize(e.getValue(),valuePseudoProperty, ctx), valuePseudoProperty, ctx, parent));<a name="line.75"></a>
-<span class="sourceLineNo">076</span><a name="line.76"></a>
-<span class="sourceLineNo">077</span>        }<a name="line.77"></a>
-<span class="sourceLineNo">078</span><a name="line.78"></a>
-<span class="sourceLineNo">079</span>        return map;<a name="line.79"></a>
-<span class="sourceLineNo">080</span>    }<a name="line.80"></a>
-<span class="sourceLineNo">081</span><a name="line.81"></a>
-<span class="sourceLineNo">082</span>    public Map&lt;String, Object&gt; toConfigNode(Map&lt;K, V&gt; object, ConfigProperty property, SavingContext ctx) throws ConfigurationException {<a name="line.82"></a>
-<span class="sourceLineNo">083</span><a name="line.83"></a>
-<span class="sourceLineNo">084</span>        ConfigProperty keyPseudoProperty = property.getPseudoPropertyForGenericsParamater(0);<a name="line.84"></a>
-<span class="sourceLineNo">085</span>        ConfigTypeAdapter&lt;K, String&gt; keyAdapter = (ConfigTypeAdapter&lt;K, String&gt;) ctx.getVitalizer().lookupTypeAdapter(keyPseudoProperty);<a name="line.85"></a>
-<span class="sourceLineNo">086</span><a name="line.86"></a>
-<span class="sourceLineNo">087</span>        ConfigTypeAdapter&lt;V, Object&gt; valueAdapter;<a name="line.87"></a>
-<span class="sourceLineNo">088</span>        ConfigProperty valuePseudoProperty = property.getPseudoPropertyForGenericsParamater(1);<a name="line.88"></a>
-<span class="sourceLineNo">089</span>        if (property.isCollectionOfReferences())<a name="line.89"></a>
-<span class="sourceLineNo">090</span>            valueAdapter = ctx.getVitalizer().getReferenceTypeAdapter();<a name="line.90"></a>
-<span class="sourceLineNo">091</span>        else<a name="line.91"></a>
-<span class="sourceLineNo">092</span>            valueAdapter = (ConfigTypeAdapter&lt;V, Object&gt;) ctx.getVitalizer().lookupTypeAdapter(valuePseudoProperty);<a name="line.92"></a>
-<span class="sourceLineNo">093</span><a name="line.93"></a>
-<span class="sourceLineNo">094</span>        Map&lt;String, Object&gt; configNode = Configuration.NodeFactory.emptyNode();<a name="line.94"></a>
+<span class="sourceLineNo">059</span>    @Override<a name="line.59"></a>
+<span class="sourceLineNo">060</span>    public Map&lt;K, V&gt; fromConfigNode(Map&lt;String, Object&gt; configNode, ConfigProperty property, LoadingContext ctx, Object parent) throws ConfigurationException {<a name="line.60"></a>
+<span class="sourceLineNo">061</span><a name="line.61"></a>
+<span class="sourceLineNo">062</span>        ConfigProperty keyPseudoProperty = property.getPseudoPropertyForGenericsParamater(0);<a name="line.62"></a>
+<span class="sourceLineNo">063</span>        ConfigTypeAdapter&lt;K, String&gt; keyAdapter = (ConfigTypeAdapter&lt;K, String&gt;) ctx.getVitalizer().lookupTypeAdapter(keyPseudoProperty);<a name="line.63"></a>
+<span class="sourceLineNo">064</span><a name="line.64"></a>
+<span class="sourceLineNo">065</span>        ConfigTypeAdapter&lt;V, Object&gt; valueAdapter;<a name="line.65"></a>
+<span class="sourceLineNo">066</span>        ConfigProperty valuePseudoProperty = property.getPseudoPropertyForGenericsParamater(1);<a name="line.66"></a>
+<span class="sourceLineNo">067</span>        if (property.isCollectionOfReferences())<a name="line.67"></a>
+<span class="sourceLineNo">068</span>            valueAdapter = ctx.getVitalizer().getReferenceTypeAdapter();<a name="line.68"></a>
+<span class="sourceLineNo">069</span>        else<a name="line.69"></a>
+<span class="sourceLineNo">070</span>            valueAdapter = (ConfigTypeAdapter&lt;V, Object&gt;) ctx.getVitalizer().lookupTypeAdapter(valuePseudoProperty);<a name="line.70"></a>
+<span class="sourceLineNo">071</span><a name="line.71"></a>
+<span class="sourceLineNo">072</span>        Map&lt;K, V&gt; map = new TreeMap&lt;K, V&gt;();<a name="line.72"></a>
+<span class="sourceLineNo">073</span><a name="line.73"></a>
+<span class="sourceLineNo">074</span>        for (Entry&lt;String, Object&gt; e : configNode.entrySet()) {<a name="line.74"></a>
+<span class="sourceLineNo">075</span>            map.put(keyAdapter.fromConfigNode(keyAdapter.normalize(e.getKey(), keyPseudoProperty, ctx), keyPseudoProperty, ctx, null),<a name="line.75"></a>
+<span class="sourceLineNo">076</span>                    valueAdapter.fromConfigNode(valueAdapter.normalize(e.getValue(),valuePseudoProperty, ctx), valuePseudoProperty, ctx, parent));<a name="line.76"></a>
+<span class="sourceLineNo">077</span><a name="line.77"></a>
+<span class="sourceLineNo">078</span>        }<a name="line.78"></a>
+<span class="sourceLineNo">079</span><a name="line.79"></a>
+<span class="sourceLineNo">080</span>        return map;<a name="line.80"></a>
+<span class="sourceLineNo">081</span>    }<a name="line.81"></a>
+<span class="sourceLineNo">082</span><a name="line.82"></a>
+<span class="sourceLineNo">083</span>    @Override<a name="line.83"></a>
+<span class="sourceLineNo">084</span>    public Map&lt;String, Object&gt; toConfigNode(Map&lt;K, V&gt; object, ConfigProperty property, SavingContext ctx) throws ConfigurationException {<a name="line.84"></a>
+<span class="sourceLineNo">085</span><a name="line.85"></a>
+<span class="sourceLineNo">086</span>        ConfigProperty keyPseudoProperty = property.getPseudoPropertyForGenericsParamater(0);<a name="line.86"></a>
+<span class="sourceLineNo">087</span>        ConfigTypeAdapter&lt;K, String&gt; keyAdapter = (ConfigTypeAdapter&lt;K, String&gt;) ctx.getVitalizer().lookupTypeAdapter(keyPseudoProperty);<a name="line.87"></a>
+<span class="sourceLineNo">088</span><a name="line.88"></a>
+<span class="sourceLineNo">089</span>        ConfigTypeAdapter&lt;V, Object&gt; valueAdapter;<a name="line.89"></a>
+<span class="sourceLineNo">090</span>        ConfigProperty valuePseudoProperty = property.getPseudoPropertyForGenericsParamater(1);<a name="line.90"></a>
+<span class="sourceLineNo">091</span>        if (property.isCollectionOfReferences())<a name="line.91"></a>
+<span class="sourceLineNo">092</span>            valueAdapter = ctx.getVitalizer().getReferenceTypeAdapter();<a name="line.92"></a>
+<span class="sourceLineNo">093</span>        else<a name="line.93"></a>
+<span class="sourceLineNo">094</span>            valueAdapter = (ConfigTypeAdapter&lt;V, Object&gt;) ctx.getVitalizer().lookupTypeAdapter(valuePseudoProperty);<a name="line.94"></a>
 <span class="sourceLineNo">095</span><a name="line.95"></a>
-<span class="sourceLineNo">096</span>        for (Entry&lt;K, V&gt; e : object.entrySet()) {<a name="line.96"></a>
-<span class="sourceLineNo">097</span>            configNode.put(<a name="line.97"></a>
-<span class="sourceLineNo">098</span>                    // always forces toString for keys - so Integers, Booleans, etc will get stringified<a name="line.98"></a>
-<span class="sourceLineNo">099</span>                    String.valueOf(keyAdapter.toConfigNode(e.getKey(), keyPseudoProperty, ctx)),<a name="line.99"></a>
-<span class="sourceLineNo">100</span>                    valueAdapter.toConfigNode(e.getValue(), valuePseudoProperty, ctx));<a name="line.100"></a>
-<span class="sourceLineNo">101</span>        }<a name="line.101"></a>
-<span class="sourceLineNo">102</span><a name="line.102"></a>
-<span class="sourceLineNo">103</span>        return configNode;<a name="line.103"></a>
-<span class="sourceLineNo">104</span>    }<a name="line.104"></a>
-<span class="sourceLineNo">105</span><a name="line.105"></a>
-<span class="sourceLineNo">106</span>    public Map&lt;String, Object&gt; getSchema(ConfigProperty property, ProcessingContext ctx) throws ConfigurationException {<a name="line.106"></a>
+<span class="sourceLineNo">096</span>        Map&lt;String, Object&gt; configNode = Configuration.NodeFactory.emptyNode();<a name="line.96"></a>
+<span class="sourceLineNo">097</span><a name="line.97"></a>
+<span class="sourceLineNo">098</span>        for (Entry&lt;K, V&gt; e : object.entrySet()) {<a name="line.98"></a>
+<span class="sourceLineNo">099</span>            configNode.put(<a name="line.99"></a>
+<span class="sourceLineNo">100</span>                    // always forces toString for keys - so Integers, Booleans, etc will get stringified<a name="line.100"></a>
+<span class="sourceLineNo">101</span>                    String.valueOf(keyAdapter.toConfigNode(e.getKey(), keyPseudoProperty, ctx)),<a name="line.101"></a>
+<span class="sourceLineNo">102</span>                    valueAdapter.toConfigNode(e.getValue(), valuePseudoProperty, ctx));<a name="line.102"></a>
+<span class="sourceLineNo">103</span>        }<a name="line.103"></a>
+<span class="sourceLineNo">104</span><a name="line.104"></a>
+<span class="sourceLineNo">105</span>        return configNode;<a name="line.105"></a>
+<span class="sourceLineNo">106</span>    }<a name="line.106"></a>
 <span class="sourceLineNo">107</span><a name="line.107"></a>
-<span class="sourceLineNo">108</span>        Map&lt;String, Object&gt; metadata = new HashMap&lt;String, Object&gt;();<a name="line.108"></a>
-<span class="sourceLineNo">109</span>        Map&lt;String, Object&gt; keyMetadata = new HashMap&lt;String, Object&gt;();<a name="line.109"></a>
-<span class="sourceLineNo">110</span>        Map&lt;String, Object&gt; valueMetadata = new HashMap&lt;String, Object&gt;();<a name="line.110"></a>
-<span class="sourceLineNo">111</span>        Map&lt;String, Object&gt; valueMetadataWrapper = new HashMap&lt;String, Object&gt;();<a name="line.111"></a>
-<span class="sourceLineNo">112</span><a name="line.112"></a>
-<span class="sourceLineNo">113</span>        metadata.put("type", "object");<a name="line.113"></a>
-<span class="sourceLineNo">114</span>        metadata.put("class", "Map");<a name="line.114"></a>
+<span class="sourceLineNo">108</span>    @Override<a name="line.108"></a>
+<span class="sourceLineNo">109</span>    public Map&lt;String, Object&gt; getSchema(ConfigProperty property, ProcessingContext ctx) throws ConfigurationException {<a name="line.109"></a>
+<span class="sourceLineNo">110</span><a name="line.110"></a>
+<span class="sourceLineNo">111</span>        Map&lt;String, Object&gt; metadata = new HashMap&lt;String, Object&gt;();<a name="line.111"></a>
+<span class="sourceLineNo">112</span>        Map&lt;String, Object&gt; keyMetadata = new HashMap&lt;String, Object&gt;();<a name="line.112"></a>
+<span class="sourceLineNo">113</span>        Map&lt;String, Object&gt; valueMetadata = new HashMap&lt;String, Object&gt;();<a name="line.113"></a>
+<span class="sourceLineNo">114</span>        Map&lt;String, Object&gt; valueMetadataWrapper = new HashMap&lt;String, Object&gt;();<a name="line.114"></a>
 <span class="sourceLineNo">115</span><a name="line.115"></a>
-<span class="sourceLineNo">116</span>        // get adapters<a name="line.116"></a>
-<span class="sourceLineNo">117</span>        ConfigProperty keyPseudoProperty = property.getPseudoPropertyForGenericsParamater(0);<a name="line.117"></a>
-<span class="sourceLineNo">118</span>        ConfigTypeAdapter&lt;K, String&gt; keyAdapter = (ConfigTypeAdapter&lt;K, String&gt;) ctx.getVitalizer().lookupTypeAdapter(keyPseudoProperty);<a name="line.118"></a>
-<span class="sourceLineNo">119</span><a name="line.119"></a>
-<span class="sourceLineNo">120</span>        ConfigProperty valuePseudoProperty = property.getPseudoPropertyForGenericsParamater(1);<a name="line.120"></a>
-<span class="sourceLineNo">121</span>        ConfigTypeAdapter&lt;V, Object&gt; valueAdapter;<a name="line.121"></a>
-<span class="sourceLineNo">122</span>        if (property.isCollectionOfReferences())<a name="line.122"></a>
-<span class="sourceLineNo">123</span>            valueAdapter = ctx.getVitalizer().getReferenceTypeAdapter();<a name="line.123"></a>
-<span class="sourceLineNo">124</span>        else<a name="line.124"></a>
-<span class="sourceLineNo">125</span>            valueAdapter = (ConfigTypeAdapter&lt;V, Object&gt;) ctx.getVitalizer().lookupTypeAdapter(valuePseudoProperty);<a name="line.125"></a>
-<span class="sourceLineNo">126</span><a name="line.126"></a>
-<span class="sourceLineNo">127</span>        // fill in key and value metadata<a name="line.127"></a>
-<span class="sourceLineNo">128</span>        keyMetadata.putAll(keyAdapter.getSchema(keyPseudoProperty, ctx));<a name="line.128"></a>
-<span class="sourceLineNo">129</span>        metadata.put("mapkey", keyMetadata);<a name="line.129"></a>
-<span class="sourceLineNo">130</span><a name="line.130"></a>
-<span class="sourceLineNo">131</span>        valueMetadata.putAll(valueAdapter.getSchema(valuePseudoProperty, ctx));<a name="line.131"></a>
-<span class="sourceLineNo">132</span>        valueMetadataWrapper.put("*", valueMetadata);<a name="line.132"></a>
-<span class="sourceLineNo">133</span>        metadata.put("properties", valueMetadataWrapper);<a name="line.133"></a>
-<span class="sourceLineNo">134</span><a name="line.134"></a>
-<span class="sourceLineNo">135</span>        return metadata;<a name="line.135"></a>
-<span class="sourceLineNo">136</span>    }<a name="line.136"></a>
+<span class="sourceLineNo">116</span>        metadata.put("type", "object");<a name="line.116"></a>
+<span class="sourceLineNo">117</span>        metadata.put("class", "Map");<a name="line.117"></a>
+<span class="sourceLineNo">118</span><a name="line.118"></a>
+<span class="sourceLineNo">119</span>        // get adapters<a name="line.119"></a>
+<span class="sourceLineNo">120</span>        ConfigProperty keyPseudoProperty = property.getPseudoPropertyForGenericsParamater(0);<a name="line.120"></a>
+<span class="sourceLineNo">121</span>        ConfigTypeAdapter&lt;K, String&gt; keyAdapter = (ConfigTypeAdapter&lt;K, String&gt;) ctx.getVitalizer().lookupTypeAdapter(keyPseudoProperty);<a name="line.121"></a>
+<span class="sourceLineNo">122</span><a name="line.122"></a>
+<span class="sourceLineNo">123</span>        ConfigProperty valuePseudoProperty = property.getPseudoPropertyForGenericsParamater(1);<a name="line.123"></a>
+<span class="sourceLineNo">124</span>        ConfigTypeAdapter&lt;V, Object&gt; valueAdapter;<a name="line.124"></a>
+<span class="sourceLineNo">125</span>        if (property.isCollectionOfReferences())<a name="line.125"></a>
+<span class="sourceLineNo">126</span>            valueAdapter = ctx.getVitalizer().getReferenceTypeAdapter();<a name="line.126"></a>
+<span class="sourceLineNo">127</span>        else<a name="line.127"></a>
+<span class="sourceLineNo">128</span>            valueAdapter = (ConfigTypeAdapter&lt;V, Object&gt;) ctx.getVitalizer().lookupTypeAdapter(valuePseudoProperty);<a name="line.128"></a>
+<span class="sourceLineNo">129</span><a name="line.129"></a>
+<span class="sourceLineNo">130</span>        // fill in key and value metadata<a name="line.130"></a>
+<span class="sourceLineNo">131</span>        keyMetadata.putAll(keyAdapter.getSchema(keyPseudoProperty, ctx));<a name="line.131"></a>
+<span class="sourceLineNo">132</span>        metadata.put("mapkey", keyMetadata);<a name="line.132"></a>
+<span class="sourceLineNo">133</span><a name="line.133"></a>
+<span class="sourceLineNo">134</span>        valueMetadata.putAll(valueAdapter.getSchema(valuePseudoProperty, ctx));<a name="line.134"></a>
+<span class="sourceLineNo">135</span>        valueMetadataWrapper.put("*", valueMetadata);<a name="line.135"></a>
+<span class="sourceLineNo">136</span>        metadata.put("properties", valueMetadataWrapper);<a name="line.136"></a>
 <span class="sourceLineNo">137</span><a name="line.137"></a>
-<span class="sourceLineNo">138</span>    public Map&lt;String, Object&gt; normalize(Object configNode, ConfigProperty property, ProcessingContext ctx) throws ConfigurationException {<a name="line.138"></a>
-<span class="sourceLineNo">139</span>        if (configNode == null) return new HashMap&lt;String, Object&gt;();<a name="line.139"></a>
-<span class="sourceLineNo">140</span>        return (Map&lt;String, Object&gt;) configNode;<a name="line.140"></a>
-<span class="sourceLineNo">141</span>    }<a name="line.141"></a>
-<span class="sourceLineNo">142</span>}<a name="line.142"></a>
+<span class="sourceLineNo">138</span>        return metadata;<a name="line.138"></a>
+<span class="sourceLineNo">139</span>    }<a name="line.139"></a>
+<span class="sourceLineNo">140</span><a name="line.140"></a>
+<span class="sourceLineNo">141</span>    @Override<a name="line.141"></a>
+<span class="sourceLineNo">142</span>    public Map&lt;String, Object&gt; normalize(Object configNode, ConfigProperty property, ProcessingContext ctx) throws ConfigurationException {<a name="line.142"></a>
+<span class="sourceLineNo">143</span>        if (configNode == null) return new HashMap&lt;String, Object&gt;();<a name="line.143"></a>
+<span class="sourceLineNo">144</span>        return (Map&lt;String, Object&gt;) configNode;<a name="line.144"></a>
+<span class="sourceLineNo">145</span>    }<a name="line.145"></a>
+<span class="sourceLineNo">146</span>}<a name="line.146"></a>
 
 
 

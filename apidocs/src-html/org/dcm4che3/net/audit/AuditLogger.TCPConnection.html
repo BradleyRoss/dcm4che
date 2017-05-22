@@ -170,7 +170,7 @@
 <span class="sourceLineNo">162</span>    private static final InetAddress localHost = localHost();<a name="line.162"></a>
 <span class="sourceLineNo">163</span>    private static final String processID = processID();<a name="line.163"></a>
 <span class="sourceLineNo">164</span>    private static final Comparator&lt;File&gt; FILE_COMPARATOR = new Comparator&lt;File&gt;() {<a name="line.164"></a>
-<span class="sourceLineNo">165</span>        <a name="line.165"></a>
+<span class="sourceLineNo">165</span>        @Override<a name="line.165"></a>
 <span class="sourceLineNo">166</span>        public int compare(File o1, File o2) {<a name="line.166"></a>
 <span class="sourceLineNo">167</span>            long diff = o1.lastModified() - o2.lastModified();<a name="line.167"></a>
 <span class="sourceLineNo">168</span>            return diff &lt; 0 ? -1 : diff &gt; 0 ? 1 : 0;<a name="line.168"></a>
@@ -291,7 +291,7 @@
 <span class="sourceLineNo">283</span>    private transient Exception lastException;<a name="line.283"></a>
 <span class="sourceLineNo">284</span>    private transient long lastSentTimeInMillis;<a name="line.284"></a>
 <span class="sourceLineNo">285</span>    private transient final FilenameFilter FILENAME_FILTER = new FilenameFilter() {<a name="line.285"></a>
-<span class="sourceLineNo">286</span>        <a name="line.286"></a>
+<span class="sourceLineNo">286</span>        @Override<a name="line.286"></a>
 <span class="sourceLineNo">287</span>        public boolean accept(File dir, String name) {<a name="line.287"></a>
 <span class="sourceLineNo">288</span>            return name.startsWith(spoolFileNamePrefix) &amp;&amp; name.endsWith(spoolFileNameSuffix);<a name="line.288"></a>
 <span class="sourceLineNo">289</span>        }<a name="line.289"></a>
@@ -776,10 +776,10 @@
 <span class="sourceLineNo">768</span>     * Send Audit Message by Syslog Protocol to Audit Record Repository, if the<a name="line.768"></a>
 <span class="sourceLineNo">769</span>     * message does not match any configured {@code AuditSuppressCriteria}. If<a name="line.769"></a>
 <span class="sourceLineNo">770</span>     * an I/O error occurs sending the message to the {@code AuditRecordRepository}<a name="line.770"></a>
-<span class="sourceLineNo">771</span>     * and if a {@code RetryInterval} is configured, the message will be spooled<a name="line.771"></a>
+<span class="sourceLineNo">771</span>     * and if a {@code RetryInterval) is configured, the message will be spooled<a name="line.771"></a>
 <span class="sourceLineNo">772</span>     * into the configured {@code SpoolDirectory} for later re-send and the<a name="line.772"></a>
 <span class="sourceLineNo">773</span>     * method returns {@code false}. If no {@code RetryInterval} is configured,<a name="line.773"></a>
-<span class="sourceLineNo">774</span>     * the method throws an {@code IOException} if an I/O error occurs sending<a name="line.774"></a>
+<span class="sourceLineNo">774</span>     * the method throws an {@code IOException) if an I/O error occurs sending<a name="line.774"></a>
 <span class="sourceLineNo">775</span>     * the message.<a name="line.775"></a>
 <span class="sourceLineNo">776</span>     * &lt;p/&gt;<a name="line.776"></a>
 <span class="sourceLineNo">777</span>     * Attention: sending via UDP without getting an I/O error does not ensure<a name="line.777"></a>
@@ -792,9 +792,9 @@
 <span class="sourceLineNo">784</span>     * {@code SendStatus.QUEUED} if the message was spooled for later re-send<a name="line.784"></a>
 <span class="sourceLineNo">785</span>     * @throws IllegalStateException           if there is no {@code AuditRecordRepository} associated with<a name="line.785"></a>
 <span class="sourceLineNo">786</span>     *                                         this {@code AuditLogger}<a name="line.786"></a>
-<span class="sourceLineNo">787</span>     * @throws IncompatibleConnectionException if no {@code Connection} of this {@code AuditLogger} is compatible<a name="line.787"></a>
-<span class="sourceLineNo">788</span>     *                                         with any {@code Connection} of the associated {@code AuditRecordRepository}<a name="line.788"></a>
-<span class="sourceLineNo">789</span>     * @throws GeneralSecurityException        if the {@link  SSLContext} could not get initialized from configured<a name="line.789"></a>
+<span class="sourceLineNo">787</span>     * @throws IncompatibleConnectionException if no {@code Connection) of this {@code AuditLogger} is compatible<a name="line.787"></a>
+<span class="sourceLineNo">788</span>     *                                         with any {@code Connection) of the associated {@code AuditRecordRepository}<a name="line.788"></a>
+<span class="sourceLineNo">789</span>     * @throws GeneralSecurityException        if the {@link  SSLContext} could not get intialized from configured<a name="line.789"></a>
 <span class="sourceLineNo">790</span>     *                                         private key and public certificates<a name="line.790"></a>
 <span class="sourceLineNo">791</span>     * @throws IOException                     if an I/O error occurs sending the message to the {@code AuditRecordRepository}<a name="line.791"></a>
 <span class="sourceLineNo">792</span>     *                                         or on spooling the message to the file system<a name="line.792"></a>
@@ -879,7 +879,7 @@
 <span class="sourceLineNo">871</span>        LOG.debug("Scheduled retry in {} s", retryInterval);<a name="line.871"></a>
 <span class="sourceLineNo">872</span>        retryTimer = getDevice().schedule(<a name="line.872"></a>
 <span class="sourceLineNo">873</span>                new Runnable() {<a name="line.873"></a>
-<span class="sourceLineNo">874</span>                    <a name="line.874"></a>
+<span class="sourceLineNo">874</span>                    @Override<a name="line.874"></a>
 <span class="sourceLineNo">875</span>                    public void run() {<a name="line.875"></a>
 <span class="sourceLineNo">876</span>                        synchronized (AuditLogger.this) {<a name="line.876"></a>
 <span class="sourceLineNo">877</span>                            retryTimer = null;<a name="line.877"></a>
@@ -925,7 +925,7 @@
 <span class="sourceLineNo">917</span>                try {<a name="line.917"></a>
 <span class="sourceLineNo">918</span>                        FilenameFilter fnFilter = new FilenameFilter() {<a name="line.918"></a>
 <span class="sourceLineNo">919</span>                                String prefix = spoolFileNamePrefix+DEVICE_NAME_IN_FILENAME_SEPARATOR+arrDev.getDeviceName()+DEVICE_NAME_IN_FILENAME_SEPARATOR;<a name="line.919"></a>
-<span class="sourceLineNo">920</span>                        <a name="line.920"></a>
+<span class="sourceLineNo">920</span>                        @Override<a name="line.920"></a>
 <span class="sourceLineNo">921</span>                        public boolean accept(File dir, String name) {<a name="line.921"></a>
 <span class="sourceLineNo">922</span>                            return name.startsWith(prefix) <a name="line.922"></a>
 <span class="sourceLineNo">923</span>                                        &amp;&amp; name.endsWith(spoolFileNameSuffix);<a name="line.923"></a>
@@ -994,7 +994,7 @@
 <span class="sourceLineNo">986</span>        try {<a name="line.986"></a>
 <span class="sourceLineNo">987</span>                FilenameFilter fnFilter = new FilenameFilter() {<a name="line.987"></a>
 <span class="sourceLineNo">988</span>                        String prefix = spoolFileNamePrefix+DEVICE_NAME_IN_FILENAME_SEPARATOR+deviceName+DEVICE_NAME_IN_FILENAME_SEPARATOR;<a name="line.988"></a>
-<span class="sourceLineNo">989</span>                <a name="line.989"></a>
+<span class="sourceLineNo">989</span>                @Override<a name="line.989"></a>
 <span class="sourceLineNo">990</span>                public boolean accept(File dir, String name) {<a name="line.990"></a>
 <span class="sourceLineNo">991</span>                    return name.startsWith(prefix) <a name="line.991"></a>
 <span class="sourceLineNo">992</span>                                &amp;&amp; name.endsWith(spoolFileNameSuffix);<a name="line.992"></a>
@@ -1279,7 +1279,7 @@
 <span class="sourceLineNo">1271</span>            ds.send(msg);<a name="line.1271"></a>
 <span class="sourceLineNo">1272</span>        }<a name="line.1272"></a>
 <span class="sourceLineNo">1273</span><a name="line.1273"></a>
-<span class="sourceLineNo">1274</span>       <a name="line.1274"></a>
+<span class="sourceLineNo">1274</span>        @Override<a name="line.1274"></a>
 <span class="sourceLineNo">1275</span>        public void close() {<a name="line.1275"></a>
 <span class="sourceLineNo">1276</span>            if (ds != null) {<a name="line.1276"></a>
 <span class="sourceLineNo">1277</span>                ds.close();<a name="line.1277"></a>
@@ -1340,7 +1340,7 @@
 <span class="sourceLineNo">1332</span>                try {<a name="line.1332"></a>
 <span class="sourceLineNo">1333</span>                    idleTimer = conn.getDevice().schedule(<a name="line.1333"></a>
 <span class="sourceLineNo">1334</span>                            new Runnable() {<a name="line.1334"></a>
-<span class="sourceLineNo">1335</span>                                <a name="line.1335"></a>
+<span class="sourceLineNo">1335</span>                                @Override<a name="line.1335"></a>
 <span class="sourceLineNo">1336</span>                                public void run() {<a name="line.1336"></a>
 <span class="sourceLineNo">1337</span>                                    onIdleTimerExpired();<a name="line.1337"></a>
 <span class="sourceLineNo">1338</span>                                }<a name="line.1338"></a>
@@ -1361,7 +1361,7 @@
 <span class="sourceLineNo">1353</span>            }<a name="line.1353"></a>
 <span class="sourceLineNo">1354</span>        }<a name="line.1354"></a>
 <span class="sourceLineNo">1355</span><a name="line.1355"></a>
-<span class="sourceLineNo">1356</span>       <a name="line.1356"></a>
+<span class="sourceLineNo">1356</span>        @Override<a name="line.1356"></a>
 <span class="sourceLineNo">1357</span>        public synchronized void close() {<a name="line.1357"></a>
 <span class="sourceLineNo">1358</span>            stopIdleTimer();<a name="line.1358"></a>
 <span class="sourceLineNo">1359</span>            closeSocket();<a name="line.1359"></a>

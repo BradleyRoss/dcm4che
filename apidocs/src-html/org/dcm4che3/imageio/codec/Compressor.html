@@ -87,7 +87,7 @@
 <span class="sourceLineNo">079</span>/**<a name="line.79"></a>
 <span class="sourceLineNo">080</span> * Compresses the pixel data of DICOM images to a lossless or lossy encapsulated transfer syntax format.<a name="line.80"></a>
 <span class="sourceLineNo">081</span> * &lt;p&gt;<a name="line.81"></a>
-<span class="sourceLineNo">082</span> * If the source image is already compressed it will be transcoded (i.e. first decompressed then compressed again).&lt;/p&gt;<a name="line.82"></a>
+<span class="sourceLineNo">082</span> * If the source image is already compressed it will be transcoded (i.e. first decompressed then compressed again).<a name="line.82"></a>
 <span class="sourceLineNo">083</span> *<a name="line.83"></a>
 <span class="sourceLineNo">084</span> * @author Gunter Zeilinger &lt;gunterze@gmail.com&gt;<a name="line.84"></a>
 <span class="sourceLineNo">085</span> * @author Hermann Czedik-Eysenberg &lt;hermann-agfa@czedik.net&gt;<a name="line.85"></a>
@@ -260,29 +260,29 @@
 <span class="sourceLineNo">252</span>            this.frameIndex = frameIndex;<a name="line.252"></a>
 <span class="sourceLineNo">253</span>        }<a name="line.253"></a>
 <span class="sourceLineNo">254</span><a name="line.254"></a>
-<span class="sourceLineNo">255</span>        <a name="line.255"></a>
+<span class="sourceLineNo">255</span>        @Override<a name="line.255"></a>
 <span class="sourceLineNo">256</span>        public boolean isEmpty() {<a name="line.256"></a>
 <span class="sourceLineNo">257</span>            return false;<a name="line.257"></a>
 <span class="sourceLineNo">258</span>        }<a name="line.258"></a>
 <span class="sourceLineNo">259</span><a name="line.259"></a>
-<span class="sourceLineNo">260</span>        <a name="line.260"></a>
+<span class="sourceLineNo">260</span>        @Override<a name="line.260"></a>
 <span class="sourceLineNo">261</span>        public byte[] toBytes(VR vr, boolean bigEndian) throws IOException {<a name="line.261"></a>
 <span class="sourceLineNo">262</span>            ByteArrayOutputStream out = new ByteArrayOutputStream();<a name="line.262"></a>
 <span class="sourceLineNo">263</span>            writeTo(out);<a name="line.263"></a>
 <span class="sourceLineNo">264</span>            return out.toByteArray();<a name="line.264"></a>
 <span class="sourceLineNo">265</span>        }<a name="line.265"></a>
 <span class="sourceLineNo">266</span><a name="line.266"></a>
-<span class="sourceLineNo">267</span>        <a name="line.267"></a>
+<span class="sourceLineNo">267</span>        @Override<a name="line.267"></a>
 <span class="sourceLineNo">268</span>        public void writeTo(DicomOutputStream out, VR vr) throws IOException {<a name="line.268"></a>
 <span class="sourceLineNo">269</span>            writeTo(out);<a name="line.269"></a>
 <span class="sourceLineNo">270</span>        }<a name="line.270"></a>
 <span class="sourceLineNo">271</span><a name="line.271"></a>
-<span class="sourceLineNo">272</span>        <a name="line.272"></a>
+<span class="sourceLineNo">272</span>        @Override<a name="line.272"></a>
 <span class="sourceLineNo">273</span>        public int calcLength(DicomEncodingOptions encOpts, boolean explicitVR, VR vr) {<a name="line.273"></a>
 <span class="sourceLineNo">274</span>            return getEncodedLength(encOpts, explicitVR, vr);<a name="line.274"></a>
 <span class="sourceLineNo">275</span>        }<a name="line.275"></a>
 <span class="sourceLineNo">276</span><a name="line.276"></a>
-<span class="sourceLineNo">277</span>        <a name="line.277"></a>
+<span class="sourceLineNo">277</span>        @Override<a name="line.277"></a>
 <span class="sourceLineNo">278</span>        public int getEncodedLength(DicomEncodingOptions encOpts, boolean explicitVR, VR vr) {<a name="line.278"></a>
 <span class="sourceLineNo">279</span>            try {<a name="line.279"></a>
 <span class="sourceLineNo">280</span>                compress();<a name="line.280"></a>

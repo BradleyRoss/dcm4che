@@ -77,7 +77,7 @@
 <span class="sourceLineNo">069</span>        this.dicomConfiguration = dicomConfiguration;<a name="line.69"></a>
 <span class="sourceLineNo">070</span>    }<a name="line.70"></a>
 <span class="sourceLineNo">071</span><a name="line.71"></a>
-<span class="sourceLineNo">072</span>    <a name="line.72"></a>
+<span class="sourceLineNo">072</span>    @Override<a name="line.72"></a>
 <span class="sourceLineNo">073</span>    public DicomServiceRegistry getServiceRegistry() {<a name="line.73"></a>
 <span class="sourceLineNo">074</span>        return serviceRegistry;<a name="line.74"></a>
 <span class="sourceLineNo">075</span>    }<a name="line.75"></a>
@@ -99,7 +99,7 @@
 <span class="sourceLineNo">091</span>            stop();<a name="line.91"></a>
 <span class="sourceLineNo">092</span>    }<a name="line.92"></a>
 <span class="sourceLineNo">093</span><a name="line.93"></a>
-<span class="sourceLineNo">094</span>   <a name="line.94"></a>
+<span class="sourceLineNo">094</span>    @Override<a name="line.94"></a>
 <span class="sourceLineNo">095</span>    public void reload() throws Exception {<a name="line.95"></a>
 <span class="sourceLineNo">096</span>        device.reconfigure(dicomConfiguration.findDevice(device.getDeviceName()));<a name="line.96"></a>
 <span class="sourceLineNo">097</span>        device.rebindConnections();<a name="line.97"></a>

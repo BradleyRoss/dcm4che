@@ -87,18 +87,18 @@
 <span class="sourceLineNo">079</span>        this.sopClasses = StringUtils.split(sopClasses, ',');<a name="line.79"></a>
 <span class="sourceLineNo">080</span>    }<a name="line.80"></a>
 <span class="sourceLineNo">081</span><a name="line.81"></a>
-<span class="sourceLineNo">082</span>    <a name="line.82"></a>
+<span class="sourceLineNo">082</span>    @Override<a name="line.82"></a>
 <span class="sourceLineNo">083</span>    public Producer createProducer() throws Exception {<a name="line.83"></a>
 <span class="sourceLineNo">084</span>        // TODO Auto-generated method stub<a name="line.84"></a>
 <span class="sourceLineNo">085</span>        return null;<a name="line.85"></a>
 <span class="sourceLineNo">086</span>    }<a name="line.86"></a>
 <span class="sourceLineNo">087</span><a name="line.87"></a>
-<span class="sourceLineNo">088</span>   <a name="line.88"></a>
+<span class="sourceLineNo">088</span>    @Override<a name="line.88"></a>
 <span class="sourceLineNo">089</span>    public Consumer createConsumer(Processor processor) throws Exception {<a name="line.89"></a>
 <span class="sourceLineNo">090</span>        return new DicomConsumer(this, processor);<a name="line.90"></a>
 <span class="sourceLineNo">091</span>    }<a name="line.91"></a>
 <span class="sourceLineNo">092</span><a name="line.92"></a>
-<span class="sourceLineNo">093</span>   <a name="line.93"></a>
+<span class="sourceLineNo">093</span>    @Override<a name="line.93"></a>
 <span class="sourceLineNo">094</span>    public boolean isSingleton() {<a name="line.94"></a>
 <span class="sourceLineNo">095</span>        // TODO Auto-generated method stub<a name="line.95"></a>
 <span class="sourceLineNo">096</span>        return false;<a name="line.96"></a>

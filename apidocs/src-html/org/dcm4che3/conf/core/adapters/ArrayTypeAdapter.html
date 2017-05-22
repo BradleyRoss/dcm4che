@@ -84,7 +84,7 @@
 <span class="sourceLineNo">076</span>        PRIMITIVE_TO_WRAPPER.put(void.class, Void.class);<a name="line.76"></a>
 <span class="sourceLineNo">077</span>    }<a name="line.77"></a>
 <span class="sourceLineNo">078</span><a name="line.78"></a>
-<span class="sourceLineNo">079</span>    <a name="line.79"></a>
+<span class="sourceLineNo">079</span>    @Override<a name="line.79"></a>
 <span class="sourceLineNo">080</span>    public Object fromConfigNode(Object configNode, ConfigProperty property, LoadingContext ctx, Object parent) throws ConfigurationException {<a name="line.80"></a>
 <span class="sourceLineNo">081</span><a name="line.81"></a>
 <span class="sourceLineNo">082</span>        Class&lt;?&gt; componentType = ((Class) property.getType()).getComponentType();<a name="line.82"></a>
@@ -124,7 +124,7 @@
 <span class="sourceLineNo">116</span>            throw new ConfigurationException("Object of unexpected type (" + configNode.getClass().getName() + ") supplied for conversion into an array. Must be a collection.");<a name="line.116"></a>
 <span class="sourceLineNo">117</span>    }<a name="line.117"></a>
 <span class="sourceLineNo">118</span><a name="line.118"></a>
-<span class="sourceLineNo">119</span>    <a name="line.119"></a>
+<span class="sourceLineNo">119</span>    @Override<a name="line.119"></a>
 <span class="sourceLineNo">120</span>    public Object toConfigNode(Object object, ConfigProperty property, SavingContext ctx) throws ConfigurationException {<a name="line.120"></a>
 <span class="sourceLineNo">121</span><a name="line.121"></a>
 <span class="sourceLineNo">122</span>        if (object == null) return null;<a name="line.122"></a>
@@ -148,7 +148,7 @@
 <span class="sourceLineNo">140</span>        return list;<a name="line.140"></a>
 <span class="sourceLineNo">141</span>    }<a name="line.141"></a>
 <span class="sourceLineNo">142</span><a name="line.142"></a>
-<span class="sourceLineNo">143</span>    <a name="line.143"></a>
+<span class="sourceLineNo">143</span>    @Override<a name="line.143"></a>
 <span class="sourceLineNo">144</span>    public Map&lt;String, Object&gt; getSchema(ConfigProperty property, ProcessingContext ctx) throws ConfigurationException {<a name="line.144"></a>
 <span class="sourceLineNo">145</span><a name="line.145"></a>
 <span class="sourceLineNo">146</span>        Map&lt;String, Object&gt; metadata = new HashMap&lt;String, Object&gt;();<a name="line.146"></a>
@@ -169,7 +169,7 @@
 <span class="sourceLineNo">161</span>        return metadata;<a name="line.161"></a>
 <span class="sourceLineNo">162</span>    }<a name="line.162"></a>
 <span class="sourceLineNo">163</span><a name="line.163"></a>
-<span class="sourceLineNo">164</span>    <a name="line.164"></a>
+<span class="sourceLineNo">164</span>    @Override<a name="line.164"></a>
 <span class="sourceLineNo">165</span>    public Object normalize(Object configNode, ConfigProperty property, ProcessingContext ctx) throws ConfigurationException {<a name="line.165"></a>
 <span class="sourceLineNo">166</span><a name="line.166"></a>
 <span class="sourceLineNo">167</span>        // byte[] is a special case<a name="line.167"></a>
