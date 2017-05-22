@@ -7,6 +7,7 @@
    incorrectly, with many of the &gt; (greater than) symbols not
    being converted to the HTML literal &amp;gt.  The current
    version is 2.2.5.</p>
-<p>This class is included in the Maven module dcm4che-audit.</p>
+<p>This package is included in the Maven module dcm4che-audit.</p>
 */
 package org.dcm4che3.audit;
+

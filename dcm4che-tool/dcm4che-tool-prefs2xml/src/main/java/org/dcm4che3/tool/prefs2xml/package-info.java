@@ -6,3 +6,4 @@
  * <p>This package is part of the Maven module dcm4che-tool-prefs2xml.</p>
  */
 package org.dcm4che3.tool.prefs2xml;
+

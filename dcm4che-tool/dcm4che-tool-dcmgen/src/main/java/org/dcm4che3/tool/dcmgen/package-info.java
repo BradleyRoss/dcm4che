@@ -1,4 +1,3 @@
-
 /**
  * DICOM Data Generation tool.
  * 

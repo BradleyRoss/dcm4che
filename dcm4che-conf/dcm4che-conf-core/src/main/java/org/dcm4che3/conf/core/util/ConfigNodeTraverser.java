@@ -64,6 +64,7 @@ public class ConfigNodeTraverser {
 
     public interface ConfigNodesTypesafeFilter {
         /**
+         * --TODO Is skipping node indicated by returning true or throwing exception?
          * @return if returns true, traversal will skip going inside this node
          */
         void beforeNodes(Map<String, Object> containerNode1, Map<String, Object> containerNode2, Class containerNodeClass, ConfigProperty property) throws ConfigurationException;
