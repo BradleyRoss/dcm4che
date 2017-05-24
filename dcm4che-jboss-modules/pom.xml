@@ -131,8 +131,8 @@
   <build>
     <plugins>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
-        <version>2.3</version>
         <executions>
           <execution>
             <id>${project.name}-bundles-assembly</id>
@@ -149,8 +149,8 @@
         </executions>
       </plugin>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
-        <version>2.3</version>
         <executions>
           <execution>
             <id>${project.name}-modules-assembly</id>
